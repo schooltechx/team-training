@@ -11,6 +11,8 @@
 
 ## Note 
 - [Basic Linux](./basic_linux.md)
+- [Basic Node](./node/Readme.md)
+- [Basic Express(TypeScript)](./express-ts/Readme.md)
 
 ## ศึกษาจากวีดีโอ
 - [เข้าใจการทำงาน Web API](https://youtu.be/c49Y5VKKW34)

@@ -32,5 +32,4 @@ fruitRoute.post('/', (req, res) => {
     _fruit.push(afruit)
     res.json(afruit);
 });
-// Implement fruitRoute.delete() fruitRoute.put() or fruitRoute.patch()
 
