@@ -7,6 +7,6 @@ COPY package.json .
 ENV NODE_ENV production
 RUN npm install
 COPY static static
-COPY dist2 src
+COPY dist src
 EXPOSE 80
 CMD ["node","src/app.js"]
