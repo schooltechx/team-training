@@ -8,7 +8,8 @@
     "start:ts": "ts-node src/app.ts",
     "start": "node dist/app.js",
     "build": "tsc",
-    "dev": "nodemon src/app.ts"
+    "dev": "nodemon src/app.ts",
+    "build:docker": "npm run build && docker build -t myexpress ."
   },
   "keywords": [],
   "author": "",
