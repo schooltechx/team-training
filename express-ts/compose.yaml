@@ -1,6 +1,6 @@
 version: "3.2"
 services:
   demo:
-    image: myexpress
+    image: myexpress:0.0.1
     ports:
-        - 4000:80
+        - 6000:80

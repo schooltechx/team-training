@@ -9,7 +9,7 @@
     "start": "node dist/app.js",
     "build": "tsc",
     "dev": "nodemon src/app.ts",
-    "build:docker": "npm run build && docker build -t myexpress ."
+    "build:docker": "npm run build && docker build -t myexpress:0.0.1 ."
   },
   "keywords": [],
   "author": "",
