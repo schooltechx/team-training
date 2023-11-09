@@ -1,19 +1,8 @@
 import express, { Express, Request, Response,NextFunction } from 'express'
 export const myapiRoute = express.Router()
-
-/** 
- * ทักทายกลับไป
- * @param name ชื่อที่รับเข้ามา
- * @return Hello ตามด้วยชื่อที่รับเข้ามา
-*/
-export function hello(name:string){
-    return "Hello "+name
-}
-
+import {hello} from "./hello"
 myapiRoute.get('/', (req, res) => {
-    res.json({
-        message: 'Hello from My API',
-    });
+    res.json(hello("My Express"));
 });
 
 // /api/myapi/area?width=3&height=4

@@ -9,7 +9,9 @@
     "start": "node dist/app.js",
     "build": "tsc",
     "dev": "nodemon src/app.ts",
-    "build:docker": "npm run build && docker build -t myexpress:0.0.1 ."
+    "build:docker": "npm run build && docker build -t myexpress:0.0.1 .",
+    "docs":"npx rimraf docs && typedoc"
+
   },
   "keywords": [],
   "author": "",
