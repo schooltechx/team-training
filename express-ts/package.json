@@ -7,10 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:ts": "ts-node src/app.ts",
     "start": "node dist/app.js",
-    "build": "tsc",
+    "build": "npm run clean &&tsc && npm run docs && npm run doc-spec",
     "dev": "nodemon src/app.ts",
     "build:docker": "npm run build && docker build -t myexpress:0.0.1 .",
-    "docs":"npx rimraf docs && typedoc"
+    "docs":"typedoc",
+    "doc-spec":"cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx",
+    "clean":"npx rimraf dist"
 
   },
   "keywords": [],

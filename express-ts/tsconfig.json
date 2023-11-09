@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,7 +13,7 @@
     "entryPoints": [
       "src/**/*.ts"
     ],
-    "out": "docs/typedoc"
+    "out": "dist/docs/typedoc"
   }
 
 }
