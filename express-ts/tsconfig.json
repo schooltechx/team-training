@@ -7,5 +7,12 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "src/**/*.ts"
+    ],
+    "out": "docs/typedoc"
   }
+
 }
