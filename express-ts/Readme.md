@@ -19,3 +19,6 @@ rm pandoc*
 
 ## Swagger
 - [Swagger Editor](https://editor.swagger.io/)
+## Todo
+- สอน design pattern
+- หาวิธีสร้าง swagger spec ที่ดีกว่านี้
