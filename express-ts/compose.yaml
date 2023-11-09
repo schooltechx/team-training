@@ -3,4 +3,4 @@ services:
   demo:
     image: myexpress:0.0.1
     ports:
-        - 6000:80
+        - 4000:80
