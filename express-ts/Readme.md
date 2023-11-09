@@ -15,3 +15,8 @@
 wget https://github.com/jgm/pandoc/releases/download/3.1.7/pandoc-3.1.7-1-amd64.deb
 dpkg -i pandoc*
 rm pandoc*
+```
+
+## Todo
+- สอน design pattern
+- หาวิธีสร้าง swagger spec ที่ดีกว่านี้
