@@ -10,7 +10,7 @@ let routerInstance = new Router('routerInstance', [
         path: "/",
         name: "Root",
         content:'<h1>You are on Home page</h1>\
-        ตัวอย่างการทำหน้า SPA ถ้า route ไหนไม่มี middleware จัดการจะไปหน้า index.html เสมอ หน้าอื่นๆให้คลิ้กที่ลิงค์ '
+        ตัวอย่างการทำหน้า SPA ถ้า route ไหนไม่มี middleware จัดการจะไปหน้า index.html เสมอ'
     },
     {
         path: '/about',
