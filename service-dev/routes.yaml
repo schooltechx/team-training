@@ -1,0 +1,33 @@
+http:
+  routers:
+    dev:
+      service: app
+      rule: "Host(`app.local`)"
+    fe:
+      service: fe-dev
+      rule: "Host(`dev.local`)"
+    be:
+      service: be-dev
+      rule: "Host(`dev.local`) && PathPrefix(`/api`)"
+
+  services:
+    app:
+      loadBalancer:
+        servers:
+        - url: 'http://192.168.2.100:4000/'
+    fe-dev:
+      loadBalancer:
+        servers:
+        - url: 'http://192.168.2.100:3000/'
+    be-dev:
+      loadBalancer:
+        servers:
+        - url: 'http://192.168.2.100:3001/'
+
+
+  middlewares:
+    user-auth: # UserName:admin Password: admin123
+      basicAuth:
+        users: #create from htpasswd
+          - "admin:$apr1$rKaNOONw$vJXI83by5aEK4xdtiov3W1"
+          - "frappet:$apr1$SeCe2hH6$DcAxZNsMSmIjd4/9TUWVC."
