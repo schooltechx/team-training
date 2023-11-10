@@ -11,17 +11,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
+
 app.get('*',(req,res)=>{
   res.sendFile(`${process.cwd()}/static/index.html`)
 })
 
-/*
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: 'Hello Express + TypeScirpt!!',
-  })
-})
-*/
 app.listen(port, () => console.log(`Application is running on port ${port}`))
 
-//C R U  D

@@ -3,6 +3,7 @@ http:
     dev:
       service: app
       rule: "Host(`app.local`)"
+
     fe:
       service: fe-dev
       rule: "Host(`dev.local`)"
@@ -15,6 +16,11 @@ http:
       loadBalancer:
         servers:
         - url: 'http://192.168.2.100:4000/'
+    app2:
+      loadBalancer:
+        servers:
+        - url: 'http://192.168.2.100:4000/'
+
     fe-dev:
       loadBalancer:
         servers:

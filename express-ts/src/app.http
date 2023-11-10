@@ -1,0 +1,30 @@
+# Install Rest client extension for Visual Studio code before use
+@host = http://192.168.2.100:4000
+
+GET {{host}}/api/myapi
+###
+GET {{host}}/api/fruits
+Accept: application/json
+###
+GET {{host}}/api/fruits/1
+Accept: application/json
+###
+PATCH {{host}}/api/fruits/1
+content-type: application/json
+
+{
+  "color": "blue"
+}
+###
+POST {{host}}/api/fruits
+content-type: application/json
+
+{
+  "name": "Coconut",
+  "color": "green"
+}
+
+###
+DELETE {{host}}/api/fruits/2
+content-type: application/json
+

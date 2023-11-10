@@ -1,6 +1,14 @@
 version: "3.2"
+networks:
+  dev:
+    external: true
 services:
   demo:
     image: myexpress:0.0.1
-    ports:
-        - 4000:80
+    # ports:
+    #     - 4001:80
+    networks:
+      - dev
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dev-docker.rule=Host(`app.local`) && (Path(`/api/fruits`)) 
