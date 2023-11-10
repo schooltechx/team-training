@@ -1,0 +1,29 @@
+version: "3.4"
+services:
+  dev-traefik:
+    image: traefik:v3.0
+    restart: unless-stopped
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.filename=/routes.yaml"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dev-traefik.rule=Host(`traefik.local`)"
+      - "traefik.http.routers.dev-traefik.service=api@internal"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./routes.yaml:/routes.yaml:rw
+    environment:
+      - TZ=Asia/Bangkok
+    networks:
+      - dev
