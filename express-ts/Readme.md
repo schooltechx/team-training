@@ -9,7 +9,7 @@
 - [สร้างโปรเจ็ค Express + TypeScript](https://devahoy.com/express-typescript/)
 
 
-## ติดตั้ง Pandoc
+## ทำเอกสารจาก markdown
 ให้ติดตั้ง [pandoc](https://pandoc.org/installing.html)ลงบน Windows/macOS/Linux เพื่อใช้สร้างเอกสาร spec จาก markdown
 ```bash
 wget https://github.com/jgm/pandoc/releases/download/3.1.7/pandoc-3.1.7-1-amd64.deb
