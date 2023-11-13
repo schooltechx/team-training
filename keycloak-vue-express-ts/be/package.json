@@ -1,0 +1,32 @@
+{
+  "name": "be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "serve": "cd dist && node app.js && cd ..",
+    "preview": "cd dist2 && node app.js && cd ..",
+    "build:docker": "ts-node tools/createSwaggerSpec.ts && tsc && cp swaggerSpecs.json dist && javascript-obfuscator ./dist --output ./dist2 && cp swaggerSpecs.json dist2 && docker build -t docker.frappet.com/demo/express-ts .",
+    "push:docker": "docker push docker.frappet.com/demo/express-ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "node-fetch-commonjs": "^3.3.2",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.20",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/node": "^20.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
