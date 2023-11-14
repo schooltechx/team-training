@@ -1,0 +1,18 @@
+{
+    "entryFile": "src/index.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": ["src/controller/*Controller.ts"],
+    "spec": { 
+      "outputDirectory": "src",
+      "specVersion": 3,
+      "description":"TSOA demo",
+      "contact":{
+        "name":"Sorawit Bholsithi",
+        "email":"sorawit@frappet.com"
+      }
+    },
+    "routes": {
+      "routesDir": "src"
+    }
+  }
+  
