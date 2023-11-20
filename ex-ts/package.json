@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/app.ts",
-    "docs":"typedoc",
+    "docs":"typedoc && npm run doc-spec",
+    "doc-spec":"cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx",
     "build": "tsc && npm run docs"
   },
   "keywords": [],

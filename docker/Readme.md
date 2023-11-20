@@ -6,7 +6,7 @@ docker เป็นสิ่งจำเป็นสำหรับการพ�
 - ข้อจำกัดของ Container ?
 - Container บน Windows ?
 
-## docker compose command
+## docker command
 
 ```
 docker ps
@@ -17,6 +17,7 @@ docker build -t tag_name .
 คำสั่งเพิ่มเติมในการสร้าง docker image ให้ดูใน [Dockerfile](../express-ts/Dockerfile)
 
 ## docker compose command
+
 เนื่องจากเป็นการเรียนลัด จะให้ใช้ docker compose เป็นหลักใช้คำสั่ง docker เท่าที่จำเป็น
 สร้างไฟล์ [docker-compose.yaml](https://github.com/schooltechx/youtube/blob/main/Docker%20VM%20K8s/docker-compose/wordpress/docker-compose.yaml), [compose.yaml](../express-ts/compose.yaml)
 ```
@@ -37,13 +38,13 @@ docker compose
 
 
 
-
-
 ## อ่านเพิ่มเติม
 เข้าใจการทำงานของ Docker และ Reverse Proxy 
 
 - [Docker in WSL2: เริ่มต้นใช้งาน Docker บน WSL2](https://youtu.be/ntLLCJk9LyY?si=j0JfcYfC9OCaK_4r)
 - [Nginx Proxy Manager ตอนติดตั้งและใช้งานเบื้องต้น](https://www.youtube.com/watch?v=iWrbL-xDwlk)
+- [ติดตั้ง Wordpress, reverse proxy, เซ็ต DNS ปฎิบัติบน cloud จริง](https://youtu.be/ALNn-X_2PEs?si=McPM02elR72IfBJ8)
+
 - [Nginx Proxy Manager สร้าง Self-signed certificate ใช้เอง](https://youtu.be/pyJF2DnPv7Y?si=K2t6lrWEJLObULre)
 - [Traefik ใชับน Docker และ Self-signed Certificate](https://www.youtube.com/watch?v=z3TqJImsXPQ)
 
