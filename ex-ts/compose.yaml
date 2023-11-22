@@ -1,0 +1,9 @@
+version: "3.2"
+networks:
+  dev:
+    external: true
+services:
+  demo:
+    image: my-express
+    ports:
+        - 4001:80
