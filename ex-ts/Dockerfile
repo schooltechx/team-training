@@ -4,11 +4,11 @@ ENV TZ=Asia/Bangkok
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir /app
 WORKDIR /app
-COPY static static
 COPY package.json .
 COPY package-lock.json .
 ENV NODE_ENV production
 RUN npm ci
+COPY static static
 COPY dist bin
 EXPOSE 80
 CMD ["node","bin/app.js"]
