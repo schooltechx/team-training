@@ -99,12 +99,9 @@ else
 fi
 ```
 
-## Git 
-ให้ตั้งค่าตามเอกสาร ["การตั้งค่า Github"](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) ให้ ลองทำแบบเดียวกันใน Linux และ เอาไฟล์เอกสารนี้ไปเป็นตัวตั้งต้นจดโน้ตสำหรับเรียน เก็บไว้ใน Resitory ของตัวเอง เพิ่มเนื้อหาตามความเหมาะสม จะได้หัดเขียน Markdown ด้วย
 
 ## ศึกษาเพิ่ม
 - [การใช้ bash shell (command line) เบื้องต้น ตอนที่ 1](https://www.youtube.com/watch?v=USyQFCkRN8c)
 - [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
 - [Bash Scripting Tutorial for Beginners](https://www.youtube.com/watch?v=tK9Oc6AEnR4)
-- [วิธีการใช้ Markdown ง่ายๆ ไม่มีความรู้เรื่อง Programming ก็ทำได้](https://dev.classmethod.jp/articles/how-to-use-markdown-simply/)
 - [ How to Write Bash Scripts in Linux](https://www.freecodecamp.org/news/shell-scripting-crash-course-how-to-write-bash-scripts-in-linux/)
