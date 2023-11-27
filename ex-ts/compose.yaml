@@ -1,6 +1,6 @@
 version: "3.2"
 services:
   express-demo:
-    image: my-express
+    image: my-express:1.0.1
     ports:
         - 4001:80

@@ -36,6 +36,7 @@
 - vitest ใช้ในการทำ Unit test
 - Playwrite ใช้ในการทำ UI Test
 - [Robot fraework](./RobotFramework/)  ใช้ในการทำ UI Test
+- [Robot Framework: สร้าง Image เอาไว้ทดสอบระบบ web ด้วย Docker](https://www.somkiat.cc/docker-image-for-robotframework/)
 
 ## Github 
 - การตั้งค่าให้ตั้งค่าตามเอกสาร ["การตั้งค่า Github"](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) ให้ ลองทำแบบเดียวกันใน Linux และ เอาไฟล์เอกสารนี้ไปเป็นตัวตั้งต้นจดโน้ตสำหรับเรียน เก็บไว้ใน Resitory ของตัวเอง เพิ่มเนื้อหาตามความเหมาะสม จะได้หัดเขียน Markdown ด้วย
