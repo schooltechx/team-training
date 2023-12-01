@@ -1,5 +1,5 @@
 # Docker
-docker เป็นสิ่งจำเป็นสำหรับการพัฒนา
+docker เป็นสิ่งจำเป็นสำหรับการพัฒนา แบบรวดเร็วถือว่าขาดไม่ได้เลย
 
 ## Linux Virtualization และ Containerization
 - ความแตกต่างระหว่าง VM กับ Container ?
@@ -11,10 +11,11 @@ docker เป็นสิ่งจำเป็นสำหรับการพ�
 ```
 docker ps
 docker images
+docker volume ls
+docker volume rm volume_name
 docker network crate network_name
 docker build -t tag_name .
 ```
-คำสั่งเพิ่มเติมในการสร้าง docker image ให้ดูใน [Dockerfile](../express-ts/Dockerfile)
 
 ## docker compose command
 
@@ -36,6 +37,8 @@ docker compose
 [แก้ไฟล์ /etc/docker/daemon.json](./registry/daemon.json)
 แล้วใช้ [docker-compose.yaml](./registry/docker-compose.yaml) วิธีการฉบับเต็มดูในวีดีโอ [Deploy Docker Registry บน K8s](https://www.youtube.com/watch?v=NJ5zcvvdL9o)
 
+## Create Docker image
+จะมีการนำ Base Image มาใส่โปรแกรมเพิ่มเข้าไป วิธีการทำดูตัวอย่าใน [Dockerfile](../express-ts/Dockerfile)
 
 
 ## อ่านเพิ่มเติม
