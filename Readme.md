@@ -1,9 +1,10 @@
 # Team Training
+สำหรับทุกคนควรผ่านการเรียนรู้หัวข้อเหล่านี้ ตั้งค่า development environment, พื้นฐานทั่วไป และ การทำเอกสาร เพื่อจะได้ทำงานร่วมกันได้อย่างมีประสิทธิ์ภาพ
 
 ## หัวข้อที่เรียน
 ต้องเรียนทุกคน Dev ,Test Support และ UI สำหรับทำงานร่วมกันอย่างเขาใจ
 - Linux พื้นฐาน
-- Node.js เบื้องต้น
+- Node.js เบื้องต้น [ดูใน node](./node/)
 - Web App คนเซ็บพื้นฐาน Storage, cookie, JWT, Web Server, SPA ฯลฯ OK
 - การทำเอกสาร ด้วย JSoc, Markdown OK(ได้ลองเขียน markdown)
 - Web API ใช้ Express ทำเอกสารด้วย Swagger 
@@ -13,7 +14,7 @@
 สำหรับทุกคนควรติดตั้ง Postman, VS Code พร้อม extension ที่จำเป็น, git, docker, node
 
 - [WSL และ Docker(คนใช้ Mac ติดตั้งแค่ docker)](https://www.youtube.com/watch?v=8g_GwM60MaU)
-- [ติดตั้ง NVM](https://github.com/nvm-sh/nvm)
+- [ติดตั้ง NVM](https://github.com/nvm-sh/nvm) ทำบน macOS หรือ WSL
 - [ตั้งค่า Git](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) ให้ลองทำบนวินโดว์และ Linux(WSL) เวลาเรียนให้ทำแบบฝึกหัดและจดเป็น markdown ใน repository ของตัวเอง
 
 ## ศึกษาจากวีดีโอ
@@ -23,18 +24,19 @@
 - [Docker in WSL2: เริ่มต้นใช้งาน Docker บน WSL2](https://www.youtube.com/watch?v=ntLLCJk9LyY)
 - [Nginx Proxy Manager ตอนติดตั้งและใช้งานเบื้องต้น](https://www.youtube.com/watch?v=iWrbL-xDwlk)
 
-## Note 
-- [Basic Linux](./basic_linux.md)
-- [Basic Node](./node/Readme.md)
-- [Basic Express(TypeScript)](./express-ts/Readme.md)
+## พื้นฐานทั่วไป 
+- [Basic Linux](./basic_linux.md) จัดการไฟล์ permission
+- [Basic Node](./node/Readme.md) เขียนโปรแกรมง่ายๆด้วย Node.js 
+- [Basic Express(TypeScript)](./ex-ts) สร้าง Web API ทำ CRUD อย่างง่าย ถ้าแบบซับซ้อนขึ้นมาหน่อยใหดูที่ [express-ts](./express-ts/Readme.md)
 - จะใช้ [Github issue/project](https://github.com/features/issues) ในการบริหารงานในทีม
 
 
 ## การทำเอกสาร
 มีตัวอย่างการทำเอกสารใน [package.json](./express-ts/package.json)
-- TSDoc จะเขียน comment ในโค้ด TypeScript แล้วใช้เครื่องมือชือ typedoc ในการแปลงให้เป็นเอกสาร HTML เพื่อใช้ในการอ้างอิง
-- OpenAPI Spec ทางทีมใช้ tosa ในการสร้าง spec จาก decorator ใน controller แล้วค่อยนำไปแปลงเป็นหน้าเวปอีกที
+- TSDoc จะเขียน comment ในโค้ด TypeScript แล้วใช้เครื่องมือชือ typedoc ในการแปลงให้เป็นเอกสาร HTML เพื่อใช้ในการอ้างอิง [ดูสคริปต์ docs ใน package.json](./express-ts/package.json)
+- OpenAPI Spec ทางทีมใช้ tosa ในการสร้าง spec จาก decorator ใน controller แล้วค่อยนำไปแปลงเป็นหน้าเวปอีกที ดูตัวอย่างใน [typeOrm-tsoa](./typeOrm-tsoa/)
 - Markdown ใช้กับการสร้างเอกสารทั่วๆ เหมาสำหรับเอกสารที่มีโครงสร้างแน่นนอนเช่น Software Specification, test Specification จะใช้ pandoc ในการแปลงเป็น MS Word  หัดเขียน Markdown แนะนำให้อ่าน ["วิธีการใช้ Markdown ง่ายๆ ไม่มีความรู้เรื่อง Programming ก็ทำได้"](https://dev.classmethod.jp/articles/how-to-use-markdown-simply/)
+ตัวอย่างการใช้ดู [doc-spec ใน package.json](./express-ts/package.json)
 - Storybook ใช้เพื่อทำเอกสาร UI Component ที่พร้อมใช้งานแล้ว
 
 ## Testing
@@ -45,7 +47,8 @@
 - [Load Test RabbitMQ และ Memphis ด้วย K6](https://www.youtube.com/watch?v=7KKoXFLqavE&t=820s)
 
 ## Developer
-
+- ตัวอย่างการพัฒนาด้วย [Vue, Express, Keycloak](./keycloak-vue-express-ts/Readme.md) 
+- [พัฒนา Microservice แบบเป็นทีม](https://youtu.be/-zfABqdhmPg?si=ULJ5HjrLzAuLSGIP)
 - [RabbitMQ เบื้องต้น เพื่อ Infra ที่แข็งแกร่ง](https://www.youtube.com/watch?v=2vcApGyfiVs)
 - [Elasticsearch ค้นคำไทยง่ายนิดเดียว](https://www.youtube.com/watch?v=WGRKCnafBC4)
 - [Nginx Proxy Manager สร้าง Self-signed certificate ใช้เอง](https://www.youtube.com/watch?v=pyJF2DnPv7Y)
