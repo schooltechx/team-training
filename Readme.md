@@ -9,21 +9,26 @@
 - Web API ใช้ Express ทำเอกสารด้วย Swagger 
 - Docker
 
-## Note 
-- [Basic Linux](./basic_linux.md)
-- [Basic Node](./node/Readme.md)
-- [Basic Express(TypeScript)](./express-ts/Readme.md)
+## ตั้งค่า development environment
+สำหรับทุกคนควรติดตั้ง Postman, VS Code พร้อม extension ที่จำเป็น, git, docker, node
+
+- [WSL และ Docker(คนใช้ Mac ติดตั้งแค่ docker)](https://www.youtube.com/watch?v=8g_GwM60MaU)
+- [ติดตั้ง NVM](https://github.com/nvm-sh/nvm)
+- [ตั้งค่า Git](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) ให้ลองทำบนวินโดว์และ Linux(WSL) เวลาเรียนให้ทำแบบฝึกหัดและจดเป็น markdown ใน repository ของตัวเอง
 
 ## ศึกษาจากวีดีโอ
 - [เข้าใจการทำงาน Web API](https://youtu.be/c49Y5VKKW34)
 - [เข้าใจการทำงานของ JWT Authentication](https://youtu.be/Sw-k9j2NeO8) 
 - [เข้าใจพื้นฐานการทำงานของ Cookie และ Storage](https://youtu.be/amm45rEjono)
+- [Docker in WSL2: เริ่มต้นใช้งาน Docker บน WSL2](https://www.youtube.com/watch?v=ntLLCJk9LyY)
+- [Nginx Proxy Manager ตอนติดตั้งและใช้งานเบื้องต้น](https://www.youtube.com/watch?v=iWrbL-xDwlk)
 
-## ตั้งค่า development environment
-สำหรับทุกคนควรติดตั้ง Postman, VS Code พร้อม extension ที่จำเป็น, git, docker, node
-- [ตั้งค่า Git](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md)
-- [WSL และ Docker(คนใช้ Mac ติดตั้งแค่ docker)](https://www.youtube.com/watch?v=8g_GwM60MaU)
-- [ติดตั้ง NVM](https://github.com/nvm-sh/nvm)
+## Note 
+- [Basic Linux](./basic_linux.md)
+- [Basic Node](./node/Readme.md)
+- [Basic Express(TypeScript)](./express-ts/Readme.md)
+- จะใช้ [Github issue/project](https://github.com/features/issues) ในการบริหารงานในทีม
+
 
 ## การทำเอกสาร
 มีตัวอย่างการทำเอกสารใน [package.json](./express-ts/package.json)
@@ -37,10 +42,14 @@
 - Playwrite ใช้ในการทำ UI Test
 - [Robot fraework](./RobotFramework/)  ใช้ในการทำ UI Test
 - [Robot Framework: สร้าง Image เอาไว้ทดสอบระบบ web ด้วย Docker](https://www.somkiat.cc/docker-image-for-robotframework/)
+- [Load Test RabbitMQ และ Memphis ด้วย K6](https://www.youtube.com/watch?v=7KKoXFLqavE&t=820s)
 
-## Github 
-- การตั้งค่าให้ตั้งค่าตามเอกสาร ["การตั้งค่า Github"](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) ให้ ลองทำแบบเดียวกันใน Linux และ เอาไฟล์เอกสารนี้ไปเป็นตัวตั้งต้นจดโน้ตสำหรับเรียน เก็บไว้ใน Resitory ของตัวเอง เพิ่มเนื้อหาตามความเหมาะสม จะได้หัดเขียน Markdown ด้วย
-- จะใช้ [Github issue/project](https://github.com/features/issues) ในการบริหารงานในทีม
+## Developer
+
+- [RabbitMQ เบื้องต้น เพื่อ Infra ที่แข็งแกร่ง](https://www.youtube.com/watch?v=2vcApGyfiVs)
+- [Elasticsearch ค้นคำไทยง่ายนิดเดียว](https://www.youtube.com/watch?v=WGRKCnafBC4)
+- [Nginx Proxy Manager สร้าง Self-signed certificate ใช้เอง](https://www.youtube.com/watch?v=pyJF2DnPv7Y)
+
 
 ## macOS
 สำหรับคนใช้ macOS อาจจะต้องมีการปรับเพื่อให้ทำงานได้รวดเร็วยิ่งขึ้น
