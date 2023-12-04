@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-test('has title', async ({ page }) => {
+test('EDM Login/Logout Test', async ({ page }) => {
   await page.goto('https://edm.frappet.synology.me');
   await expect(page).toHaveTitle("Sign in to EDM");
   await page.fill("input[name='username']","oom")

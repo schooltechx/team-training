@@ -113,6 +113,8 @@ export default defineConfig({
 ในโฟลเดอร์ tests ลบตัวอย่างออกแล้วสร้าง [login.spec.ts](./tests/login.spec.ts) เป็นตัวอย่างการใช้งาน
 ทดสอบบน chromium และ แสดงรายงานการทดสอบ
 ```
+# ถ้า clone มาเรียกคำสั่งนี้ก่อน เพื่อติดตั้ง driver
+npx playwright install
 npx playwright test --project=chromium
 npx playwright show-report
 
