@@ -5,8 +5,10 @@
 
 - ติดตั้ง [LetxPath](https://chrome.google.com/webstore/detail/letxpath/bekehlnepmijedippfibbmbglglbmlgk) ใน chrome เพื่อดู selector สำหรับการทดสอบได้งายขึ้น 
 
-- ติดตั้ง Playwright [ตามในเวป](https://playwright.dev/docs/intro)
+- ติดตั้ง Playwright [ตามในเวป](https://playwright.dev/docs/intro) สำหรับผู้เริ่มใช้ให้ติดตั้งบน วินโดว์หรือ macOS เพราะจะได้ลองใช้แบบมีหน้าจอ Graphic ถ้าเป็นการใช้แบบไม่มีหน้าจอให้เห็นจะเรียกว่า headless เหมาะกับการทดสอบผ่านสคริปต์ CI/CD 
 ``` bash
+mkdir Playwright
+cd Playwright
 npm init playwright@latest
 Need to install the following packages:
   create-playwright@1.17.131
