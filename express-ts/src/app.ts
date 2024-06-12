@@ -22,8 +22,6 @@ app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
 
-
-
 app.get('*',(req,res,next)=>{
   res.sendFile(`${process.cwd()}/static/index.html`)
 })
