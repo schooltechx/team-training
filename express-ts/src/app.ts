@@ -1,10 +1,11 @@
 // src/app.ts
-import "dotenv/config" 
+import "dotenv/config"
+import cors from "cors" 
 import express, { Express, Request, Response,NextFunction } from 'express'
 import {myapiRoute} from './lib/myapi'
 import {fruitRoute} from "./lib/fruit"
 const app: Express = express()
-const port = Number(process.env.PORT) || 80
+const port = Number(process.env.PORT) || 4000
 /*
 let apikey="123456789"
 app.use((req:Request,res:Response,next:NextFunction)=>{
@@ -15,6 +16,7 @@ app.use((req:Request,res:Response,next:NextFunction)=>{
   next()
 })
 */
+app.use(cors())
 app.use(express.json())
 app.use(express.raw())
 app.use(express.urlencoded({extended:true}))
@@ -22,9 +24,8 @@ app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
 
-app.get('*',(req,res,next)=>{
-  res.sendFile(`${process.cwd()}/static/index.html`)
-})
+// app.get('*',(req,res,next)=>{
+//   res.sendFile(`${process.cwd()}/static/index.html`)
+// })
 
 app.listen(port, () => console.log(`Application is running on port ${port}`))
-

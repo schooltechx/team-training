@@ -8,12 +8,12 @@
 mkdir express.ts
 cd express.ts
 npm init -y
-npm i dotenv express typedoc
-npm i -d @types/express @types/node nodemon ts-node typescript
+npm i dotenv express typedoc cors
+npm i -D @types/express @types/node @types/cors nodemon ts-node typescript
 code .
 ```
-สร้างไฟล์ [tsconfig.json](./express-ts/tsconfig.json) โดยมีเนื้อหาเดียวกับใน repo นี้
-
+สร้างไฟล์ [tsconfig.json](./express-ts/tsconfig.json) โดยมีเนื้อหาเดียวกับใน repo นี้ สำเนา [env.examle](./env.example) เป็น .env
+ไฟล์ package.json ส่วนที่เป็น scripts แก้ให้เป็นดังนี้
 ```
   "scripts": {
     "start:ts": "ts-node src/app.ts",
@@ -28,7 +28,7 @@ code .
 import "dotenv/config" 
 import express, { Express, Request, Response,NextFunction } from 'express'
 const app: Express = express()
-let port = 4000
+const port = Number(process.env.PORT) || 3000
 let apikey="123456789"
 app.use((req:Request,res:Response,next:NextFunction)=>{
   console.log("Middleware")
@@ -47,7 +47,8 @@ app.get('/',(req,res)=>{
 })
 app.listen(port, () => console.log(`Application is running on port ${port}`))
 ```
-จากโค้ดนี้ทำความเข้าใจ route และ Middleware ของ Express ลองรันโปรแกรมด้วย คำสั่งเหล่า เพื่อดูการทำงานของโค้ดโปรเจ็กนี้ ใช้ postman หรือ Thunder Client เพื่อส่ง apikey ใน header
+
+จากโค้ดนี้ทำความเข้าใจ route และ Middleware ของ Express ลองรันโปรแกรมด้วย คำสั่งเหล่า เพื่อดูการทำงานของโค้ดโปรเจ็กนี้ ใช้ postman หรือ Thunder Client (VS Code extension)เพื่อส่ง apikey ใน header 
 (รายละเดียดจะสอนในชั้นเรียน)
 ```
 npm run dev
@@ -63,31 +64,122 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 ```
 
-สร้างไฟล์ static/index.html แล้วเพิ่มโค้ดนี้ใน src/app.ts ก่อน app.listen(..) จะเป็นการจำลอง static page ของเวป
+สำเนาโฟลเดอร์ [static](./static/) มาไว้ในโปรเจ็กนี้ แล้วเพิ่มโค้ดนี้ลงใน src/app.ts ก่อน app.listen(..) จะเป็นการจำลอง Single Page Application(SPA)
 ```ts
 app.get('*',(req,res,next)=>{
   res.sendFile(`${process.cwd()}/static/index.html`)
 })
 
 ```
-## แยกโค้ด
-จัดการแยกโค้ดเป็นหลายไฟล์เพื่อที่จะได้จัดการได้ง่ายด้วย express.Router กับ import
+## Import
+ก็อปโค้ดมาทับทั้งหมดหรือ
+- อัปเดต [src/app.ts](./src/app.ts) ให้ตรงตามใน repo นี้
+- ก้อปโฟลเดอร์ [src/lib](./src/lib/), [static/lib](./static) มาใช้โดยให้โครงสร้างตรงกัน
+
+ศึกษาการสร้างนำฟังก์ชั่นกลับมาใช้ใหม่และจัดการแยกโค้ดเป็นหลายไฟล์เพื่อที่จะได้จัดการได้ง่ายด้วย express.Router กับ import และตัวอย่างกับ Web API เบื้องต้น
+โดยดู [src/lib/hello.ts](./src/lib/hello.ts) จะถูกนำมาใช้ใน [src/lib/myapi.ts](./src/lib/myapi.ts),
 
 ## CRUD
-- [fruit.ts](./src/lib/fruit.ts) ดูวิธีการทำ get, post, delete, put หรือ patch
+ไฟล์ [src/lib/fruit.ts](./src/lib/fruit.ts) ตัวอย่างการทำ get, post, delete, put หรือ patch
 
 
+## ทำเอกสารจาก code (typescript)
+ทำเอกสาร html จากโค้ด typescript และ comment ใช้เพื่ออ้างอิงสำหรับนักพัฒนา
+รันคำสั่ง
+```
+npm run doc
+```
+เอกสารจะไปอยู่ที่ dist/docs/typedoc
 
 ## ทำเอกสารจาก markdown
-ให้ติดตั้ง [pandoc](https://pandoc.org/installing.html)ลงบน Windows/macOS/Linux เพื่อใช้สร้างเอกสาร spec จาก markdown
+Markdown ข้อดีของการทำเอกสารด้วย Markdown คือแปลงได้หลายรูปแบบเช่น HTML PDF Word ฯลฯ ตัวอย่างนี้จะแปลงเป็นเอกสาร MS Word(docx) จะใช้รูปแบบเอกสารจาก [spec/DFD-reference.docx](./spec/DFD-reference.docx)
+
+ให้ติดตั้ง [pandoc](https://pandoc.org/installing.html)ลงบน Windows/macOS/Linux เพื่อใช้สร้างเอกสาร spec จาก markdown การติดตั้งบน Linux ทำดังนี้
 ```bash
-wget https://github.com/jgm/pandoc/releases/download/3.1.7/pandoc-3.1.7-1-amd64.deb
+wget https://github.com/jgm/pandoc/releases/download/3.2/pandoc-3.2-1-amd64.deb
 dpkg -i pandoc*
 rm pandoc*
 ```
+สร้างเอกสาร .docx จาก .md รันคำสั่ง
+```
+npm run doc-spec
 
-## Swagger
+```
+## Frontend
+สร้าง Frontend ง่ายๆเพื่อทดสอบ Web API ตัวอย่างนี้จะใช้ [SvelteKit](https://kit.svelte.dev/) 
+
+```
+npm create svelte@latest fruit-fe
+cd fruit-fe
+npm install
+npm code .
+```
+แก้ package.json ของโปรเจ็ก SvelteKit ให้รันที่พอร์ต 3000
+```
+"dev": "vite dev --port=3000",
+```
+
+เนื่องจาก backend รันที่ localhost:4000 จะเป็นคนละโดเมนกับ Frontend ปกติจะติด CORS ตัว backend ติดตั้ง cors ไว้ สำหรับ production ไม่ควรข้ามจุดนี้ จะต้องใช้ API Gateway ในการรวม Backend และ Frontend เป็นโดเมนเดียวกัน(จะแสดงในหัวข้ออื่น)
+ให้แก้โค้ด src/route/+page.svelte ให้เป็นดังนี้
+
+```html
+<script lang="ts">
+import { onMount } from 'svelte';    
+let fruits: {id:number,name:string,color:string}[]=[]
+let selectedId=0,debug = "",fruitName="",fruitColor=""
+async function load(){
+    const res = await fetch("http://localhost:4000/api/fruits")
+    fruits = await res.json()
+}
+async function create(){
+    const res = await fetch("http://localhost:4000/api/fruits",{
+        "method":"POST",
+        "headers":{"Content-Type": "application/json"},
+        "body":JSON.stringify({name:fruitName,color:fruitColor})
+    })
+    load()
+}
+async function remove(){
+  debug = "Delete "+selectedId
+  selectedId = 0
+}
+async function update(){
+    debug = "Update "+selectedId
+}
+function selectFruit(id:number){
+    let f = fruits.find((e)=>e.id===id)
+    if(f){
+        selectedId=id
+        fruitName=f.name
+        fruitColor=f.color
+        debug = "Select "+selectedId    
+    }else{
+        debug = id+" not found "+id
+    }
+}
+onMount(async () => {load()});
+</script>
+<input type="text" name="name" bind:value={fruitName} placeholder="name">
+<input type="text" name="color" bind:value={fruitColor} placeholder="color">
+<button on:click={create} disabled={!fruitName||!fruitColor}>Create</button> 
+<button on:click={update} disabled={!fruitName||!fruitColor||selectedId===0}>Update</button>
+<button on:click={remove} disabled={selectedId===0}>Delete</button>
+<ul>
+{#each fruits as fruit}
+    <li>
+        <input type="radio" name="id" on:click={()=>selectFruit(fruit.id)}>
+        {fruit.name} : {fruit.color} 
+    </li>
+{/each}
+</ul>
+<div>{debug}</div>
+```
+
+## การบ้าน
+- ให้แก้ไข update() remove() เพื่อทำให้โปรแกรมสมบูรณ์
+- ใช้ความรู้ที่เรียนมาสร้าง Todo List โดยมีฟังชั่นการทำงานคล้ายกับ[ตัวอย่างนี้](https://svelte.dev/repl/7eb8c1dd6cac414792b0edb53521ab49?version=3.20.1)
+
+
+## ดูเพิ่มเติม
+- [รู้จัก Postman มากกว่าแค่ส่ง Request](https://www.youtube.com/watch?v=DDZGZPgUcok)
 - [Swagger Editor](https://editor.swagger.io/)
-## Todo
-- สอน design pattern
-- หาวิธีสร้าง swagger spec ที่ดีกว่านี้
