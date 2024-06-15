@@ -4,6 +4,8 @@ import cors from "cors"
 import express, { Express, Request, Response,NextFunction } from 'express'
 import {myapiRoute} from './lib/myapi'
 import {fruitRoute} from "./lib/fruit"
+import Router from "./routes"
+import swaggerUi from "swagger-ui-express"
 const app: Express = express()
 const port = Number(process.env.PORT) || 4000
 /*
@@ -23,7 +25,16 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
-
+app.use(Router)
+app.use(
+  "/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+);
 // app.get('*',(req,res,next)=>{
 //   res.sendFile(`${process.cwd()}/static/index.html`)
 // })

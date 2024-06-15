@@ -8,13 +8,13 @@
 mkdir express.ts
 cd express.ts
 npm init -y
-npm i dotenv express typedoc cors
+npm i dotenv express cors
 npm i -D @types/express @types/node @types/cors nodemon ts-node typescript
 code .
 ```
 สร้างไฟล์ [tsconfig.json](./express-ts/tsconfig.json) โดยมีเนื้อหาเดียวกับใน repo นี้ สำเนา [env.examle](./env.example) เป็น .env
 ไฟล์ package.json ส่วนที่เป็น scripts แก้ให้เป็นดังนี้
-```
+```json
   "scripts": {
     "start:ts": "ts-node src/app.ts",
     "start": "node dist/app.js",
@@ -56,38 +56,41 @@ npm run build
 npm start
 npm start:ts
 ```
-เพิ่ม middleware มาตรฐานใน src/app.ts
+เพิ่ม middleware ต่างๆใน src/app.ts
 ```ts
+app.use(cors())
 app.use(express.json())
 app.use(express.raw())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static('static'))
 ```
+ในตัวอย่างต่อๆไปให้ comment ส่วน Middleware ของ apikey ไว้เพื่อง่ายต่อการทดสอบทดสอบส่วนต่อๆไป
 
-สำเนาโฟลเดอร์ [static](./static/) มาไว้ในโปรเจ็กนี้ แล้วเพิ่มโค้ดนี้ลงใน src/app.ts ก่อน app.listen(..) จะเป็นการจำลอง Single Page Application(SPA)
-```ts
-app.get('*',(req,res,next)=>{
-  res.sendFile(`${process.cwd()}/static/index.html`)
-})
-
-```
 ## Import
-ก็อปโค้ดมาทับทั้งหมดหรือ
-- อัปเดต [src/app.ts](./src/app.ts) ให้ตรงตามใน repo นี้
-- ก้อปโฟลเดอร์ [src/lib](./src/lib/), [static/lib](./static) มาใช้โดยให้โครงสร้างตรงกัน
+ตัวอย่างการนำโค้ดมาใช้ซ้ำด้วยการ import ก้อปโฟลเดอร์ [src/lib](./src/lib/) มาใช้โดยให้โครงสร้างตรงกัน เพิ่มโค้ดนี้ใน [src/app.ts](./src/app.ts)
+
+```ts
+...
+import {myapiRoute} from './lib/myapi'
+import {fruitRoute} from "./lib/fruit"
+...
+app.use('/api/myapi',myapiRoute)
+app.use('/api/fruits',fruitRoute)
+
+```
+
 
 ศึกษาการสร้างนำฟังก์ชั่นกลับมาใช้ใหม่และจัดการแยกโค้ดเป็นหลายไฟล์เพื่อที่จะได้จัดการได้ง่ายด้วย express.Router กับ import และตัวอย่างกับ Web API เบื้องต้น
 โดยดู [src/lib/hello.ts](./src/lib/hello.ts) จะถูกนำมาใช้ใน [src/lib/myapi.ts](./src/lib/myapi.ts),
 
-## CRUD
-ไฟล์ [src/lib/fruit.ts](./src/lib/fruit.ts) ตัวอย่างการทำ get, post, delete, put หรือ patch
-
-
 ## ทำเอกสารจาก code (typescript)
-ทำเอกสาร html จากโค้ด typescript และ comment ใช้เพื่ออ้างอิงสำหรับนักพัฒนา
+ทำเอกสาร html จากโค้ด typescript และ comment ใช้เพื่ออ้างอิงสำหรับนักพัฒนาด้วย typedoc ค่าตอนฟิกอยู่ใน [typedocOptions](./tsconfig.json)  เพิ่มบรรทัดนี้ใน Scripts ของ package.json
+```json
+"docs": "typedoc",
+```
 รันคำสั่ง
 ```
-npm run doc
+npm i typedoc
+npm run docs
 ```
 เอกสารจะไปอยู่ที่ dist/docs/typedoc
 
@@ -100,12 +103,21 @@ wget https://github.com/jgm/pandoc/releases/download/3.2/pandoc-3.2-1-amd64.deb
 dpkg -i pandoc*
 rm pandoc*
 ```
-สร้างเอกสาร .docx จาก .md รันคำสั่ง
+เพิ่มบรรทัดนี้ใน Scripts ของ package.json
+```json
+"doc-spec": "cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx",
 ```
+
+สร้างเอกสาร .docx จาก .md รันคำสั่ง
+```bash
 npm run doc-spec
 
 ```
-## Frontend
+เอกสารจะอยู่ที่ dist/DFD.docx
+
+
+## CRUD
+ไฟล์ [src/lib/fruit.ts](./src/lib/fruit.ts) ตัวอย่างการทำ get, post, delete, put หรือ patch
 สร้าง Frontend ง่ายๆเพื่อทดสอบ Web API ตัวอย่างนี้จะใช้ [SvelteKit](https://kit.svelte.dev/) 
 
 ```
@@ -175,11 +187,65 @@ onMount(async () => {load()});
 <div>{debug}</div>
 ```
 
-## การบ้าน
+### การบ้าน
 - ให้แก้ไข update() remove() เพื่อทำให้โปรแกรมสมบูรณ์
 - ใช้ความรู้ที่เรียนมาสร้าง Todo List โดยมีฟังชั่นการทำงานคล้ายกับ[ตัวอย่างนี้](https://svelte.dev/repl/7eb8c1dd6cac414792b0edb53521ab49?version=3.20.1)
 
+## SPA
+ตัวอย่าง Single Page Application
+สำเนาโฟลเดอร์ [static](./static/) มาไว้ในโปรเจ็กนี้ แล้วเพิ่มโค้ดนี้ลงใน src/app.ts ก่อน จะเป็นการจำลอง Single Page Application(SPA)
+```ts
+...
+app.use(express.static('static'))
+...
+app.get('*',(req,res,next)=>{
+  res.sendFile(`${process.cwd()}/static/index.html`)
+})
+...
+```
+
+## MVC and Swagger 
+สามารถเขียนโค้ดแบบ MVC ได้ 
+- Controller อยู่ที่ 
+[src/controller](./src/controllers/pingController.ts)
+- View ของ Backend API คือ [routes](./src/routes/index.ts) ในตัวอย่างนี้จะสร้าง Route ด้วยตัวเอง tsoa สามารถสร้าง routes ได้แต่ไม่ได้แสดงในตัวอย่างนี้
+- tsoa ใช้เพื่อทำเอกสาร API ด้วย decorator ดู @Get @Route ใน controller จะใช้เพื่อสร้าง swagger.json ค่าคอนฟิกอยู่ใน [tsoa.json](./tsconfig.json)
+- swagger-ui-express เพื่อแสดงผล Swagger ที่ localhost:4000/swagger
+
+เพิ่มบรรทัดนี้ใน Scripts ของ package.json
+```json
+"swagger": "tsoa spec",
+```
+โค้ด [src/app.js](./src/app.ts)
+```ts
+...
+import Router from "./routes"
+import swaggerUi from "swagger-ui-express"
+...
+app.use(Router)
+app.use(
+  "/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+)
+...
+
+
+```
+
+ติดตั้งและรันคำสั่ง
+```bash
+npm i tsoa swagger-ui-express
+npm i -D @types/swagger-ui-express
+npm run swagger
+npm run dev
+```
 
 ## ดูเพิ่มเติม
 - [รู้จัก Postman มากกว่าแค่ส่ง Request](https://www.youtube.com/watch?v=DDZGZPgUcok)
 - [Swagger Editor](https://editor.swagger.io/)
+- [Building REST API with Express.js, TypeScript and Swagger](https://medium.com/ms-club-of-sliit/building-rest-api-with-express-js-typescript-and-swagger-387a9c731717)
