@@ -9,7 +9,7 @@
     <nav>
         <button router-link="/">Home</button>
         <button router-link="/about">About</button>
-        <button router-link="/api">API</button>
+        <button router-link="/test">Test</button>
         <button router-link="/unknown">Error</button>
     </nav>
     <div id="app">
@@ -17,5 +17,14 @@
     <script type="module" src="main.js"></script>
 </body>
 </html>
+<script>
+async function load(){
+    const res = await fetch("http://localhost:4000/api/fruits")
+    fruits = await res.json()
+    let e=document.getElementById('debug')
+    e.innerText = JSON.stringify(fruits)
+}
+
+</script>
 
 

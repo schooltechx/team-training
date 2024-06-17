@@ -1,5 +1,5 @@
 # Express with TypeScript
-
+ตัวอย่างการทำโปรเจ็ก Web API บน Node.js ด้วย Express.js
 
 
 # เริ่มโปรเจ็ก
@@ -22,7 +22,6 @@ code .
     "dev": "nodemon src/app.ts"
   },
 ```
-
 สร้างไฟล์เปล่า src/app.ts แล้วใส่โค้ดดังนี้
 ```ts
 import "dotenv/config" 
@@ -48,7 +47,11 @@ app.get('/',(req,res)=>{
 app.listen(port, () => console.log(`Application is running on port ${port}`))
 ```
 
-จากโค้ดนี้ทำความเข้าใจ route และ Middleware ของ Express ลองรันโปรแกรมด้วย คำสั่งเหล่า เพื่อดูการทำงานของโค้ดโปรเจ็กนี้ ใช้ postman หรือ Thunder Client (VS Code extension)เพื่อส่ง apikey ใน header 
+จากโค้ดนี้จะใช้ dotenv เพื่ออ่านค่าตัวแปรแวดล้อมจาก ไฟล์ .env (สร้างไฟล์นี้ที่ root ของโปรเจ็ก)
+```
+PORT=4000
+```
+ให้ศึกษาการใช้งาน Middleware และ Web API route บน Express ลองรันโปรแกรมด้วย คำสั่งเหล่า เพื่อดูการทำงานของโค้ดโปรเจ็กนี้ ใช้ postman หรือ Thunder Client (VS Code extension)เพื่อส่ง apikey ใน header 
 (รายละเดียดจะสอนในชั้นเรียน)
 ```
 npm run dev
@@ -66,7 +69,7 @@ app.use(express.urlencoded({extended:true}))
 ในตัวอย่างต่อๆไปให้ comment ส่วน Middleware ของ apikey ไว้เพื่อง่ายต่อการทดสอบทดสอบส่วนต่อๆไป
 
 ## Import
-ตัวอย่างการนำโค้ดมาใช้ซ้ำด้วยการ import ก้อปโฟลเดอร์ [src/lib](./src/lib/) มาใช้โดยให้โครงสร้างตรงกัน เพิ่มโค้ดนี้ใน [src/app.ts](./src/app.ts)
+ตัวอย่างการนำโค้ดมาใช้ซ้ำ หรือแยกโค้ดไปอีกไฟล์ด้วยการ import ก้อปโฟลเดอร์ [src/lib](./src/lib/) มาใช้โดยให้โครงสร้างตรงกัน เพิ่มโค้ดนี้ใน [src/app.ts](./src/app.ts)
 
 ```ts
 ...
@@ -95,7 +98,7 @@ npm run docs
 เอกสารจะไปอยู่ที่ dist/docs/typedoc
 
 ## ทำเอกสารจาก markdown
-Markdown ข้อดีของการทำเอกสารด้วย Markdown คือแปลงได้หลายรูปแบบเช่น HTML PDF Word ฯลฯ ตัวอย่างนี้จะแปลงเป็นเอกสาร MS Word(docx) จะใช้รูปแบบเอกสารจาก [spec/DFD-reference.docx](./spec/DFD-reference.docx)
+Markdown ข้อดีของการทำเอกสารด้วย Markdown คือแปลงได้หลายรูปแบบเช่น HTML PDF Word ฯลฯ ตัวอย่างนี้จะแปลงเป็นเอกสาร MS Word(docx) จะใช้รูปแบบเอกสารจาก [spec/DFD-reference.docx](./spec/DFD-reference.docx) ตัวอย่างนี้จะไม่เกี่ยวข้องกับโค้ดของ Node.js เป็นการทำเอกสารทั่วๆไป
 
 ให้ติดตั้ง [pandoc](https://pandoc.org/installing.html)ลงบน Windows/macOS/Linux เพื่อใช้สร้างเอกสาร spec จาก markdown การติดตั้งบน Linux ทำดังนี้
 ```bash
@@ -118,7 +121,7 @@ npm run doc-spec
 
 ## CRUD
 ไฟล์ [src/lib/fruit.ts](./src/lib/fruit.ts) ตัวอย่างการทำ get, post, delete, put หรือ patch
-สร้าง Frontend ง่ายๆเพื่อทดสอบ Web API ตัวอย่างนี้จะใช้ [SvelteKit](https://kit.svelte.dev/) 
+จะสร้าง Frontend ง่ายๆเพื่อทดสอบ Web API ตัวอย่างนี้จะใช้ [SvelteKit](https://kit.svelte.dev/) 
 
 ```
 npm create svelte@latest fruit-fe
