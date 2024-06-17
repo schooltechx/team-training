@@ -19,8 +19,8 @@ let routerInstance = new Router('routerInstance', [
         หน้า About'
     },
     {
-        path: '/api',
-        name: "api",
+        path: '/test',
+        name: "Test",
         content: '<h1>Test API</h1> \
         หน้า APi'
     }
