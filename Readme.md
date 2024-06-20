@@ -24,7 +24,7 @@
 - ใช้ [Github issue/project](https://github.com/features/issues) ในการบริหารงานในทีม
 
 ## Git
-ตั้งค่าและใช้งานทำเหมือนในหัวข้อ ["ตั้งค่า Git"](https://github.com/schooltechx/youtube/blob/main/fullstac"k-dev/github/Setup.md) 
+ตั้งค่าและใช้งานทำเหมือนในหัวข้อ [ตั้งค่า Git](https://github.com/schooltechx/youtube/blob/main/fullstack-dev/github/Setup.md) 
 
 หรือเริ่มจากโปรเจ็กที่มีอยู่แล้ว
 ```
