@@ -23,6 +23,22 @@
 - [Docker](./docker/Readme.md) สอนการติดตั้งใช้งานโปรแกรมชนิดต่างๆ, Database,Wordpress,Reverse Proxy, API Gateway ฯลฯ
 - ใช้ [Github issue/project](https://github.com/features/issues) ในการบริหารงานในทีม
 
+## Git
+ตั้งค่าและใช้งานทำเหมือนในหัวข้อ ["ตั้งค่า Git"](https://github.com/schooltechx/youtube/blob/main/fullstac"k-dev/github/Setup.md) 
+
+หรือเริ่มจากโปรเจ็กที่มีอยู่แล้ว
+```
+cd proj1
+git init
+touch test.txt
+touch .gitignore
+git add .
+git commit
+# create git repo from web
+git remote add origin git@github.com:username/new_repo
+git push -u origin master
+
+```
 
 ## Testing
 - vitest ใช้ในการทำ Unit test
