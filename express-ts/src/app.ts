@@ -7,7 +7,7 @@ import {fruitRoute} from "./lib/fruit"
 import Router from "./routes"
 import swaggerUi from "swagger-ui-express"
 const app: Express = express()
-const port = Number(process.env.PORT) || 4000
+const port = Number(process.env.PORT) || 80
 /*
 let apikey="123456789"
 app.use((req:Request,res:Response,next:NextFunction)=>{
@@ -26,6 +26,7 @@ app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
 app.use(Router)
+/** hello */
 app.use(
   "/swagger",
   swaggerUi.serve,

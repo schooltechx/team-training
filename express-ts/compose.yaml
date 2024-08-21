@@ -1,12 +1,11 @@
-version: "3.2"
 networks:
   dev:
     external: true
 services:
   demo:
-    image: myexpress:0.0.1
-    # ports:
-    #     - 4001:80
+    image: docker.frappet.com/training/oom_express:0.0.1
+    ports:
+        - 4001:80
     networks:
       - dev
     labels:

@@ -9,7 +9,9 @@
     "start": "node dist/app.js",
     "build": "npm run clean &&tsc && npm run docs && npm run doc-spec",
     "dev": "nodemon src/app.ts",
-    "build:docker": "npm run build && docker build -t myexpress:0.0.1 .",
+    "build:docker": "npm run build && docker build -t docker.frappet.com/training/oom_express:0.0.3 .",
+    "push:docker": "npm run build:docker && docker push docker.frappet.com/training/oom_express:0.0.3", 
+    "reload:docker": "docker compose pull && docker compose up -d",
     "docs": "typedoc",
     "doc-spec": "cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx",
     "swagger": "tsoa spec",
@@ -22,6 +24,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "pandoc": "^0.2.0",
     "swagger-ui-express": "^5.0.1",
     "tsoa": "^6.3.1",
     "typedoc": "^0.25.3"
