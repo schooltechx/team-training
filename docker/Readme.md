@@ -1,26 +1,31 @@
 # Docker
-docker เป็นสิ่งจำเป็นสำหรับการพัฒนา แบบรวดเร็วถือว่าขาดไม่ได้เลย
+
+เทคโนโลยี container เป็นสิ่งจำเป็นสำหรับการพัฒนาในปัจจุบัน ส่วนใหญ่เริ่มใช้งาน docker เอกสารนี้เป็นการสรุปการใช้จะมีรายละเอียดในการสอนอีกทีหนึ่ง
 
 ## Linux Virtualization และ Containerization
 - ความแตกต่างระหว่าง VM กับ Container ?
+- Container มีแบบไหนบ้าง ? Windows
 - ข้อจำกัดของ Container ?
-- Container บน Windows ?
+- ทำไมต้องใช้ ?
 
 ## docker command
-
+คำสั่งพื้นฐาน
 ```
 docker ps
 docker images
+docker run [image]
 docker volume ls
 docker volume rm volume_name
-docker network crate network_name
+docker network ls
+docker network crate [network_name]
 docker build -t tag_name .
 ```
 
 ## docker compose command
 
-เนื่องจากเป็นการเรียนลัด จะให้ใช้ docker compose เป็นหลักใช้คำสั่ง docker เท่าที่จำเป็น
-สร้างไฟล์ [docker-compose.yaml](https://github.com/schooltechx/youtube/blob/main/Docker%20VM%20K8s/docker-compose/wordpress/docker-compose.yaml), [compose.yaml](../express-ts/compose.yaml)
+ใช้ไฟล์ compose(compose.yaml, docker-compose.yaml) ที่เป็นคอนฟิกสำหรับการเรียกใช้ doker ทำให้ไม่ต้องจำคำสั่งที่ซับซ้อนเพื่อติดตั้งและเรียกใช้งานไฟล์ทั้งระบบ และไฟล์นี้สามารถเก็บใน git ได้
+
+ตัวอย่างไฟล์ [docker-compose.yaml](https://github.com/schooltechx/youtube/blob/main/Docker%20VM%20K8s/docker-compose/wordpress/docker-compose.yaml), [compose.yaml](../express-ts/compose.yaml)
 ```
 docker compose ps
 docker compose up -d
