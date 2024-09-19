@@ -12,7 +12,7 @@ npm i dotenv express cors
 npm i -D @types/express @types/node @types/cors nodemon ts-node typescript
 code .
 ```
-สร้างไฟล์ [tsconfig.json](./express-ts/tsconfig.json) โดยมีเนื้อหาเดียวกับใน repo นี้ สำเนา [env.examle](./env.example) เป็น .env
+สร้างไฟล์ [tsconfig.json](./tsconfig.json) โดยมีเนื้อหาเดียวกับใน repo นี้ สำเนา [env.examle](./env.example) เป็น .env
 ไฟล์ package.json ส่วนที่เป็น scripts แก้ให้เป็นดังนี้
 ```json
   "scripts": {
