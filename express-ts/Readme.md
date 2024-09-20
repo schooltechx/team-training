@@ -57,7 +57,7 @@ PORT=4000
 npm run dev
 npm run build
 npm start
-npm start:ts
+npm run start:ts
 ```
 เพิ่ม middleware ต่างๆใน src/app.ts
 ```ts
@@ -210,7 +210,7 @@ app.get('*',(req,res,next)=>{
 ## MVC and Swagger 
 สามารถเขียนโค้ดแบบ MVC ได้ 
 - Controller อยู่ที่ 
-[src/controller](./src/controllers/pingController.ts)
+[src/controller](./src/controllers/helloController.ts)
 - View ของ Backend API คือ [routes](./src/routes/index.ts) ในตัวอย่างนี้จะสร้าง Route ด้วยตัวเอง tsoa สามารถสร้าง routes ได้แต่ไม่ได้แสดงในตัวอย่างนี้
 - tsoa ใช้เพื่อทำเอกสาร API ด้วย decorator ดู @Get @Route ใน controller จะใช้เพื่อสร้าง swagger.json ค่าคอนฟิกอยู่ใน [tsoa.json](./tsconfig.json)
 - swagger-ui-express เพื่อแสดงผล Swagger ที่ localhost:4000/swagger
