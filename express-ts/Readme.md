@@ -210,7 +210,7 @@ app.get('*',(req,res,next)=>{
 ## MVC and Swagger 
 express สามารถเขียนโค้ดแบบ MVC ได้ ในตัวอย่างนี้จะเป็นการสร้าง Controller และสร้างเอกสารของ API ด้วย [TSOA](https://tsoa-community.github.io/docs/introduction.html)
 
-เนื่องจากเป็นตัวอย่างอย่างง่าย ทำแค่ controller จะไม่ได้ใช้ Service หรือ Model ในโค้ด และไม่ได้สร้าง Route ด้วย TSOA
+เนื่องจากเป็นตัวอย่างอย่างง่าย ทำแค่ controller จะไม่ได้ใช้ Service หรือ Model ในโค้ด 
 
 ติดตั้ง
 ```bash
@@ -218,21 +218,26 @@ npm i tsoa swagger-ui-express
 npm i -D @types/swagger-ui-express
 ```
 
-ให้สร้างไฟล์ตามรายการนี้
-- [tsoa.json](./tsoa.json) เป็นการตั้งค่าในการทำงานของ tsoa เช่น input/output คือไฟล์อะไร
-- [src/controllers/helloController.ts](./src/controllers/helloController.ts) จะใช้ decorator อธิบายว่าเพิ่มเติม API มันมีหน้าตาเป็นอย่างไรจะได้สร้างเอกสารได้ถูกต้อง
-- [src/routes/index.ts](./src/routes/index.ts) ในมุมมอง ของ Backend ตัว route ทำหน้าที่เป็น View จริงๆแล้ว tsoa สามารถสร้าง routes ได้ แต่ตัวอย่างนี้จะสร้าง route ด้วยตัวเอง เอง
-- [package.json](./package.json) เพิ่มบรรทัดนี้ใน Scripts คำสั่งนี้จะสร้าง static/swagger.json จาก [src/controllers/*.ts](./src/controllers/)
+ให้สำเนาไฟล์ตามรายการนี้มาไว้ในโปรเจ็ก
+- [tsoa.json](./tsoa.json) เป็นการตั้งค่าในการทำงานของ tsoa เช่น input/output คือไฟล์อะไร คำที่แสดงในเอกสาร API
+- [src/controllers/helloController.ts](./src/controllers/helloController.ts) จะใช้ decorator ช่วยอธิบายว่า API มันมีหน้าตาเป็นอย่างไร จะได้สร้างเอกสารและ route ได้ถูกต้อง
+- [src/routes/index.ts](./src/routes/index.ts) ในมุมมอง ของ Backend ตัว route ทำหน้าที่เป็น View ไฟลนี้เป็นการสร้าง route ด้วยตัวเอง
+- [package.json](./package.json) เพิ่มบรรทัดนี้ใน Scripts 
+คำสั่ง swagger สร้าง OpenAPI Spec ใน static/swagger.json จาก [src/controllers/*.ts](./src/controllers/) 
+คำสั่ง routes ใช้ tsoa สร้าง Express route โดยดูข้อมูลจากโค้ดของ Controller จะได้ไฟล์ [src/routes.ts](./src/routes.ts) ออกมา
+
 ```json
 "swagger": "tsoa spec",
+"routes": "tsoa spec-and-routes",
 ```
-- [src/app.ts](./src/app.ts) ใช้ middleware ของ Router และ swaggerUi
+- [src/app.ts](./src/app.ts) เรียกใช้ swaggerUi และมีการนำเข้า RegisterRoutes มีให้เลือกสองแบบคือจาก route ที่สร้างเอง(./myRoutes)  และ ที่สร้างด้วย tsoa(./route) ให้สลับใช้งานด้วยการ comment โค้ด
 ```ts
 ...
-import Router from "./routes"
+import { RegisterRoutes } from "./myRoutes"
+//import { RegisterRoutes } from "./routes"
 import swaggerUi from "swagger-ui-express"
 ...
-app.use(Router)
+RegisterRoutes(app) // route: /hello
 app.use(
   "/swagger",
   swaggerUi.serve,
@@ -253,7 +258,9 @@ npm run dev
 ไปที่ http://localhost:4000/swagger เพื่อดูหน้าเอกสาร API
 
 ### Homework
-ลองสร้าง controller และ route เพื่อให้ครบขั้นตอนการทำ CRUD แนะนำให้ลองดัดแปลงจากโค้ด [fruit.ts](./src/lib/fruit.ts) โดยเรียก Controller ที่สร้างเอง ให้อยู่ที่ http://localhost:4000/fruits
+ลองสร้าง controller และ route เพื่อให้ครบขั้นตอนการทำ CRUD แนะนำให้ลองดัดแปลงจากโค้ด [fruit.ts](./src/lib/fruit.ts) โดยเรียก Controller ที่สร้างเอง ให้อยู่ที่ http://localhost:4000/fruits ศึกษาการใช้ TSOA(PUT,POST,PATCH,DELETE) [จากตัวอย่าง](https://tsoa-community.github.io/docs/examples.html)
+
+
 
 ## ดูเพิ่มเติม
 - [รู้จัก Postman มากกว่าแค่ส่ง Request](https://www.youtube.com/watch?v=DDZGZPgUcok)

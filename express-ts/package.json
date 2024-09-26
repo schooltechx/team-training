@@ -15,6 +15,7 @@
     "docs": "typedoc",
     "doc-spec": "cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx",
     "swagger": "tsoa spec",
+    "routes": "tsoa spec-and-routes",
     "clean": "npx rimraf dist"
   },
   "keywords": [],

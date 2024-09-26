@@ -4,7 +4,8 @@ import cors from "cors"
 import express, { Express, Request, Response,NextFunction } from 'express'
 import {myapiRoute} from './lib/myapi'
 import {fruitRoute} from "./lib/fruit"
-import Router from "./routes"
+import { RegisterRoutes } from "./myRoutes"
+//import { RegisterRoutes } from "./routes"
 import swaggerUi from "swagger-ui-express"
 const app: Express = express()
 const port = Number(process.env.PORT) || 80
@@ -25,8 +26,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
-app.use(Router)
-/** hello */
+RegisterRoutes(app) // /hello
 app.use(
   "/swagger",
   swaggerUi.serve,

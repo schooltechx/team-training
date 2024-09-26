@@ -4,6 +4,14 @@
     "controllerPathGlobs": ["src/controllers/*.ts"],
     "spec": {
       "outputDirectory": "static",
-      "specVersion": 3
+      "specVersion": 3,
+      "description":"TSOA demo by Frappet",
+      "contact":{
+        "name":"Sorawit Bholsithi",
+        "email":"sorawit@frappet.com"
+      }
+    },
+    "routes": {
+      "routesDir": "src"
     }
   }
