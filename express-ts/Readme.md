@@ -208,18 +208,25 @@ app.get('*',(req,res,next)=>{
 ```
 
 ## MVC and Swagger 
-สามารถเขียนโค้ดแบบ MVC ได้ 
-- Controller อยู่ที่ 
-[src/controller](./src/controllers/helloController.ts)
-- View ของ Backend API คือ [routes](./src/routes/index.ts) ในตัวอย่างนี้จะสร้าง Route ด้วยตัวเอง tsoa สามารถสร้าง routes ได้แต่ไม่ได้แสดงในตัวอย่างนี้
-- tsoa ใช้เพื่อทำเอกสาร API ด้วย decorator ดู @Get @Route ใน controller จะใช้เพื่อสร้าง swagger.json ค่าคอนฟิกอยู่ใน [tsoa.json](./tsconfig.json)
-- swagger-ui-express เพื่อแสดงผล Swagger ที่ localhost:4000/swagger
+express สามารถเขียนโค้ดแบบ MVC ได้ ในตัวอย่างนี้จะเป็นการสร้าง Controller และสร้างเอกสารของ API ด้วย [TSOA](https://tsoa-community.github.io/docs/introduction.html)
 
-เพิ่มบรรทัดนี้ใน Scripts ของ package.json
+เนื่องจากเป็นตัวอย่างอย่างง่าย ทำแค่ controller จะไม่ได้ใช้ Service หรือ Model ในโค้ด และไม่ได้สร้าง Route ด้วย TSOA
+
+ติดตั้ง
+```bash
+npm i tsoa swagger-ui-express
+npm i -D @types/swagger-ui-express
+```
+
+ให้สร้างไฟล์ตามรายการนี้
+- [tsoa.json](./tsoa.json) เป็นการตั้งค่าในการทำงานของ tsoa เช่น input/output คือไฟล์อะไร
+- [src/controllers/helloController.ts](./src/controllers/helloController.ts) จะใช้ decorator อธิบายว่าเพิ่มเติม API มันมีหน้าตาเป็นอย่างไรจะได้สร้างเอกสารได้ถูกต้อง
+- [src/routes/index.ts](./src/routes/index.ts) ในมุมมอง ของ Backend ตัว route ทำหน้าที่เป็น View จริงๆแล้ว tsoa สามารถสร้าง routes ได้ แต่ตัวอย่างนี้จะสร้าง route ด้วยตัวเอง เอง
+- [package.json](./package.json) เพิ่มบรรทัดนี้ใน Scripts คำสั่งนี้จะสร้าง static/swagger.json จาก [src/controllers/*.ts](./src/controllers/)
 ```json
 "swagger": "tsoa spec",
 ```
-โค้ด [src/app.js](./src/app.ts)
+- [src/app.ts](./src/app.ts) ใช้ middleware ของ Router และ swaggerUi
 ```ts
 ...
 import Router from "./routes"
@@ -236,17 +243,17 @@ app.use(
   })
 )
 ...
-
-
 ```
 
-ติดตั้งและรันคำสั่ง
+รันคำสั่ง
 ```bash
-npm i tsoa swagger-ui-express
-npm i -D @types/swagger-ui-express
 npm run swagger
 npm run dev
 ```
+ไปที่ http://localhost:4000/swagger เพื่อดูหน้าเอกสาร API
+
+### Homework
+ลองสร้าง controller และ route เพื่อให้ครบขั้นตอนการทำ CRUD แนะนำให้ลองดัดแปลงจากโค้ด [fruit.ts](./src/lib/fruit.ts) โดยเรียก Controller ที่สร้างเอง ให้อยู่ที่ http://localhost:4000/fruits
 
 ## ดูเพิ่มเติม
 - [รู้จัก Postman มากกว่าแค่ส่ง Request](https://www.youtube.com/watch?v=DDZGZPgUcok)
