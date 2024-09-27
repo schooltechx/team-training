@@ -10,15 +10,16 @@
 		"securitySchemes": {}
 	},
 	"info": {
-		"title": "train",
-		"version": "1.0.0",
-		"description": "TSOA demo",
+		"title": "TSOA Demo",
+		"version": "1.1.0",
+		"description": "TSOA demo by Frappet",
 		"license": {
-			"name": "ISC"
+			"name": "Frappet Opensource"
 		},
 		"contact": {
 			"name": "Sorawit Bholsithi",
-			"email": "sorawit@frappet.com"
+			"email": "sorawit@frappet.com",
+			"url": "https://www.chamomind.com"
 		}
 	},
 	"paths": {

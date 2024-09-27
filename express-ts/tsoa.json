@@ -3,13 +3,17 @@
     "noImplicitAdditionalProperties": "throw-on-extras",
     "controllerPathGlobs": ["src/controllers/*.ts"],
     "spec": {
-      "outputDirectory": "static",
-      "specVersion": 3,
-      "description":"TSOA demo by Frappet",
+      "name": "TSOA Demo",
+      "description":"TSOA demo by Oom",
+      "license": "Frappet Opensource",
+      "version": "1.1.0",
       "contact":{
         "name":"Sorawit Bholsithi",
-        "email":"sorawit@frappet.com"
-      }
+        "email":"sorawit@frappet.com",
+        "url": "https://www.chamomind.com"
+      },
+      "outputDirectory": "static",
+      "specVersion": 3
     },
     "routes": {
       "routesDir": "src"

@@ -221,7 +221,7 @@ npm i -D @types/swagger-ui-express
 ให้สำเนาไฟล์ตามรายการนี้มาไว้ในโปรเจ็ก
 - [tsoa.json](./tsoa.json) เป็นการตั้งค่าในการทำงานของ tsoa เช่น input/output คือไฟล์อะไร คำที่แสดงในเอกสาร API
 - [src/controllers/helloController.ts](./src/controllers/helloController.ts) จะใช้ decorator ช่วยอธิบายว่า API มันมีหน้าตาเป็นอย่างไร จะได้สร้างเอกสารและ route ได้ถูกต้อง
-- [src/routes/index.ts](./src/routes/index.ts) ในมุมมอง ของ Backend ตัว route ทำหน้าที่เป็น View ไฟลนี้เป็นการสร้าง route ด้วยตัวเอง
+- [src/myRoutes/index.ts](./src/myRoutes/index.ts) ในมุมมอง ของ Backend ตัว route ทำหน้าที่เป็น View ไฟลนี้เป็นการสร้าง route ด้วยตัวเอง
 - [package.json](./package.json) เพิ่มบรรทัดนี้ใน Scripts 
 คำสั่ง swagger สร้าง OpenAPI Spec ใน static/swagger.json จาก [src/controllers/*.ts](./src/controllers/) 
 คำสั่ง routes ใช้ tsoa สร้าง Express route โดยดูข้อมูลจากโค้ดของ Controller จะได้ไฟล์ [src/routes.ts](./src/routes.ts) ออกมา
