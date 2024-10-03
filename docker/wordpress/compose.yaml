@@ -6,8 +6,6 @@ services:
     container_name: wp-db
     volumes:
       - ./db-data:/var/lib/mysql
-    networks:
-      - default
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: supersecretpassword

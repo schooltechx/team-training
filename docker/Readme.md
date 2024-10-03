@@ -36,6 +36,17 @@ docker compose logs -f [service_name]
 docker compose 
 
 ```
+ตัวอย่างการใช้งาน docker volume
+```
+services:
+  db:
+    image: mariadb
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
+```
+
 ## Docker registry
 เป็นที่เก็บ docker image มีเวอร์ชั่น(tag) ต่างๆให้เลือกใช้ ที่นิยมใช้กันคือ [Docker Hub](https://hub.docker.com/) 
 เราสามารถติดตั้งเองได้ 
