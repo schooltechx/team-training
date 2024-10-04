@@ -36,7 +36,20 @@ docker compose logs -f [service_name]
 docker compose 
 
 ```
-ตัวอย่างการใช้งาน docker volume
+
+
+## แบบฝึกหัด
+- ติดตั้งเวปเซิร์ฟเวอร์ Nginx สร้างโฟลเดอร์ [simple-web](./simple-web/) โดยมีไฟล์ [docker-compose.yaml](./simple-web/docker-compose.yaml) และ [html/index.html](./simple-web/html/index.html) อยู่ข้างใน เรียกคำสั่ง docker compose up ในโฟลเดอร์นั้น
+- ติดตั้ง Wordpress สร้างโฟลเดอร์ [wordpress](./wordpress/) โดยมีไฟล์ [compose.yaml](./wordpress/compose.yaml) อยู่ข้างใน เรียกคำสั่ง docker compose up ในโฟลเดอร์นั้น
+
+## Docker Volume
+เมื่อมีการแก้ไขค่าบางอย่างคอนเทนเนอร์จะถูกสร้างใหม่จากอิมเมจในเครื่องทำให้ข้อมูลที่สร้างในคอนเทนเนอร์หายไป แบบฝึกหัด simple-web และ wordpress แสดงการใช้ volume เพื่อให้ container ใช้ไฟล์หรือโฟลเดอร์จากเครื่องโฮส เมื่อคอนเทนเนอร์ถูกสร้างใหม่ข้อมูลจะไม่หายไป (persistent volume)
+
+simple-web เป็นแบบ read only(ro)คอนเทนเนอร์จะอ่านอย่างเดียวแก้ไขค่าไม่ได้เราจะแก้ไฟล์ได้จากเครื่องโฮสเท่านั้น 
+
+wordpress จำเป็นต้องแก้ไขไฟล์จาก container ซึ่งการสร้างไฟล์จะใช้สิทธิ์ใน container ทำให้เราไม่สามารถลบหรือแก้ไขได้ จำเป็นต้องมีสิทธิ์ sudo ในการจัดการ 
+
+กรณีพวกฐานข้อมูลอาจจะใช้ docker volume จะได้มีสิทธิ์ ตัวอย่างเป็นดังนี้
 ```
 services:
   db:
@@ -46,6 +59,22 @@ services:
 volumes:
   db-data:
 ```
+แสดงและลบ volume ทำดังนี้
+```sh
+docker volume ls 
+docker volume rm [volume_name]
+
+```
+## Docker network
+Docker จะสร้างเน็ตเวิร์กส่วนตัวต่อหนึ่งไฟล์คอมโพส 
+```sh
+oom@debian12ct:~/docker/simple-web$ docker compose up -d
+[+] Running 2/2
+ ✔ Network simple-web_default  Created  0.2s 
+ ✔ Container simple-web-web-1  Started  0.4s 
+```
+เมื่ออยู่เน็ตเวิร์กเดียวกันจะอ้างถึงกันผ่านชื่อเซอร์วิส (เหมือนมี dns ภายใน) โดยไม่ต้องใช้ IP เนื่องจากเราไม่รู้ IP ที่แน่นอนจึงใช้วิธีนี้เป็นหลัก  ดูตัวอย่างใน [compose.yaml](./wordpress/compose.yaml) ของ wordpress สามารถอ้าง db:3306
+
 
 ## Docker registry
 เป็นที่เก็บ docker image มีเวอร์ชั่น(tag) ต่างๆให้เลือกใช้ ที่นิยมใช้กันคือ [Docker Hub](https://hub.docker.com/) 
