@@ -1,0 +1,21 @@
+{
+    "entryFile": "src/app.ts",
+    "noImplicitAdditionalProperties": "throw-on-extras",
+    "controllerPathGlobs": ["src/controllers/*.ts"],
+    "spec": {
+      "name": "TSOA Demo",
+      "description":"TSOA demo by Oom",
+      "license": "Frappet Opensource",
+      "version": "1.1.0",
+      "contact":{
+        "name":"Sorawit Bholsithi",
+        "email":"sorawit@frappet.com",
+        "url": "https://www.chamomind.com"
+      },
+      "outputDirectory": "static",
+      "specVersion": 3
+    },
+    "routes": {
+      "routesDir": "src"
+    }
+  }

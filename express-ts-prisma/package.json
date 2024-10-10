@@ -1,0 +1,33 @@
+{
+  "name": "express-ts-prisma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "build": "npm run clean &&tsc && npm run docs && npm run doc-spec",
+    "dev": "nodemon src/app.ts",
+    "build:docker": "npm run build && docker build -t docker.frappet.com/training/oom_express:0.0.3 .",
+    "push:docker": "npm run build:docker && docker push docker.frappet.com/training/oom_express:0.0.3",
+    "reload:docker": "docker compose pull && docker compose up -d",
+    "routes": "tsoa spec-and-routes"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.5",
+    "nodemon": "^3.1.7",
+    "prisma": "^5.20.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
