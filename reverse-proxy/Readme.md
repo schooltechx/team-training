@@ -30,6 +30,8 @@ services:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
 ```
+เวลา NPM ทำการ proxy ไปเวปเซิร์ฟเวอร์ที่อยู่ในแต่ละคอนเทนเนอร์ ห้ามใช้ localhost เพราะ ตัว NPM เองก็เป็นคอนเทนเนอร์เหมือนกันซึ่งจะหมายถึงตัว NPM เอง กรณีเวปเซิร์ฟเวอร์เปิดพอร์ตบนเครื่องโอสให้ใช้ IP address ของโฮสแทน หรืออ้างโดเมน host.docker.internal
+
 
 ## HTTPS
 เนื่องจาก Reverse Proxy เป็นจุดรวมในการเชื่อมต่อจากอินเตอร์เน็ต จึงเหมาะกับ ทำ HTTPS เพื่อให้มีการเข้ารหัส ซึ่งจะต้องมี Certificate อาจจะซื้อมาใช้ ขอฟรีจาก Let's Encrypt หรือ ทำขึ้นมาเองซึ่งเรียกว่า Selfsigned Certificate ตัวอย่างคำสั่งด้านล่างจะทำ wildcard Certificate ทำให้ Certificate ตัวเดียวใช้ได้หลาย Sub Domain เวลาใช้งาน ให้ไปติดตั้งใน reverse proxy
