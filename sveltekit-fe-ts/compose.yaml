@@ -1,0 +1,15 @@
+networks:
+  proxy:
+    external: true
+services:
+  fe:
+    image: docker.frappet.com/training/oom_fe:latest
+    ports:
+    - "3001:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fe.rule=Host(`fe.oom.home`)"
+    environment:
+      - TZ=Asia/Bangkok
+    networks:
+     - proxy
