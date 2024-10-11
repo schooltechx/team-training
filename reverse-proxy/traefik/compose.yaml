@@ -1,0 +1,24 @@
+# Windows
+# NET stop HTTP
+# docker network create proxy
+services:
+  traefik:
+    image: traefik:v3.2
+    ports:
+      - 80:80
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yaml:/traefik.yaml:ro
+      - ./routes.yaml:/routes.yaml:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tf.rule=Host(`tf.oom.home`)"
+      - "traefik.http.routers.tf.service=api@internal"
+    environment:
+      - TZ=Asia/Bangkok
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true
