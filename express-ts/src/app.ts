@@ -19,7 +19,9 @@ app.use((req:Request,res:Response,next:NextFunction)=>{
   next()
 })
 */
-app.use(cors())
+if(process.env.NODE_ENV!=="production"){
+  app.use(cors())
+}
 app.use(express.json())
 app.use(express.raw())
 app.use(express.urlencoded({extended:true}))
@@ -39,5 +41,4 @@ app.use(
 // app.get('*',(req,res,next)=>{
 //   res.sendFile(`${process.cwd()}/static/index.html`)
 // })
-
 app.listen(port, () => console.log(`Application is running on port ${port}`))

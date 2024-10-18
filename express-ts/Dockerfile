@@ -6,7 +6,7 @@ WORKDIR /app
 COPY static static
 COPY package.json .
 COPY package-lock.json .
-ENV NODE_ENV production
+ENV NODE_ENV=production
 RUN npm ci
 COPY dist bin
 EXPOSE 80

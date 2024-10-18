@@ -6,26 +6,26 @@ http:
     dev-be:
       service: devbe
       rule: "Host(`fe-dev.oom.home`) && PathPrefix(`/api`)" 
-    pro-fe:
-      service: profe
-      rule: "Host(`fe.oom.home`)"
-    pro-be:
-      service: probe
-      rule: "Host(`fe.oom.home`) && PathPrefix(`/api`)" 
+    # pro-fe:
+    #   service: profe
+    #   rule: "Host(`fe.oom.home`)"
+    # pro-be:
+    #   service: probe
+    #   rule: "Host(`fe.oom.home`) && PathPrefix(`/api`)" 
   services:
     devfe:
       loadBalancer:  
         servers:
-        - url: 'http://192.168.2.101:3000'
+        - url: 'http://fe'
     devbe:
       loadBalancer:  
         servers:
-        - url: 'http://192.168.2.101:4000'
-    profe:
-      loadBalancer:  
-        servers:
-        - url: 'http://fe'
-    probe:
-      loadBalancer:  
-        servers:
         - url: 'http://be'
+    # profe:
+    #   loadBalancer:  
+    #     servers:
+    #     - url: 'http://fe'
+    # probe:
+    #   loadBalancer:  
+    #     servers:
+    #     - url: 'http://be'
