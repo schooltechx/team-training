@@ -9,16 +9,6 @@ import { RegisterRoutes } from "./myRoutes"
 import swaggerUi from "swagger-ui-express"
 const app: Express = express()
 const port = Number(process.env.PORT) || 80
-/*
-let apikey="123456789"
-app.use((req:Request,res:Response,next:NextFunction)=>{
-  console.log("Middleware")
-  if(req.headers.apikey!==apikey ){
-    return res.status(401).json({error:"Unauthorized"})
-  }
-  next()
-})
-*/
 if(process.env.NODE_ENV!=="production"){
   app.use(cors())
 }
@@ -28,6 +18,19 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
+const apiKeyCheck = (req: Request, res: Response, next: NextFunction) => {
+  console.log("Middleware");
+  if (req.headers.apikey !== apikey) {
+    res.status(401).json({ error: "Unauthorized" });
+  } else {
+    next();
+  }
+}
+//app.use(apiKeyCheck);
+app.get("/hello2",apiKeyCheck,(_req, res) => {
+  res.send("Hello 2");
+});
+
 RegisterRoutes(app) // /hello
 app.use(
   "/swagger",
@@ -38,6 +41,9 @@ app.use(
     },
   })
 );
+app.get("/", (_req, res) => {
+  res.send("Hello Express");
+});
 // app.get('*',(req,res,next)=>{
 //   res.sendFile(`${process.cwd()}/static/index.html`)
 // })
