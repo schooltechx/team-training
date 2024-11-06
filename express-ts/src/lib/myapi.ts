@@ -10,7 +10,7 @@ myapiRoute.get('/area', (req, res,next) => {
     const width = Number(req.query.width)
     const height = Number(req.query.height)
     const area = width*height
-    return res.json(area)
+    res.json(area)
 
 });
 

@@ -27,20 +27,22 @@ code .
 import "dotenv/config" 
 import express, { Express, Request, Response,NextFunction } from 'express'
 const app: Express = express()
-const port = Number(process.env.PORT) || 3000
-let apikey="123456789"
-app.use((req:Request,res:Response,next:NextFunction)=>{
-  console.log("Middleware")
-  if(req.headers.apikey!==apikey ){
-    return res.status(401).json({error:"Unauthorized"})
+const port = Number(process.env.PORT) || 3000;
+const apikey = process.env.APIKEY || "123456789";
+const apiKeyCheck = (req: Request, res: Response, next: NextFunction) => {
+    console.log("Middleware");
+    if (req.headers.apikey !== apikey) {
+      res.status(401).json({ error: "Unauthorized" });
+    } else {
+      next();
+    }
   }
-  next()
-})
+//app.use(apiKeyCheck);
+app.get("/hello2",apiKeyCheck,(_req, res) => {
+  res.send("Hello 2");
+});
 
-app.get('/hello',(req,res)=>{
-    
-    res.send("Hello 2")
-})
+
 app.get('/',(req,res)=>{
     res.send("Hello Express")
 })
@@ -61,7 +63,11 @@ npm run start:ts
 ```
 เพิ่ม middleware ต่างๆใน src/app.ts
 ```ts
-app.use(cors())
+const port = Number(process.env.PORT) || 3000;
+const apikey = process.env.APIKEY || "123456789";
+if(process.env.NODE_ENV!=="production"){
+  app.use(cors())
+}
 app.use(express.json())
 app.use(express.raw())
 app.use(express.urlencoded({extended:true}))
