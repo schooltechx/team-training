@@ -1,16 +1,9 @@
-networks:
-  proxy:
-    external: true
 services:
-  be:
-    image: docker.frappet.com/training/oom_be:latest
+  myexpress:
+    image: my-app:0.0.1
+    # image: docker.frappet.com/training/oom_be:latest
     ports:
-        - 4001:80
+        - 9999:80
     # deploy:
     #   mode: replicated
     #   replicas: 3
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fe.rule=Host(`fe.oom.home`) && PathPrefix(`/api/`)"
-    networks:
-     - proxy
