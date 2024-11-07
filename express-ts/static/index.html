@@ -15,11 +15,13 @@
     <div id="app">
     </div>
     <script type="module" src="main.js"></script>
+    <div id="debug">debug here</div>
+    <button onclick="load()">load</button>
 </body>
 </html>
 <script>
 async function load(){
-    const res = await fetch("http://localhost:4000/api/fruits")
+    const res = await fetch("/api/fruits")
     fruits = await res.json()
     let e=document.getElementById('debug')
     e.innerText = JSON.stringify(fruits)
