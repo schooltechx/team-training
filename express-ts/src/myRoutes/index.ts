@@ -1,9 +1,9 @@
 import { Express, Request, Response } from 'express'
 import {HelloController} from "../controllers/helloController";
 export function RegisterRoutes(app: Express) {
-  app.get("/hello", async (_req, res) => {
+  app.get("/hello/:msg", async (req, res) => {
     const controller = new HelloController();
-    const response = await controller.getMessage();
+    const response = await controller.getMessage(req.params.msg);
     res.send(response);
   });
 }  

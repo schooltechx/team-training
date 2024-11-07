@@ -6,13 +6,25 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"msgObj": {
+				"properties": {
+					"msg": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"msg"
+				],
+				"type": "object"
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
 		"title": "TSOA Demo",
 		"version": "1.1.0",
-		"description": "TSOA demo by Frappet",
+		"description": "TSOA demo by Oom",
 		"license": {
 			"name": "Frappet Opensource"
 		},
@@ -23,7 +35,7 @@
 		}
 	},
 	"paths": {
-		"/hello": {
+		"/hello/{msg}": {
 			"get": {
 				"operationId": "GetMessage",
 				"responses": {
@@ -33,12 +45,12 @@
 							"application/json": {
 								"schema": {
 									"properties": {
-										"message": {
+										"msg": {
 											"type": "string"
 										}
 									},
 									"required": [
-										"message"
+										"msg"
 									],
 									"type": "object"
 								}
@@ -47,7 +59,97 @@
 					}
 				},
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"description": "String in path /hello/Oom",
+						"in": "path",
+						"name": "msg",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/hello": {
+			"post": {
+				"operationId": "LogMessage",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/msgObj"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create message",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "Object of Message",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/msgObj",
+								"description": "Object of Message"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "UpdateMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/msgObj"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/msgObj"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "RemoveMessage",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Remove message",
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		}
 	},

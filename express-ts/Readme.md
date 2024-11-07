@@ -196,7 +196,7 @@ onMount(async () => {load()});
 <div>{debug}</div>
 ```
 
-### การบ้าน
+### การบ้าน CRUD
 - ให้แก้ไข update() remove() เพื่อทำให้โปรแกรมสมบูรณ์
 - ใช้ความรู้ที่เรียนมาสร้าง Todo List โดยมีฟังชั่นการทำงานคล้ายกับ[ตัวอย่างนี้](https://svelte.dev/repl/7eb8c1dd6cac414792b0edb53521ab49?version=3.20.1)
 
@@ -263,7 +263,7 @@ npm run dev
 ```
 ไปที่ http://localhost:4000/swagger เพื่อดูหน้าเอกสาร API
 
-### Homework
+### การบ้าน TSOA
 ลองสร้าง controller และ route เพื่อให้ครบขั้นตอนการทำ CRUD แนะนำให้ลองดัดแปลงจากโค้ด [fruit.ts](./src/lib/fruit.ts) โดยเรียก Controller ที่สร้างเอง ให้อยู่ที่ http://localhost:4000/fruits ศึกษาการใช้ TSOA(PUT,POST,PATCH,DELETE) [จากตัวอย่าง](https://tsoa-community.github.io/docs/examples.html)
 
 

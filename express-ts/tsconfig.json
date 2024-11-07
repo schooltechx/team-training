@@ -12,7 +12,7 @@
   },
   "typedocOptions": {
     "entryPoints": [
-      "src/**/*.ts"
+      "src/lib/*.ts"
     ],
     "out": "dist/docs/typedoc"
   }

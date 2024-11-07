@@ -4,11 +4,10 @@ import cors from "cors"
 import express, { Express, Request, Response,NextFunction } from 'express'
 import {myapiRoute} from './lib/myapi'
 import {fruitRoute} from "./lib/fruit"
-import { RegisterRoutes } from "./myRoutes"
-//import { RegisterRoutes } from "./routes"
 import swaggerUi from "swagger-ui-express"
 const app: Express = express()
 const port = Number(process.env.PORT) || 80
+const apikey = Number(process.env.APIKEY) || '123456789'
 if(process.env.NODE_ENV!=="production"){
   app.use(cors())
 }
@@ -18,6 +17,9 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.static('static'))
 app.use('/api/myapi',myapiRoute)
 app.use('/api/fruits',fruitRoute)
+//import { RegisterRoutes } from "./myRoutes"
+import { RegisterRoutes } from "./routes"
+
 const apiKeyCheck = (req: Request, res: Response, next: NextFunction) => {
   console.log("Middleware");
   if (req.headers.apikey !== apikey) {
@@ -47,4 +49,4 @@ app.get("/", (_req, res) => {
 // app.get('*',(req,res,next)=>{
 //   res.sendFile(`${process.cwd()}/static/index.html`)
 // })
-app.listen(port, () => console.log(`Application is running on port ${port}`))
+app.listen(port, () => console.log(`Running on port http://localhost:${port}`))
