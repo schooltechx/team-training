@@ -3,36 +3,15 @@ http:
     myweb:
       service: my-web
       rule: "Host(`myweb.oom.home`)"
-    # dev-fe:
-    #   service: devfe
-    #   rule: "Host(`fe-dev.oom.home`)"
-    # dev-be:
-    #   service: devbe
-    #   rule: "Host(`fe-dev.oom.home`) && PathPrefix(`/api`)" 
-    # pro-fe:
-    #   service: profe
-    #   rule: "Host(`fe.oom.home`)"
-    # pro-be:
-    #   service: probe
-    #   rule: "Host(`fe.oom.home`) && PathPrefix(`/api`)" 
+    hello:
+      service: hello
+      rule: "Host(`myweb.oom.home`) && PathPrefix(`/api/hello`)"
   services:
-    devfe:
+    myweb:
       loadBalancer:  
         servers:
         - url: 'http://192.168.2.45:9080'
-    # devfe:
-    #   loadBalancer:  
-    #     servers:
-    #     - url: 'http://fe'
-    # devbe:
-    #   loadBalancer:  
-    #     servers:
-    #     - url: 'http://be'
-    # profe:
-    #   loadBalancer:  
-    #     servers:
-    #     - url: 'http://fe'
-    # probe:
-    #   loadBalancer:  
-    #     servers:
-    #     - url: 'http://be'
+    hello:
+      loadBalancer:  
+        servers:
+        - url: 'http://192.168.41.250:4000'

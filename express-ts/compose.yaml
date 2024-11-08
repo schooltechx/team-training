@@ -7,3 +7,9 @@ services:
     # deploy:
     #   mode: replicated
     #   replicas: 3
+
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.fe.rule=Host(`fe.oom.home`)"
+    # networks:
+    #  - traefik
