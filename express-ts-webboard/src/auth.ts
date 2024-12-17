@@ -46,7 +46,7 @@ export async function verify(req: Request, res: Response, next: NextFunction) {
   } else {
     try {
       //console.log(token)
-      console.log(secretOrPublicKey())
+      // console.log(secretOrPublicKey())
       let decodedToken = jwt.verify(token, secretOrPublicKey()) as jwt.JwtPayload;
       //console.log(decodedToken.role);
       next();
@@ -84,12 +84,18 @@ export function verifyRoles(roles: string[]) {
         if (!roleList) {
           res.status(401).send({ error: `No role in token` });
         } else {
+          let found=false
           for (let i = 0; i < roleList.length; i++) {
-            if (roles.includes(roleList[i])) next();
+            if (roles.includes(roleList[i]))
+              found=true
           }
-          res
+          if(found){
+            next();
+          }else{
+            res
             .status(401)
             .send({ error: `Rols not match ` + roleList.join(",") });
+          }
         }
       } catch (e) {
         if (

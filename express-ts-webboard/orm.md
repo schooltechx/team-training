@@ -17,7 +17,8 @@ npm init -y
 npm i @prisma/client dotenv express
 npm i -D @types/node @types/express nodemon ts-node typescript prisma
 code .
-npx prisma init --datasource-provider sqlite #.env, prisma/shema.prisma
+npx prisma init --datasource-provider sqlite 
+# แก้ไข .env, prisma/shema.prisma
 code prisma/schema.prisma
 npx prisma migrate dev --name init # prisma/migrations/*
 code test_orm.ts

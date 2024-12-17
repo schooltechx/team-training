@@ -11,10 +11,18 @@ async function main() {
   //     email: 'bob5@prisma.io'
   //   },
   // })
+  const username="oom",password="oom",email="oom@xxx.com",role="admin,editor"
+  const auser = await prisma.user.findFirst({
+    where: { username },
+    select: {username:true,email:true,role:true}})
+  if(!auser){
+    await prisma.user.create({data:{username,password,email,role}})
+  }
   const usersWithPosts = await prisma.user.findMany({
-    include: {
+    select: {username:true,email:true,password:true,role:true,
       writtenPosts: true,
-      role:true
+      favoritePosts:true,
+      userPreference:true,
     }
   })
   console.dir(usersWithPosts, { depth: null })
