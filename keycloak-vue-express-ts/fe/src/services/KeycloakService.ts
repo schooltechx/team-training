@@ -1,6 +1,6 @@
 import Keycloak from "keycloak-js";
 
-const keycloakInstance = new Keycloak();
+const keycloakInstance = new Keycloak('/keycloak.json');
 
 interface CallbackOneParam<T1 = void, T2 = void> {
   (param1: T1): T2;

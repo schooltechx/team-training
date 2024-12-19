@@ -1,10 +1,11 @@
 import dotenv from 'dotenv'; 
 dotenv.config();
+import cors from "cors" 
 import express, { Express, Request, Response } from 'express'
 import {initPublicKey,initPublicKeyOnline,verifyRoles, verify,verifyOnline,getDecodeToken} from './auth'
 const app: Express = express()
 const port: number = Number(process.env.PORT) || 80;
-//app.use(cors());
+app.use(cors());
 app.use(express.json()); // ‘application/json’ 
 app.use(express.raw());  // ‘application/octet-stream’ 
 app.use(express.urlencoded({ extended: true }));

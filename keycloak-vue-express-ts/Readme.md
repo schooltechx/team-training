@@ -1,14 +1,39 @@
 # Keycloak Vue Express
-ตัวอย่างการใช้ Keycloak(25.0.0) ร่วมกับ Vue และ Express 
+ตัวอย่างการใช้ Keycloak(26.0.6) ร่วมกับ Vue และ Express 
+
+## Keycloak
+```
+cd keycloak
+mkdir data_keycloak
+chmod 777 data_keycloak
+docker compose up -d
+```
+Keycloak รุ่นใหม่(26 ขึ้นไป) client ใช้ http ได้แค่ localhost นอกนั้นควรเป็น https
+- แก้ไขค่า url ไฟล์ be/static/js-console.html be/static/keycloak.json ถ้า keycloak ไม่ได้รันที่ http://localhost:3022 
+
+- ไปที่หน้าเวป http://localhost:3022 ใช้ยูสเซอร์ admin รหัสผ่าน admin 
+- สร้าง realms sso 
+- สร้าง client, Client type: OpenID Connect, Client ID:express-client,
+![alt text](keycloak/img/create-client.png)
+![alt text](keycloak/img/setup-client.png)
+
+- สร้างยูสเซอร์ oom สำหรับ Realms sso พร้อมสร้างรหัสผ่าน ทำการ logout จาก admin แล้วทดสอบ login ยูสเซอร์ที่ http://localhost:3022/sso/account
+![alt text](keycloak/img/create-user.png)
+![alt text](keycloak/img/set-password.png)
+- ทดสอบไปที่ https://www.keycloak.org/app/
+![alt text](keycloak/img/keycloak_app.png)
+
+
 
 ## Frontend 
 VUE.js ทำ Authentication จะ Redirect ไป login ที่ keyloak.local , Realms sso, client ชื่อ express-client  
 - [KeyclakService.ts](./fe/src/services/KeycloakService.ts) ใช้จัดการ Authentication ทั้งหมดด้วย keycloak-js คอนฟิกอยู่ที่ [keyloak.json](./fe/public/keycloak.json)
 - [httpservice.ts](./fe/src/services/HttpService.ts) สำหรับทำ HTTP request ผ่าน axios จะใส่ token ใน header ให้
+- [keycloak.json](./fe/public/keycloak.json) เซ็ตค่า realms, auth-server-url และ resource ให้ถูกต้อง
 
 ## Backend
 Node.js + Express จะตรวจสอบ token ทำ Authorization ใช้ jsonwebtoken ในการตรวจสอบ
-ให้สำเนา [.env.sample](./be/env.sample) ไปเป็น .env แล้วแก้ค่าให้เหมาะสม ควรใช้ค่า REALM_URL เป็นหลัก ส่วน PUBLICKEY ใช้เพื่อการทดสอบเท่านั้น
+ให้สำเนา [.env.sample](./be/env.sample) ไปเป็น .env แล้วแก้ค่าให้เหมาะสม ควรใช้ค่า REALM_URL เป็นหลัก 
 - [index.ts](./be/src/index.ts) เป็นตัวอย่างการใช้งาน
 - [auth.ts](./be/src/auth.ts) เป็น Express Middleware ใช้เพื่อตรวจสอบ Token 
   - initPublicKeyOnline(url) อ่าน Public Key จากเซิร์ฟเวอร์ keycloak แล้วเซ็ตในตัวแปร private ของโมดูล
@@ -26,7 +51,7 @@ Note: ใช้ [node-fetch-commonjs](https://www.npmjs.com/package/node-fetch-c
 npm create vite@latest
 cd fe
 npm install
-npm i keycloak-js@22.0.3 axios
+npm i keycloak-js@26.0.6 axios
 npm run dev
 ```
 
@@ -37,8 +62,7 @@ npm init -y
 npm i express nodemon jsonwebtoken node-fetch-commonjs dotenv
 npm i -D typescript @types/node @types/express ts-node @types/jsonwebtoken
 ```
-
-ิอ่านเพิ่ม
+อ่านเพิ่ม
 - [Keycloak - A gentle introduction to Keycloak using Vite+React, NodeJS](https://www.youtube.com/watch?v=5z6gy4WGnUs)
 - [Secure Vue.js app with Keycloak](https://medium.com/keycloak/secure-vue-js-app-with-keycloak-94814181e344)
 - [JWT Authorization and Authentication, Node, Express, and Vue](https://dev.to/kevin_odongo35/jwt-authorization-and-authentication-node-express-and-vue-2p8c)
