@@ -5,10 +5,12 @@ import express, { Express, Request, Response } from 'express'
 import {initPublicKey,initPublicKeyOnline,verifyRoles, verify,verifyOnline,getDecodeToken} from './auth'
 const app: Express = express()
 const port: number = Number(process.env.PORT) || 80;
+
 app.use(cors());
 app.use(express.json()); // ‘application/json’ 
 app.use(express.raw());  // ‘application/octet-stream’ 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('static'));
 
 (async()=>{ //simulate top level await
   let isInit = (
@@ -20,11 +22,14 @@ app.use(express.urlencoded({ extended: true }));
   }
   app.get('/api/profile',verify, (req: Request, res: Response) => {
     let dt = getDecodeToken(req)
-    console.log(dt?.role)
+    console.log(dt)
+    // console.log(dt?.role)
     res.json(dt)
   })
   app.get('/api/admin_profile',verifyRoles(["admin"]), (req: Request, res: Response) => {
     let dt = getDecodeToken(req)
+    // console.log(dt?.role)
+    console.log("This is admin")
     console.log(dt?.role)
     res.json(dt)
   })

@@ -1,0 +1,81 @@
+@host = http://localhost:3022
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwdE9Pd0x1YmF6UHo2aEU2TmtLY29MRHQ4TzBjRTRyYlN2OXU3OWpBNkZNIn0.eyJleHAiOjE3MzQ2MzA0ODYsImlhdCI6MTczNDYyNjg4NiwianRpIjoiOTQ1YzUyMzQtYmRkMy00NmY4LTkzODQtNjlkYWVhMWRhMzRiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDIyL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIzODk2NDRlNi1mMWVhLTQ5ZWMtODVjYy1jYjI1NDEyOWZjMDUiLCJzY29wZSI6ImVtYWlsIHByb2ZpbGUifQ.lHdmXktT4_ibrgUGiXdB7Aw17gJ1uAkcjSorz2oMEz6X4UPgD4Nvll05Fe8eGbQgYOICoQ9EaQ2TGBd6_oqLJI5zeuQWPwGsWiKYL_rA0vBvly-_sn6iTfwXxd8ZBRQ4V9PzxtMzHVYaJABBjMfRPHmRRP_cX13qlRU974T8G_ODhsWmQNQMnzxatcZLy7VvyHM1DPDElkXDXdQtFLpzKfnMRhqMLPjpygGEkkMuT5GEhnPevLD9TDkOenhmomOrdjhm7MbyISZU29oUMPB8EvmRxehcsHsjXqyYGMWTLl67nhan2NcJeXMnCHG9ycliNwzIZ3xs1G-bFkf_bHwkXg
+
+
+## public key of realm
+GET {{host}}/realms/sso
+### Login for realms user
+POST {{host}}/realms/sso/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=admin-cli
+&username=oom
+&password=oom
+&grant_type=password
+
+
+########## Admin API https://www.keycloak.org/docs-api/latest/rest-api/index.html
+## Login by admin of master realms
+POST {{host}}/realms/master/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=admin-cli
+&username=admin
+&password=admin
+&grant_type=password
+
+### Login by secret of sso realms (server to server)
+POST {{host}}/realms/sso/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=b2b-client
+&client_secret=n4LacxK00hfHCSKZCvY64IqDhAL0EkL0
+&grant_type=client_credentials
+
+### default realms config
+GET {{host}}/admin/realms
+Authorization: Bearer {{token}}
+
+### Get Realms config
+GET {{host}}/admin/realms/sso
+Authorization: Bearer {{token}}
+
+### Get users in realms
+GET {{host}}/admin/realms/sso/users
+Authorization: Bearer {{token}}
+
+### Create user in realms
+POST {{host}}/admin/realms/sso/users
+Authorization: Bearer {{token}}
+
+{
+    "username":"oom2",
+    "email":"oom2@xxx.com",
+    "enabled":true,
+    "credentials":[
+        {
+            "temporary":false,
+            "type":"password",
+            "value":"oom2"
+        }
+    ]
+}
+
+### assign role not finished yet
+POST {{host}}/admin/realms/sso/users/user_id/role-mappings/clients/client_uuid
+
+### Get a user by name
+GET {{host}}/admin/realms/sso/users/?username=oom
+Authorization: Bearer {{token}}
+
+### Delete user
+DELETE {{host}}/admin/realms/sso/users/9144accb-ed90-461c-a00a-23aa02d2ef53
+Authorization: Bearer {{token}}
+
+### Find id of express-client
+GET {{host}}/admin/realms/sso/clients/?clientId=express-client
+Authorization: Bearer {{token}}
+
+### Get role list in express-client
+GET {{host}}/admin/realms/sso/clients/ea8ca0eb-f5f7-4843-a060-f0c263b30d26/roles
+Authorization: Bearer {{token}}

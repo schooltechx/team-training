@@ -1,2 +1,4 @@
 authen.ts
 .env
+node_modules
+data_*

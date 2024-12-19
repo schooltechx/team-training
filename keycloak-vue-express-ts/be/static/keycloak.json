@@ -1,6 +1,6 @@
 {
     "realm": "sso",
-    "auth-server-url": "http://192.168.2.101:3022/",
+    "auth-server-url": "http://localhost:3022/",
     "ssl-required": "external",
     "resource": "express-client",
     "public-client": true,
