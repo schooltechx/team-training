@@ -23,6 +23,8 @@ VUE.js จะ redirect ไป keycloak ทำ Authentication เสร็จจ�
 - [httpservice.ts](./fe/src/services/HttpService.ts) สำหรับทำ HTTP request ผ่าน axios จะใส่ token ใน header ให้
 - [keycloak.json](./fe/public/keycloak.json) เซ็ตค่า realms, auth-server-url และ resource ให้ถูกต้อง
 
+![alt text](keycloak/img/lightweight-access-token-output.png)
+
 ## อ่านเพิ่ม
 - [Keycloak - A gentle introduction to Keycloak using Vite+React, NodeJS](https://www.youtube.com/watch?v=5z6gy4WGnUs)
 - [Secure Vue.js app with Keycloak](https://medium.com/keycloak/secure-vue-js-app-with-keycloak-94814181e344)
