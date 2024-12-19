@@ -1,14 +1,11 @@
 
 
 @host = http://localhost:3000
-@token = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9vbSIsImVtYWlsIjoib29tQHl5eS5jb20iLCJyb2xlIjpbImFkbWluIiwiZWRpdG9yIl0sImlhdCI6MTczNDQ0OTY1NywiZXhwIjoxNzM0NDUxNDU3fQ.WhXnw9fGbpge-xBGwuQXjbWvRTNL0Gi0GZRFweXxjtrauvPGmpihkwC6B_Rf6p2Pe9iCP-8CE31Rn8pqTRqVh9vvo69zstN0NX1dwAkFSsvJXk9UuXJMv_6rQ9wSiPbgsp6nNpHzVecY8roPOaDSfAtswQtLpPCsDWulucSu0YkdbJ45UBaHbdAVhR05wSuIvldd4P45jRksSp-P59I6RHzb2xaJlGQCPKWW7vwx-ixfLVpwrA3mAucFwsOv0cC6bGNE1YXVEEMUErm41nBlcF92sEi6ZFv2Z2A5cZXnjumHX5Z4YNbk25pv22bgWtV8h_fIIYHckyjGsCtWvEHQNqZ7iQ28KPhqeYd6QD1gcukieYxv3idTGxz1dFahB_VIIxFzOPhooQtLJHK4d90iT0PiRUrC9pCtH9OJ7_cknmayRZW2lmGYnjXaPI2_iHw3kojGsmUKpn8fDaduuoos4dNNYQROKckhOma8lE8yqvmMHvi5OUzjKeD9rO-NfrCrp3JJy5e3VL1YtdTJLfJ_8__MngarF_f7d0fOP2OI_SBW667IM-9YrovRXG2iT5H-KHyykK1Ys3kx15m74-f9RbAre9cDEywJzWvPYMkszIEk0GuWIFku7SEGi6FJs7Z_Vitu73pXZgvEpg3doVbvKLsYWX1RWpXKUP_iQEEQ5Eo
-
+@token = token_from_login
 ###### Unauthenticated  ######
 
-### List User
-GET {{host}}/api/users HTTP/1.1
 ### Login
-POST {{host}}/api/users/login HTTP/1.1
+POST {{host}}/api/me/login HTTP/1.1
 content-type: application/json
 
 {
@@ -17,6 +14,9 @@ content-type: application/json
 }
 
 ###### Authenticated User ######
+
+### List User
+GET {{host}}/api/users HTTP/1.1
 
 ### decode token, logined
 GET {{host}}/api/me/decode-token HTTP/1.1
@@ -55,9 +55,9 @@ content-type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "email":"oom@yyy.com"
+    "email":"oomxxx@yyy.com"
 }
 ### Delete user
-DELETE {{host}}/api/users/oom3 HTTP/1.1
+DELETE {{host}}/api/users/oom1 HTTP/1.1
 Authorization: Bearer {{token}}
 
