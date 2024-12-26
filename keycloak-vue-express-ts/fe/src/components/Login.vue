@@ -1,6 +1,8 @@
 <template>
     <div class="login">
-      <h2>Login {{ Login() }}</h2>
+      <h1>Keyclak Vue.js demo</h1>
+      <h2>Hello {{ userName() }}</h2>
+      <button @click="Login">Login</button>
       <button @click="LogOut">Log Out</button>
       <pre>Roles: {{ UserRoles()?.join(" ") }}</pre>
       <pre>Access Token: {{ AccessToken() }}</pre>
@@ -25,8 +27,10 @@
       }
     },async mounted(){
       try{
-        const res = await HttpService.getAxiosClient().get("http://localhost:3001/api/profile")
-        //console.log(res.data)
+        let res = await HttpService.getAxiosClient().get("/fe.json")
+        let apiBasePath = res.ok || res.data?.apiBasePath||""
+        res = await HttpService.getAxiosClient().get(apiBasePath+"/api/profile")
+        
         this.protect = JSON.stringify(res.data,null,4)
       }catch(e){
         console.log(e)
@@ -36,6 +40,9 @@
     },
     methods: {
       Login() {
+        return KeyCloakService.CallLogin();
+      },
+      userName() {
         return KeyCloakService.GetUserName();
       },
       AccessToken() {

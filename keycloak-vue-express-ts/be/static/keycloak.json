@@ -1,6 +1,6 @@
 {
     "realm": "sso",
-    "auth-server-url": "http://localhost:3022/",
+    "auth-server-url": "https://identity.frappet.synology.me/",
     "ssl-required": "external",
     "resource": "express-client",
     "public-client": true,
