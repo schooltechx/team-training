@@ -16,14 +16,31 @@ Node.js + Express จะตรวจสอบ token ทำ Authorization ใช�
 
 Note: ใช้ [node-fetch-commonjs](https://www.npmjs.com/package/node-fetch-commonjs) แทน [node-fetch](https://github.com/node-fetch/node-fetch) เพราะว่า TypeScript แปลงเป็น JS แบบ commonjs ที่ node-fetch ไม่รองรับ และไม่ใช้ [request](https://www.npmjs.com/package/request) เพราะ deplicate ไปแล้ว(หลายตัวอย่างใช้กัน)
 
+### Backend test
+มีสองตัวเลือกในการทดสอบ
+- [api.http](./keycloak/api.http) ให้เรียก API "Login for realms user" เพื่อให้ได้ access token แล้วค่อยนำไปทดสอบต่อ
+
+- Client อย่างง่าย: [be/static/demo.html](be/static/demo.html) จะเรียกใช้ be/static/keycloak.json ให้แก้ให้เหมาะสม โค้ดตัวอย่างนี้ปรับปรุงแล้วสำหรับ 26.x.x ยังไม่ได้ทดสอบมากนัก
+
+
 ## Frontend 
 VUE.js จะ redirect ไป keycloak ทำ Authentication เสร็จจะ Redirect กลับมา แล้วจะเรียก API ไปที่ Backend
+
+Note: Keycloak รุ่นใหม่(น่าจะ 24+) บังคับ frontend ใช้ HTTPS ยกเว้น localhost ถึงจะใช้ http ได้ ถ้ารัน frontend ในเครื่อง remote ให้ใช้ VS Code forward port มาที่ local แทนได้
+![alt text](keycloak/img/CryptoAPIisNotAvaliable.png)
+
+
 - [KeyclakService.ts](./fe/src/services/KeycloakService.ts) ใช้จัดการ Authentication ทั้งหมดด้วย keycloak-js 
 คอนฟิกอยู่ที่ [.env](./be/env.sample)
 - [httpservice.ts](./fe/src/services/HttpService.ts) สำหรับทำ HTTP request ผ่าน axios จะใส่ token ใน header ให้
 - [keycloak.json](./fe/public/keycloak.json) เซ็ตค่า realms, auth-server-url และ resource ให้ถูกต้อง
 
 ![alt text](keycloak/img/lightweight-access-token-output.png)
+
+Note: ในภาพใช้งาน keycloak ด้วย http://localhost:3000 จริงๆแล้วเป็นการ forward port จาก http://192.168.2.101:3000 จะได้ไม่ต้องใช้ https
+
+
+
 
 ## อ่านเพิ่ม
 - [Keycloak - A gentle introduction to Keycloak using Vite+React, NodeJS](https://www.youtube.com/watch?v=5z6gy4WGnUs)
