@@ -28,7 +28,10 @@
     },async mounted(){
       try{
         let res = await HttpService.getAxiosClient().get("/fe.json")
-        let apiBasePath = res.ok || res.data?.apiBasePath||""
+        let apiBasePath = ""
+        if(res.status==200) {
+          apiBasePath = res.data?.apiBasePath||""
+        } 
         res = await HttpService.getAxiosClient().get(apiBasePath+"/api/profile")
         
         this.protect = JSON.stringify(res.data,null,4)
@@ -39,9 +42,9 @@
 
     },
     methods: {
-      Login() {
-        return KeyCloakService.CallLogin();
-      },
+      // Login() {
+      //   return KeyCloakService.CallLogin;
+      // },
       userName() {
         return KeyCloakService.GetUserName();
       },

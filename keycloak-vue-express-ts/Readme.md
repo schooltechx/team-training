@@ -39,9 +39,6 @@ Note: Keycloak รุ่นใหม่(น่าจะ 24+) บังคับ 
 
 Note: ในภาพใช้งาน keycloak ด้วย http://localhost:3000 จริงๆแล้วเป็นการ forward port จาก http://192.168.2.101:3000 จะได้ไม่ต้องใช้ https
 
-
-
-
 ## อ่านเพิ่ม
 - [Keycloak - A gentle introduction to Keycloak using Vite+React, NodeJS](https://www.youtube.com/watch?v=5z6gy4WGnUs)
 - [Secure Vue.js app with Keycloak](https://medium.com/keycloak/secure-vue-js-app-with-keycloak-94814181e344)
