@@ -1,21 +1,20 @@
-@host = http://localhost:3022
-@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwdE9Pd0x1YmF6UHo2aEU2TmtLY29MRHQ4TzBjRTRyYlN2OXU3OWpBNkZNIn0.eyJleHAiOjE3MzQ2MzA0ODYsImlhdCI6MTczNDYyNjg4NiwianRpIjoiOTQ1YzUyMzQtYmRkMy00NmY4LTkzODQtNjlkYWVhMWRhMzRiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDIyL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIzODk2NDRlNi1mMWVhLTQ5ZWMtODVjYy1jYjI1NDEyOWZjMDUiLCJzY29wZSI6ImVtYWlsIHByb2ZpbGUifQ.lHdmXktT4_ibrgUGiXdB7Aw17gJ1uAkcjSorz2oMEz6X4UPgD4Nvll05Fe8eGbQgYOICoQ9EaQ2TGBd6_oqLJI5zeuQWPwGsWiKYL_rA0vBvly-_sn6iTfwXxd8ZBRQ4V9PzxtMzHVYaJABBjMfRPHmRRP_cX13qlRU974T8G_ODhsWmQNQMnzxatcZLy7VvyHM1DPDElkXDXdQtFLpzKfnMRhqMLPjpygGEkkMuT5GEhnPevLD9TDkOenhmomOrdjhm7MbyISZU29oUMPB8EvmRxehcsHsjXqyYGMWTLl67nhan2NcJeXMnCHG9ycliNwzIZ3xs1G-bFkf_bHwkXg
+@host = https://identity.frappet.synology.me
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzQ2ODgwODIsImlhdCI6MTczNDY4MDg4MiwianRpIjoiOWRkYWMyMDMtM2UwMS00NjhjLThjMDEtMjViZmQxNDE5ZmY2IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIwNWNjMGVjMC05M2M3LTRhOWUtOGE4Yi05YTIwOWQ1ZmY3ODUiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.lBN8MuCb5aEtwP0RiMzw3CYLbWKOF14fxYRmLm4k7gw4Ks82PicZAb2bskFhCsG3CeSTTIewC4s55BF32BwKNBIIkLx-SIP8Xs6KffWGKaPOKNblsu6zteg1cADTpflkVRASuJtnR89FzBlLX-niJNERaTKVfXOmDDTkKuKmg9t26G-jKKtaTxS05aNQ4rHCx8Ggt5mV9zsXCIphTEh22L_eX0ySYiBwV5QxITFyARm-QfhCaQe990ufgI3Co6uwhgpvilT67p-Rmm_Ops2XFvZwuphxt604tzoJN9mF6ha8f8hHs1pMubd-HvtGeq5tA35zxyr75cZsCWrfeFO4VQ
 
-
-## public key of realm
-GET {{host}}/realms/sso
+### public key of realm
+GET {{host}}/realms/oom
 ### Login for realms user
-POST {{host}}/realms/sso/protocol/openid-connect/token
+POST {{host}}/realms/oom/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=admin-cli
+client_id=express-client
 &username=oom
 &password=oom
 &grant_type=password
 
 
 ########## Admin API https://www.keycloak.org/docs-api/latest/rest-api/index.html
-## Login by admin of master realms
+### Login by admin of master realms
 POST {{host}}/realms/master/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
@@ -25,11 +24,11 @@ client_id=admin-cli
 &grant_type=password
 
 ### Login by secret of sso realms (server to server)
-POST {{host}}/realms/sso/protocol/openid-connect/token
+POST {{host}}/realms/oom/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id=b2b-client
-&client_secret=n4LacxK00hfHCSKZCvY64IqDhAL0EkL0
+&client_secret=WFt4eLKgp3wXx14jE95fRnf1WxVWe1ZS
 &grant_type=client_credentials
 
 ### default realms config
@@ -37,15 +36,15 @@ GET {{host}}/admin/realms
 Authorization: Bearer {{token}}
 
 ### Get Realms config
-GET {{host}}/admin/realms/sso
+GET {{host}}/admin/realms/oom
 Authorization: Bearer {{token}}
 
 ### Get users in realms
-GET {{host}}/admin/realms/sso/users
+GET {{host}}/admin/realms/oom/users
 Authorization: Bearer {{token}}
 
 ### Create user in realms
-POST {{host}}/admin/realms/sso/users
+POST {{host}}/admin/realms/oom/users
 Authorization: Bearer {{token}}
 
 {
@@ -65,17 +64,17 @@ Authorization: Bearer {{token}}
 POST {{host}}/admin/realms/sso/users/user_id/role-mappings/clients/client_uuid
 
 ### Get a user by name
-GET {{host}}/admin/realms/sso/users/?username=oom
+GET {{host}}/admin/realms/master/users/?username=admin
 Authorization: Bearer {{token}}
 
 ### Delete user
-DELETE {{host}}/admin/realms/sso/users/9144accb-ed90-461c-a00a-23aa02d2ef53
+DELETE {{host}}/admin/realms/oom/users/3a7f60d5-2131-44f2-a9e7-aa0c80d25f76
 Authorization: Bearer {{token}}
 
 ### Find id of express-client
-GET {{host}}/admin/realms/sso/clients/?clientId=express-client
+GET {{host}}/admin/realms/oom/clients/?clientId=express-client
 Authorization: Bearer {{token}}
 
 ### Get role list in express-client
-GET {{host}}/admin/realms/sso/clients/ea8ca0eb-f5f7-4843-a060-f0c263b30d26/roles
+GET {{host}}/admin/realms/oom/clients/12c8cd99-a5ec-4461-8ce9-52445d29ff14
 Authorization: Bearer {{token}}
