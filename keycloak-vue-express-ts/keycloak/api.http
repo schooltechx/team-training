@@ -1,13 +1,22 @@
-@host = https://identity.frappet.synology.me
-@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzQ2ODgwODIsImlhdCI6MTczNDY4MDg4MiwianRpIjoiOWRkYWMyMDMtM2UwMS00NjhjLThjMDEtMjViZmQxNDE5ZmY2IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIwNWNjMGVjMC05M2M3LTRhOWUtOGE4Yi05YTIwOWQ1ZmY3ODUiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.lBN8MuCb5aEtwP0RiMzw3CYLbWKOF14fxYRmLm4k7gw4Ks82PicZAb2bskFhCsG3CeSTTIewC4s55BF32BwKNBIIkLx-SIP8Xs6KffWGKaPOKNblsu6zteg1cADTpflkVRASuJtnR89FzBlLX-niJNERaTKVfXOmDDTkKuKmg9t26G-jKKtaTxS05aNQ4rHCx8Ggt5mV9zsXCIphTEh22L_eX0ySYiBwV5QxITFyARm-QfhCaQe990ufgI3Co6uwhgpvilT67p-Rmm_Ops2XFvZwuphxt604tzoJN9mF6ha8f8hHs1pMubd-HvtGeq5tA35zxyr75cZsCWrfeFO4VQ
+### Admin REST API
+### https://www.keycloak.org/docs-api/latest/rest-api/index.html
+
+@host = http://localhost:8080
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzYyNDc3NzksImlhdCI6MTczNjI0MDU3OSwianRpIjoiMjAyMDU2NjAtMjljZS00MWZlLTlmZDEtOGJkMzgyMzM0ZTg4IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI0YWM5MWFmNy1kYWIxLTQ0MjktYjA1My1lODlhMDIyYjM4YjMiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.ZREHjxd-hy2SOdTs-4u9gnGHJV-Q61s4td9MxbYSKnY4IvGV1aAj8B2ke1pk2Qmf5FQk_3NTyvRmo5OKiiPj-iXwC7IabsZgeGze85K0ZMrxpGUO3qf_KO7L2dAR21H35cSxn3MmxzY528Ohh6LDBNm1ACeNKeogh8z7ynDBsHCFdWc_CMd1iaTNMrtlW3u3BP48o1ifcjbhVtNo1w9S67b_QSf-lZQyUxA4BwsP82oi2rPcm-_17ahzBDXxA018BBPn4-CpqYtWZ-qsyamwxsns-7rmmhHSNYoS-IaUqsXXwJbxirBOcjTEipeSVj2chJ6sZNR3LAVAA0IViMfDyA
+@realm = oom
+@username = mam
+@user_uuid=4e042033-e491-4b79-8a72-7b889a15826e
+@client_id = express-client
+@client_uuid = 12c8cd99-a5ec-4461-8ce9-52445d29ff14
+
 
 ### public key of realm
-GET {{host}}/realms/sso
+GET {{host}}/realms/{{realm}}
 ### Login for realms user
 POST {{host}}/realms/sso/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=express-client
+client_id={{client_id}}
 &username=oom
 &password=oom
 &grant_type=password
@@ -24,7 +33,7 @@ client_id=admin-cli
 &grant_type=password
 
 ### Login by secret of realms (server to server)
-POST {{host}}/realms/sso/protocol/openid-connect/token
+POST {{host}}/realms/{{realm}}/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id=b2b-client
@@ -36,15 +45,17 @@ GET {{host}}/admin/realms
 Authorization: Bearer {{token}}
 
 ### Get Realms config
-GET {{host}}/admin/realms/sso
+GET {{host}}/admin/realms/{{realm}}
 Authorization: Bearer {{token}}
 
+
+###################  user
 ### Get users in realms
 GET {{host}}/admin/realms/sso/users
 Authorization: Bearer {{token}}
 
 ### Create user in realms
-POST {{host}}/admin/realms/sso/users
+POST {{host}}/admin/realms/{{realm}}/users
 Authorization: Bearer {{token}}
 
 {
@@ -60,21 +71,54 @@ Authorization: Bearer {{token}}
     ]
 }
 
-### assign role not finished yet
-POST {{host}}/admin/realms/sso/users/user_id/role-mappings/clients/client_uuid
-
 ### Get a user by name
-GET {{host}}/admin/realms/master/users/?username=admin
+GET {{host}}/admin/realms/{{realm}}/users/?username=mam
 Authorization: Bearer {{token}}
 
 ### Delete user
-DELETE {{host}}/admin/realms/sso/users/3a7f60d5-2131-44f2-a9e7-aa0c80d25f76
+DELETE {{host}}/admin/realms/sso/users/{{{user_uuid}}}
 Authorization: Bearer {{token}}
 
+
+
+####### Client
 ### Find id of express-client
-GET {{host}}/admin/realms/sso/clients/?clientId=express-client
+GET {{host}}/admin/realms/{{realm}}/clients/?clientId=express-client
 Authorization: Bearer {{token}}
 
-### Get role list in express-client
-GET {{host}}/admin/realms/sso/clients/12c8cd99-a5ec-4461-8ce9-52445d29ff14
+
+
+###
+GET {{host}}/admin/realms/{{realm}}/groups/{group-id}/role-mappings/clients/{client-id}/available
 Authorization: Bearer {{token}}
+
+
+######## Roles 
+### Get role list in express-client
+GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles
+Authorization: Bearer {{token}}
+
+### Role avaliable to user
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/clients/{{client_uuid}}/available
+Authorization: Bearer {{token}}
+
+### Role by name
+GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles/dev
+Authorization: Bearer {{token}}
+
+
+### assign client role 
+POST {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/clients/{{client_uuid}}
+Authorization: Bearer {{token}}
+
+[
+  {
+  "id": "6f2fb8a6-7e68-4723-ba84-36d1b45ef23d",
+  "name": "dev",
+  "description": "",
+  "composite": false,
+  "clientRole": true,
+  "containerId": "12c8cd99-a5ec-4461-8ce9-52445d29ff14",
+  "attributes": {}
+  }
+]
