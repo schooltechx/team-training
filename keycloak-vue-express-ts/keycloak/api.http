@@ -1,17 +1,15 @@
 ### Admin REST API
 ### https://www.keycloak.org/docs-api/latest/rest-api/index.html
 
-@host = http://localhost:8080
-@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzYyNDc3NzksImlhdCI6MTczNjI0MDU3OSwianRpIjoiMjAyMDU2NjAtMjljZS00MWZlLTlmZDEtOGJkMzgyMzM0ZTg4IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI0YWM5MWFmNy1kYWIxLTQ0MjktYjA1My1lODlhMDIyYjM4YjMiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.ZREHjxd-hy2SOdTs-4u9gnGHJV-Q61s4td9MxbYSKnY4IvGV1aAj8B2ke1pk2Qmf5FQk_3NTyvRmo5OKiiPj-iXwC7IabsZgeGze85K0ZMrxpGUO3qf_KO7L2dAR21H35cSxn3MmxzY528Ohh6LDBNm1ACeNKeogh8z7ynDBsHCFdWc_CMd1iaTNMrtlW3u3BP48o1ifcjbhVtNo1w9S67b_QSf-lZQyUxA4BwsP82oi2rPcm-_17ahzBDXxA018BBPn4-CpqYtWZ-qsyamwxsns-7rmmhHSNYoS-IaUqsXXwJbxirBOcjTEipeSVj2chJ6sZNR3LAVAA0IViMfDyA
+@host = http://localhost:8080/
+@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzYyNTA1NTYsImlhdCI6MTczNjI0MzM1NiwianRpIjoiODljNTY1ZWYtMDEwZi00Nzc1LWFmNWQtNDYyZDQ3M2M4M2M3IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIyZjgzNzljYi03MThiLTQ1YWEtYjA2ZS03YTcyMTZlNzVkZmMiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.IyJZ3uwrx4znsNIAgTOHT4YVKUhPWw18tWMmczLBDd3aPJAYDV4Ua_XgJNqLaLUl-ZfygRLBW3pJO3VnRz0hbOT6gauw4s2EYawIrV23bDGp_SKPOFnZk0mvQrLzfRmcbf8v0bUnt8RMff3gWODQdvf6iRTRCXge41hftjkaVyalhpPyT-UNZd3-XHNIMieK_Zl-uZBPs8vJmokSrslxq9g4gBs409PpQuvDo4sBG_Oe21-cLu9AnX0BJlsryZZ1-LwO8qPZ6NPou6hHFoLROKTL2zoz2MKCVsED83puQTN7uWvw-blJAxhFH7oD7P43P-Zr3zGmeg2bAju_bau7nQ
 @realm = oom
 @username = mam
-@user_uuid=4e042033-e491-4b79-8a72-7b889a15826e
+@user_uuid = 4e042033-e491-4b79-8a72-7b889a15826e
 @client_id = express-client
 @client_uuid = 12c8cd99-a5ec-4461-8ce9-52445d29ff14
 
-
-### public key of realm
-GET {{host}}/realms/{{realm}}
+############ Login
 ### Login for realms user
 POST {{host}}/realms/sso/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
@@ -21,8 +19,6 @@ client_id={{client_id}}
 &password=oom
 &grant_type=password
 
-
-########## Admin API https://www.keycloak.org/docs-api/latest/rest-api/index.html
 ### Login by admin of master realms
 POST {{host}}/realms/master/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
@@ -40,18 +36,25 @@ client_id=b2b-client
 &client_secret=WFt4eLKgp3wXx14jE95fRnf1WxVWe1ZS
 &grant_type=client_credentials
 
-### default realms config
+######### Realms
+### get realms list and info(config)
 GET {{host}}/admin/realms
 Authorization: Bearer {{token}}
-
-### Get Realms config
+### Get a realm info(configX
 GET {{host}}/admin/realms/{{realm}}
 Authorization: Bearer {{token}}
+### public key of realm
+GET {{host}}/realms/{{realm}}
 
-
-###################  user
+###################  User
 ### Get users in realms
-GET {{host}}/admin/realms/sso/users
+GET {{host}}/admin/realms/{{realm}}/users
+Authorization: Bearer {{token}}
+### Get a users in realms
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}
+Authorization: Bearer {{token}}
+### search by username (oom will match oom1, ooom2)
+GET {{host}}/admin/realms/{{realm}}/users/?username={{username}}
 Authorization: Bearer {{token}}
 
 ### Create user in realms
@@ -70,44 +73,30 @@ Authorization: Bearer {{token}}
         }
     ]
 }
-
-### Get a user by name
-GET {{host}}/admin/realms/{{realm}}/users/?username=mam
-Authorization: Bearer {{token}}
-
 ### Delete user
 DELETE {{host}}/admin/realms/sso/users/{{{user_uuid}}}
 Authorization: Bearer {{token}}
 
-
-
-####### Client
-### Find id of express-client
-GET {{host}}/admin/realms/{{realm}}/clients/?clientId=express-client
+########## Client
+### Get list of client in a realm
+### search one append /{{client_uuid}} or /?clientId={{client_id}}
+GET {{host}}/admin/realms/{{realm}}/clients
 Authorization: Bearer {{token}}
-
-
-
-###
-GET {{host}}/admin/realms/{{realm}}/groups/{group-id}/role-mappings/clients/{client-id}/available
-Authorization: Bearer {{token}}
-
 
 ######## Roles 
-### Get role list in express-client
+### Get role list in client
 GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles
 Authorization: Bearer {{token}}
 
-### Role avaliable to user
+### Role list avaliable for a user
 GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/clients/{{client_uuid}}/available
 Authorization: Bearer {{token}}
 
-### Role by name
+### Get a role by name
 GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles/dev
 Authorization: Bearer {{token}}
 
-
-### assign client role 
+### assign client role (required id and name)
 POST {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/clients/{{client_uuid}}
 Authorization: Bearer {{token}}
 
