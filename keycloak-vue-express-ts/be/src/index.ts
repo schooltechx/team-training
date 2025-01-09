@@ -5,8 +5,10 @@ import express, { Express, Request, Response } from 'express'
 import {initPublicKey,initPublicKeyOnline,verifyRoles, verify,verifyOnline,getDecodeToken} from './auth'
 const app: Express = express()
 const port: number = Number(process.env.PORT) || 80;
+if(process.env.NODE_ENV!=="production"){
+  app.use(cors())
+}
 
-app.use(cors());
 app.use(express.json()); // ‘application/json’ 
 app.use(express.raw());  // ‘application/octet-stream’ 
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +34,9 @@ app.use(express.static('static'));
     console.log("This is admin")
     console.log(dt?.role)
     res.json(dt)
+  })
+  app.get('*',(req,res,next)=>{
+    res.sendFile(`${process.cwd()}/static/index.html`)
   })
 
   app.listen(port, () => console.log(`Application is running on port ${port}`))

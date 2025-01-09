@@ -1,0 +1,17 @@
+services:
+  keycloak-vue-be:
+    image: docker.frappet.com/training/keycloak-vue-be
+    ports:
+        - 3001:80
+    environment:
+      - REALM_URL=https://identity.frappet.synology.me/realms/oom
+    # volumes:
+    #   - static/fe.json:/app/static/fe.json:ro
+    #   - static/keycloak.json:/app/static/keycloak.json:ro
+  keycloak-vue-fe:
+    image: docker.frappet.com/training/keycloak-vue-fe
+    ports:
+        - 3000:80
+    # volumes:
+    #   - public/fe.json:/usr/share/nginx/html/fe.json:ro
+    #   - public/keycloak.json:/usr/share/nginx/html/keycloak.json:ro

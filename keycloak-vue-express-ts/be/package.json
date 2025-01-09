@@ -9,8 +9,8 @@
     "build": "tsc",
     "serve": "cd dist && node app.js && cd ..",
     "preview": "cd dist2 && node app.js && cd ..",
-    "build:docker": "ts-node tools/createSwaggerSpec.ts && tsc && cp swaggerSpecs.json dist && javascript-obfuscator ./dist --output ./dist2 && cp swaggerSpecs.json dist2 && docker build -t docker.frappet.com/demo/express-ts .",
-    "push:docker": "docker push docker.frappet.com/demo/express-ts"
+    "build:docker": "docker build -t docker.frappet.com/training/keycloak-vue-be .",
+    "push:docker": "npm run build:docker && docker push docker.frappet.com/training/keycloak-vue-be"
   },
   "keywords": [],
   "author": "",

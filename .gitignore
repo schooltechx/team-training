@@ -2,3 +2,4 @@ authen.ts
 .env
 node_modules
 data_*
+dist

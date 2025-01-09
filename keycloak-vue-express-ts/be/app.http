@@ -1,0 +1,19 @@
+@host = http://localhost:8080
+@api_host = http://localhost:3001
+@token = put_token_here
+@realm = sso
+@username = oom
+@client_id = express-client
+
+### Login for realms user
+POST {{host}}/realms/{{realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{client_id}}
+&username=oom
+&password=oom
+&grant_type=password
+
+### Get profile
+GET {{api_host}}/api/profile
+Authorization: Bearer {{token}}

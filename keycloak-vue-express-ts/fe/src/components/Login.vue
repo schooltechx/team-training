@@ -2,7 +2,6 @@
     <div class="login">
       <h1>Keyclak Vue.js demo</h1>
       <h2>Hello {{ userName() }}</h2>
-      <button @click="Login">Login</button>
       <button @click="LogOut">Log Out</button>
       <pre>Roles: {{ UserRoles()?.join(" ") }}</pre>
       <pre>Access Token: {{ AccessToken() }}</pre>
@@ -31,6 +30,8 @@
         let apiBasePath = ""
         if(res.status==200) {
           apiBasePath = res.data?.apiBasePath||""
+        }else{
+          console.log("Use default config (no fe.json)")
         } 
         res = await HttpService.getAxiosClient().get(apiBasePath+"/api/profile")
         
