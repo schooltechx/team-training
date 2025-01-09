@@ -1,13 +1,16 @@
 ### Admin REST API
 ### https://www.keycloak.org/docs-api/latest/rest-api/index.html
 
-@host = http://localhost:8080/
-@token = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3V0V6aG94dGFBTTV6b3JpWFVYdF9fbUExcTdkX0o3cDZXYUh0ZGk2bUR3In0.eyJleHAiOjE3MzYyNTA1NTYsImlhdCI6MTczNjI0MzM1NiwianRpIjoiODljNTY1ZWYtMDEwZi00Nzc1LWFmNWQtNDYyZDQ3M2M4M2M3IiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5mcmFwcGV0LnN5bm9sb2d5Lm1lL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiIyZjgzNzljYi03MThiLTQ1YWEtYjA2ZS03YTcyMTZlNzVkZmMiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.IyJZ3uwrx4znsNIAgTOHT4YVKUhPWw18tWMmczLBDd3aPJAYDV4Ua_XgJNqLaLUl-ZfygRLBW3pJO3VnRz0hbOT6gauw4s2EYawIrV23bDGp_SKPOFnZk0mvQrLzfRmcbf8v0bUnt8RMff3gWODQdvf6iRTRCXge41hftjkaVyalhpPyT-UNZd3-XHNIMieK_Zl-uZBPs8vJmokSrslxq9g4gBs409PpQuvDo4sBG_Oe21-cLu9AnX0BJlsryZZ1-LwO8qPZ6NPou6hHFoLROKTL2zoz2MKCVsED83puQTN7uWvw-blJAxhFH7oD7P43P-Zr3zGmeg2bAju_bau7nQ
+@host = https://localhost:8080
+@token = put_token_here
 @realm = oom
 @username = mam
 @user_uuid = 4e042033-e491-4b79-8a72-7b889a15826e
 @client_id = express-client
 @client_uuid = 12c8cd99-a5ec-4461-8ce9-52445d29ff14
+@realm_role = super
+@client_role = dev
+
 
 ############ Login
 ### Login for realms user
@@ -46,7 +49,42 @@ Authorization: Bearer {{token}}
 ### public key of realm
 GET {{host}}/realms/{{realm}}
 
-###################  User
+################### Realms Role
+
+### Get role mappings list of Realms and Client
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings
+Authorization: Bearer {{token}}
+
+### Get realm-level roles that avaliable to a user
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/realm/available
+Authorization: Bearer {{token}}
+
+### Get realm-level role mappings
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/realm
+Authorization: Bearer {{token}}
+
+### Get realm-level role mappings
+GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/realm
+Authorization: Bearer {{token}}
+
+### Get a role by name
+GET {{host}}/admin/realms/{{realm}}/roles/{{realm_role}}
+Authorization: Bearer {{token}}
+
+### Add realm-level role mappings to the user
+POST {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/realm
+Authorization: Bearer {{token}}
+
+[
+  {
+    "id": "bca08238-4c48-4243-8aca-318591c2ddc0",
+    "name": "super"
+  }
+]
+
+
+
+################### User
 ### Get users in realms
 GET {{host}}/admin/realms/{{realm}}/users
 Authorization: Bearer {{token}}
@@ -77,13 +115,14 @@ Authorization: Bearer {{token}}
 DELETE {{host}}/admin/realms/sso/users/{{{user_uuid}}}
 Authorization: Bearer {{token}}
 
+
 ########## Client
 ### Get list of client in a realm
 ### search one append /{{client_uuid}} or /?clientId={{client_id}}
 GET {{host}}/admin/realms/{{realm}}/clients
 Authorization: Bearer {{token}}
 
-######## Roles 
+######## Client Roles 
 ### Get role list in client
 GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles
 Authorization: Bearer {{token}}
@@ -93,7 +132,7 @@ GET {{host}}/admin/realms/{{realm}}/users/{{user_uuid}}/role-mappings/clients/{{
 Authorization: Bearer {{token}}
 
 ### Get a role by name
-GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles/dev
+GET {{host}}/admin/realms/{{realm}}/clients/{{client_uuid}}/roles/{{client_role}}
 Authorization: Bearer {{token}}
 
 ### assign client role (required id and name)
@@ -111,3 +150,4 @@ Authorization: Bearer {{token}}
   "attributes": {}
   }
 ]
+
