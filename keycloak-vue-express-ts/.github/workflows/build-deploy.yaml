@@ -1,0 +1,88 @@
+# Quickstart for GitHub Actions
+# https://docs.github.com/en/actions/writing-workflows/quickstart
+name: build-deploy
+run-name: build-deploy ${{ github.actor }} 
+on:
+  workflow_dispatch:
+    inputs:
+      IMAGE_VER:
+        description: "version for build image"
+        type: string
+      PUSH:
+        description: "push to registry"
+        type: boolean
+        default: false
+      DEPLOY:
+        description: "deploy to server"
+        type: boolean
+        default: false
+
+env:
+  REGISTRY: docker.frappet.com
+  IMAGE_NAME_BE: training/keycloak-vue-be
+  IMAGE_NAME_FE: training/keycloak-vue-fe
+  
+
+jobs:
+  # act workflow_dispatch --reuse -W .github/workflows/build-deploy.yaml --input PUSH=false  --input IMAGE_VER=v0.2.4-dev
+  # act workflow_dispatch -W .github/workflows/build-deploy.yaml --input PUSH=true --input DEPLOY=true --input IMAGE_VER=v0.2.5-dev
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: Gen Version
+        id: gen_ver
+        run: |
+          IMAGE_VER=${{ github.event.inputs.IMAGE_VER }}
+          echo "{\"version\":\"$IMAGE_VER\", \"builddate\":\"$(date +"%Y-%m-%d_%T")\",\"ref_name\":\"$GITHUB_REF\" }" > ./build.json
+          cp ./build.json be/static
+          cp ./build.json fe/public
+          echo '::set-output name=image_ver::'$IMAGE_VER
+      - name: Debug act
+        if: ${{ env.ACT }}
+        run: |
+          echo $GITHUB_REF
+          echo ${{ steps.gen_ver.outputs.image_ver }}
+          cat ./build.json
+          echo ${{inputs.IMAGE_VER}}
+          echo ${{inputs.PUSH}}
+          echo ${{inputs.DEPLOY}}
+          echo ${{secrets.DOCKER_USER}}
+
+      - name: Login in to registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Build backend image and load
+        uses: docker/build-push-action@v6
+        with:
+          context: ./be
+          load: true
+          push: ${{inputs.PUSH}}
+          tags: ${{env.REGISTRY}}/${{env.IMAGE_NAME_BE}}:${{ inputs.IMAGE_VER }},${{env.REGISTRY}}/${{env.IMAGE_NAME_BE}}:latest
+
+      - name: Build frontend image image and load
+        uses: docker/build-push-action@v6
+        with:
+          context: ./fe
+          load: true
+          push: ${{inputs.PUSH}}
+          tags: ${{env.REGISTRY}}/${{env.IMAGE_NAME_FE}}:${{ inputs.IMAGE_VER }},${{env.REGISTRY}}/${{env.IMAGE_NAME_FE}}:latest
+
+      - name: Deploy to server
+        if: ${{inputs.DEPLOY}}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: 10100
+          script: |
+            cd "${{ secrets.DEPLOY_COMPOSE_PATH }}"
+            docker compose pull
+            docker compose up -d
+            echo "${{ inputs.IMAGE_VER }}"> success

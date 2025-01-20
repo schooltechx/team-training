@@ -4,7 +4,7 @@ COPY . .
 RUN npm ci
 COPY static static
 RUN npm run build
-FROM node:22-alpine as production-stage
+FROM node:22-alpine AS production-stage
 WORKDIR /app
 ENV NODE_ENV=production
 ENV TZ=Asia/Bangkok

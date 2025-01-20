@@ -39,6 +39,49 @@ Note: Keycloak รุ่นใหม่(น่าจะ 24+) บังคับ 
 
 Note: ในภาพใช้งาน keycloak ด้วย http://localhost:3000 จริงๆแล้วเป็นการ forward port จาก http://192.168.2.101:3000 จะได้ไม่ต้องใช้ https
 
+
+## Github Action
+จะใช้ [Github action](https://docs.github.com/en/actions/writing-workflows/quickstart) 
+ในการทำ CI/CD เนื่องจากการรันบน Githubตรงๆ จะจำกัดชั่วโมงการรันสคริปต์ จะใช้ [nektos/act](https://github.com/nektos/act)
+เพื่อเรียกใช้งานได้ไม่จำกัด
+
+### การติดตั้ง nektosact
+
+ติดตั้งได้หลายวิธีตาม[เอกสารบนเวป](https://nektosact.com/installation/index.html) สำหรับ WSL/Linux/macOS สามารถดาว์นโหลด binary แยกไฟล์แล้วใส่ใน /usr/local/bin ก็เป็นวิธีที่ไม่ซับซ้อนนัก
+
+### การใช้งาน
+สร้าง secret เพื่อใช้งาน
+```sh
+cp secrets.example .secret
+```
+- [.secrets](./secrets.example) เป็นค่าคอนฟิกที่ไม่เปิดเผยเหมือนเก็บในตัวแปร SECRET ของ github
+- ตัวแปรแวดล้อม(environment variable) ในตัวอย่างเซ็ตค่าใน local-build.yaml อีกทางเลือกหนึ่ง สามารถใช้ ไฟล์ .env ในลักษณะเดียวกับ .secrets ก็ได้
+- [.github/workflows/build-deploy.yaml](.github/workflows/build-deploy.yaml) สร้างที่บนสุดของ repo เป็น script เป็น Workflow สำหรับทำ CI/CD จะมี step สำหรับการทำงานต่างๆให้ใช้งาน สามารถอ่านค่า env, secret, input เพื่อกำหนดการทำงานแบบต่างๆ ปกติจำทำงานตามเหตุการณ์ที่เกิดใน Github เช่น 
+
+เรียกใช้ได้ตามคำสั่งด้านล่าง
+```bash
+# สร้าง docker image ใช้งานในเครื่องตัวเอง
+act workflow_dispatch --reuse -W .github/workflows/build-deploy.yaml --input IMAGE_VER=v0.2.4-dev --input PUSH=false
+# หรือ push ขึ้น docker registry และ deploy
+act workflow_dispatch -W .github/workflows/build-deploy.yaml --input IMAGE_VER=v0.2.5-dev --input PUSH=true --input DEPLOY=true
+
+```
+
+การเรียกใช้งานครั้งแรกจะถามอิมเมจที่ใช้ Linux เลือก "Medium size image" ครอบคลุมการทำงานส่วนใหญ่แล้ว 
+```bash
+act workflow_dispatch --reuse -W .github/workflows/local-build.yaml --input IMAGE_VER=v0.0.1-dev
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock' 
+? Please choose the default image you want to use with act:
+  - Large size image: ca. 17GB download + 53.1GB storage, you will need 75GB of free disk space, snapshots of GitHub Hosted Runners without snap and pulled docker images
+  - Medium size image: ~500MB, includes only necessary tools to bootstrap actions and aims to be compatible with most actions
+  - Micro size image: <200MB, contains only NodeJS required to bootstrap actions, doesn't work with all actions
+
+Default image and other options can be changed manually in /home/oom/.config/act/actrc (please refer to https://github.com/nektos/act#configuration for additional information about file structure)  [Use arrows to move, type to filter, ? for more help]
+  Large
+> Medium
+  Micro
+```
+
 ## อ่านเพิ่ม
 - [Keycloak - A gentle introduction to Keycloak using Vite+React, NodeJS](https://www.youtube.com/watch?v=5z6gy4WGnUs)
 - [Secure Vue.js app with Keycloak](https://medium.com/keycloak/secure-vue-js-app-with-keycloak-94814181e344)
