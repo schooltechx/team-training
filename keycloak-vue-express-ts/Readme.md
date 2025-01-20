@@ -43,7 +43,7 @@ Note: ในภาพใช้งาน keycloak ด้วย http://localhost:3
 ## Github Action
 จะใช้ [Github action](https://docs.github.com/en/actions/writing-workflows/quickstart) 
 ในการทำ CI/CD เนื่องจากการรันบน Githubตรงๆ จะจำกัดชั่วโมงการรันสคริปต์ จะใช้ [nektos/act](https://github.com/nektos/act)
-เพื่อเรียกใช้งานได้ไม่จำกัด
+เพื่อเรียกใช้งานได้ไม่จำกัด ดูวีดีโอแนะนำ ["How GitHub Actions 10x my productivity"](https://www.youtube.com/watch?v=yfBtjLxn_6k)
 
 ### การติดตั้ง nektosact
 
