@@ -7,6 +7,22 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"msgZodObj": {
+				"properties": {
+					"msg": {
+						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"msg",
+					"id"
+				],
+				"type": "object"
+			},
 			"msgObj": {
 				"properties": {
 					"msg": {
@@ -35,6 +51,123 @@
 		}
 	},
 	"paths": {
+		"/helloZod/{msg}": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"msg": {
+											"type": "string"
+										}
+									},
+									"required": [
+										"msg"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"description": "String in path /helloZod/Oom",
+						"in": "path",
+						"name": "msg",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/helloZod": {
+			"post": {
+				"operationId": "LogMessage",
+				"responses": {
+					"201": {
+						"description": "Message Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/msgZodObj"
+								}
+							}
+						}
+					}
+				},
+				"description": "Create message",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"description": "Object of Message",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/msgZodObj",
+								"description": "Object of Message"
+							}
+						}
+					}
+				}
+			},
+			"patch": {
+				"operationId": "UpdateMessage",
+				"responses": {
+					"200": {
+						"description": "Message updated",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/msgZodObj"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/msgZodObj"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "RemoveMessage",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Remove message",
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
 		"/hello/{msg}": {
 			"get": {
 				"operationId": "GetMessage",

@@ -1,5 +1,5 @@
 import {Get,Post,Patch,Delete,SuccessResponse, 
-  Route,Path,Query,Body,Example,Controller} from "tsoa";
+  Route,Path,Query,Body,Example,Controller} from "@tsoa/runtime";
   type msgObj = {msg:string}  
   @Route("hello")
   export class HelloController extends Controller {
@@ -19,12 +19,12 @@ import {Get,Post,Patch,Delete,SuccessResponse,
     @Post()
     @SuccessResponse("201", "Created")
     public async logMessage(@Body() msgBody:msgObj){
-      //this.setStatus(201); 
+      //this.setStatus(201);
       return msgBody
     }
     @Patch()
     public async updateMessage(@Body() msgBody:msgObj){
-      //this.setStatus(201); 
+      //this.setStatus(201);
       return msgBody
     }
     /**

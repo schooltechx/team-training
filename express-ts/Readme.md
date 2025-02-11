@@ -213,15 +213,15 @@ app.get('*',(req,res,next)=>{
 ...
 ```
 
-## MVC and Swagger 
+## MVC and Swagger
 express สามารถเขียนโค้ดแบบ MVC ได้ ในตัวอย่างนี้จะเป็นการสร้าง Controller และสร้างเอกสารของ API ด้วย [TSOA](https://tsoa-community.github.io/docs/introduction.html)
 
 เนื่องจากเป็นตัวอย่างอย่างง่าย ทำแค่ controller จะไม่ได้ใช้ Service หรือ Model ในโค้ด 
 
 ติดตั้ง
 ```bash
-npm i tsoa swagger-ui-express
-npm i -D @types/swagger-ui-express
+npm i @tsoa/runtime swagger-ui-express
+npm i -D tsoa @types/swagger-ui-express
 ```
 
 ให้สำเนาไฟล์ตามรายการนี้มาไว้ในโปรเจ็ก
@@ -262,6 +262,47 @@ npm run swagger
 npm run dev
 ```
 ไปที่ http://localhost:4000/swagger เพื่อดูหน้าเอกสาร API
+
+
+TSOA มี decorators ช่วยทำให้การสร้าง route และ เอกสารจาก  controller ได้ง่ายขึ้น TypeScript ช่วยตรวจสอบ Type ได้ตอนคอมไพล์ ตอนโปรแกรมทำงานไม่สามารถตรวจ Input ได้จะใช้ Zod เพื่อตรวจสอบ แนะนำให้ดูบทความ 
+["Supercharge Your API with Type-Safe Validation using TSOA and Zod Decorators"](https://github.com/pmullot/tsoa-zod-decorators/tree/main)
+
+```bash
+npm i zod
+```
+- เพิ่ม decorator สำหรับตรวจสอบ [](src/lib/validation.decorators.ts) 
+- ตัวอย่างการใช้อยู่ในไฟล์ [src/lib](src/controllers/helloZod.controller.ts)
+- เพิ่มโค้ดสำหรับดัก Error
+```
+...
+RegisterRoutes(app) 
+app.use(function errorHandler(
+  err: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response | void {
+  if (err instanceof ValidateError) {
+    console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
+    return res.status(422).json({
+      message: "Validation Failed",
+      details: err?.fields,
+    });
+  }
+  if (err instanceof Error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+
+  next();
+});
+...
+```
+
+
+
+
 
 ### การบ้าน TSOA
 ลองสร้าง controller และ route เพื่อให้ครบขั้นตอนการทำ CRUD แนะนำให้ลองดัดแปลงจากโค้ด [fruit.ts](./src/lib/fruit.ts) โดยเรียก Controller ที่สร้างเอง ให้อยู่ที่ http://localhost:4000/fruits ศึกษาการใช้ TSOA(PUT,POST,PATCH,DELETE) [จากตัวอย่าง](https://tsoa-community.github.io/docs/examples.html)

@@ -32,8 +32,8 @@ DELETE {{host}}/api/fruits/2
 content-type: application/json
 
 ########## TSOA
-###
-GET {{host}}/hello/Controller
+### no validate
+GET {{host}}/hello/My-Controller
 Accept: application/json
 ###
 POST {{host}}/hello
@@ -47,8 +47,17 @@ content-type: application/json
 Accept: application/json
 
 {"msg":"Who are you?"}
-
 ###
 DELETE {{host}}/hello?id=123
 content-type: application/json
 Accept: application/json
+
+### with Zod validate
+GET {{host}}/helloZod/oom
+Accept: application/json
+###
+POST {{host}}/helloZod
+content-type: application/json
+Accept: application/json
+
+{"id":0,"msg":"xx"}

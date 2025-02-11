@@ -10,7 +10,7 @@
     "build": "npm run clean &&tsc && npm run docs && npm run doc-spec",
     "dev": "nodemon src/app.ts",
     "build:docker": "npm run build && docker build -t docker.frappet.com/training/oom_be:0.0.3 -t docker.frappet.com/training/oom_be .",
-    "push:docker": "npm run build:docker && docker push docker.frappet.com/training/oom_be:0.0.3 && docker push docker.frappet.com/training/oom_be", 
+    "push:docker": "npm run build:docker && docker push docker.frappet.com/training/oom_be:0.0.3 && docker push docker.frappet.com/training/oom_be",
     "reload:docker": "docker compose pull && docker compose up -d",
     "docs": "typedoc",
     "doc-spec": "cd spec && pandoc DFD_01.md DFD_02.md -f gfm --reference-doc=DFD-reference.docx --data-dir=. -o ../dist/DFD.docx && cd ..",
@@ -22,21 +22,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tsoa/runtime": "^6.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "pandoc": "^0.2.0",
     "swagger-ui-express": "^5.0.1",
-    "tsoa": "^6.3.1",
-    "typedoc": "^0.25.3"
+    "typedoc": "^0.25.3",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.20",
     "@types/node": "^20.8.10",
-    "@types/swagger-ui-express": "^4.1.6",
+    "@types/swagger-ui-express": "^4.1.7",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
+    "tsoa": "^6.6.0",
     "typescript": "^5.2.2"
   }
 }

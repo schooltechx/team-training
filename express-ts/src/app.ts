@@ -5,6 +5,7 @@ import express, { Express, Request, Response,NextFunction } from 'express'
 import {myapiRoute} from './lib/myapi'
 import {fruitRoute} from "./lib/fruit"
 import swaggerUi from "swagger-ui-express"
+import { ValidateError } from "tsoa";
 const app: Express = express()
 const port = Number(process.env.PORT) || 80
 const apikey = Number(process.env.APIKEY) || '123456789'
@@ -33,7 +34,31 @@ app.get("/hello2",apiKeyCheck,(_req, res) => {
   res.send("Hello 2");
 });
 
-RegisterRoutes(app) // /hello
+RegisterRoutes(app) 
+app.use(function errorHandler(
+  err: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response | void {
+  if (err instanceof ValidateError) {
+    console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
+    return res.status(422).json({
+      message: "Validation Failed",
+      details: err?.fields,
+    });
+  }
+  if (err instanceof Error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+
+  next();
+});
+
+
+
 app.use(
   "/swagger",
   swaggerUi.serve,
