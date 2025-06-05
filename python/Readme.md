@@ -147,7 +147,7 @@ print(response.text)
 
 ### Open Goverment Data of Thailand
 ตัวอย่างการนำข้อมูลมาทำ Virtualize จะใช้
-ฐานข้อมูลเปิดภาครัฐนักพัฒนาสามารถเรียกใช้ผ่าน [API](https://data.go.th/pages/data-go-th-api) ได้
+ฐานข้อมูลเปิดภาครัฐนักพัฒนาสามารถเรียกใช้ผ่าน [API](https://data.go.th/pages/data-go-th-api) ได้ ดู [open_goverment_data.ipynb](./open_goverment_data.ipynb)
 
 - ไปที่ [Open Goverment Data of Thailand](https://data.go.th/)  กดเลือก [สำหรับนักพัฒนา](https://opend.data.go.th/register_api/)
 - สมัครเป็นผู้ใช้ยืนยันอีเมลล์จะได้ User Token ออกมา 
@@ -156,14 +156,17 @@ print(response.text)
 - โค้ดดึงข้อมูลผ่าน API ทำการจัดรูปเพื่อแสดงผลบนหน้าจอ
 ```python
 import requests
+import json
 resource_id="c2a299e0-1270-4d7f-903a-739e7f2eeb75"
-url = "https://opend.data.go.th/get-ckan/datastore_search?resource_id="+resource_id+"&limit=5&q=title:jones"
+url = "https://opend.data.go.th/get-ckan/datastore_search?resource_id="+resource_id+"&limit=5"
+
 header = {
     'api-key': userdata.get('opend_data')
 }
 response = requests.request("GET",url,headers=header)
-formated_text = json.dumps(json.loads(response.text), indent=2)
-print(formated_text)
+json_data = json.loads(response.text)
+formated_data = json.dumps(json_data, indent=2)
+print(formated_data)
 ```
 - ใช้ pandas ทำออกมาเป็นตาราง
 ```python
