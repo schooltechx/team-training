@@ -46,13 +46,20 @@ Set-ExecutionPolicy Unrestricted -Force
 ```
 
 **UV**
-
+ใช้ uv จัดการ package แทน virtualenv(pip)
 ```sh
 # หรือ brew install uv
-$ curl -LsSf https://astral.sh/uv/install.sh | sudo sh
+$ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv init uv-project
 cd uv-project
+uv add scikit-learn xgboost
+# รันโปรแกรม
+uv run hello.py
+# 
+uv python list --only-installed
 ```
+
+
 
 ```powershell
 $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
