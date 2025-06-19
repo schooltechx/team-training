@@ -55,10 +55,25 @@ uv init uv-project
 cd uv-project
 uv add scikit-learn xgboost
 # รันโปรแกรม
-uv run hello.py
+uv run main.py
 uv python list --only-installed
-# ใช้ jupyter notebook
+# ใช้ jupyter notebook บน VS Code
+mkdir project_folder
+cd project_folder
+uv init
+uv venv
+source .venv/bin/activate
+uv add --dev ipykernel
+code .
+# Web UI แทน VS code
 uv run --with jupyter jupyter lab
+# หรือ
+uvx jupyter lab
+```
+
+การติดตั้ง package ใน ช่องโค้ดของ jupyter notebook
+```python
+!uv add opencv-python
 ```
 
 ### GPU
