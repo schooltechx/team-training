@@ -45,38 +45,43 @@ code .
 Set-ExecutionPolicy Unrestricted -Force
 ```
 
-**UV**
-ใช้ uv จัดการ package แทน virtualenv(pip)
+### UV
+สามารถใช้ uv จัดการ package และสร้าง virtualenv แทน pip วิธีใช้งานเพิ่มเติมดู[ที่นี้](https://www.datacamp.com/tutorial/python-uv)
+
 ```sh
-# หรือ brew install uv
+# ติดตั้งด้วย brew install uv หรือ 
 $ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv init uv-project
 cd uv-project
 uv add scikit-learn xgboost
 # รันโปรแกรม
 uv run hello.py
-# 
 uv python list --only-installed
-```
-
-
-
-```powershell
-$ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
+# ใช้ jupyter notebook
+uv run --with jupyter jupyter lab
 ```
 
 ### GPU
 
 การใช้งาน Python กับ Computer Visualization หรือ AI ควรมี GPU ช่วย
-แนะนำการ์ดจอของ Nvidia เพราะ Library ทุกตัวรองรับ CUDA
-ควรติดตั้งไดร์เวอร์ที่มาจาก Nvidia โดยตรง ตรวจสอบด้วยคำสั่ง
 
-```
+- แนะนำการ์ดจอของ Nvidia เพราะ Library ทุกตัวรองรับ CUDA
+ควรติดตั้งไดร์เวอร์ close source ที่มาจาก Nvidia โดยตรงและติดตั้ง [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) 
+- AMD ต้อง[ติดตั้ง ROCm](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-overview.html)
+- Intel [OpenVINO toolkit](https://www.intel.com/content/www/us/en/support/articles/000057226/software/development-software.html)
+
+
+ตรวจสอบด้วยคำสั่ง
+
+```sh
 nvidia-smi
+# or AMD GPU
+amd-smi
+# or Intel GPU
+intel-smi
 ```
 
-ให้ติดตั้ง [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) ด้วย
+
 
 ## ใช้งานผ่าน Command Line
 
