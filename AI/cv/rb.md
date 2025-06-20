@@ -25,7 +25,7 @@ dataset.location
 ```
 ## Step # 03 Train the YOLOv11 Model
 
-ขั้นตอนต่อไปนี้จะเป็นการเทรนโมเดลจะใช้เวลานานถ้าไม่มี GPU ให้ใช้ colab ถ้า VRAM น้อยให้ลดค่า batch ผลของการเทรนจะอยู่ในโฟลเดอร์ run อย่าลืมดาว์นโหลด yolo11n.pt มาใช้งาน
+ขั้นตอนต่อไปนี้จะเป็นการเทรนโมเดลจะใช้เวลานาน ถ้าไม่มี GPU ให้ใช้ colab ถ้า VRAM น้อยให้ลดค่า batch ลง ผลของการเทรนจะอยู่ในโฟลเดอร์ run อย่าลืมดาว์นโหลด yolo11n.pt มาใช้งาน
 
 
 ```python
@@ -90,41 +90,28 @@ results = model.val(
 )
 ```
 ## Step # 06 Inference with Custom Model on Images
+สุ่มภาพในโฟลเดอร์มาทดสอบ ในโค้ดนี้ใช้จาก test dataset 
+
 ```python
-rom ultralytics import YOLO
+from ultralytics import YOLO
 import random
 import cv2
 import os
 from IPython.display import Image, display
 
 def find_images_in_subfolders(root_dir, image_extensions=None):
-    """
-    Find all image files in a directory and its subfolders.
-    
-    Args:
-        root_dir (str): The root directory to search.
-        image_extensions (list, optional): List of image file extensions to look for.
-                                           Defaults to common image extensions.
-    
-    Returns:
-        list: List of paths to image files.
-    """
     if image_extensions is None:
-        image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp']
-    
+        image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp']    
     image_files = []
     for subdir, _, files in os.walk(root_dir):
         for file in files:
             if any(file.lower().endswith(ext) for ext in image_extensions):
                 image_files.append(os.path.join(subdir, file))
     return image_files
-
 # Example usage
 image_list = find_images_in_subfolders(f'{dataset.location}/test/images')
-
-# Randomly select 10 unique images
+# Randomly select 8 unique images
 random_images = random.sample(image_list, 8)
-
 # Process each randomly selected image
 for image_path in random_images:
     results = model(image_path, imgsz=640)
