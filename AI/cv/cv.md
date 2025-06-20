@@ -6,6 +6,8 @@
 ```
 
 ## Sample Code
+
+### Youtube Downloader
 ดาว์นโหลดไฟล์จาก Youtube
 ```python
 from pytubefix import YouTube
@@ -21,6 +23,7 @@ video_path = video_stream.download(filename='temp_video.mp4')
 print(f'Download path:{video_path}')
 ```
 
+### Open CV for Picture
 ใช้ OpenCV เปิดไฟล์ภาพ
 ```python
 import cv2
@@ -30,6 +33,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 ```
+### Basic OpenCV for video
 ใช้ OpenCV เปิดวีดีโอ วาดเส้น ตัวหนังสือ สี่เหลี่ยม ลดขนาดเฟรม และแสดงวีดีโอ
 ```python
 import cv2
@@ -56,13 +60,14 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
-Object Detect และ Classification ด้วย Yolo ซึ่งเป็นโมเดลที่เทรนมาแล้ว
+## Object Detect and Classification 
+ทำด้วย Yolo ซึ่งเป็นโมเดลที่เทรนมาแล้ว
 
 ```python
 from ultralytics import YOLO
 from IPython.display import display, Image, clear_output
 model = YOLO("yolo11m-seg.pt")
-cap = cv2.VideoCapture('./video.mp4') # 0 for default webcam or video path
+cap = cv2.VideoCapture('./temp_video.mp4') # 0 for default webcam or video path
 while True:
     # time.sleep(0.005)
     ret, frame = cap.read() # Capture frame-by-frame
@@ -87,6 +92,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
+## Segment and Classification
 ใช้ Yolo ทำ segment และ Classification ด้วยโมเดลที่เทรนมาแล้ว
 ```python
 import cv2
@@ -127,5 +133,5 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
-อ่านเพิ่ม
+## อ่านเพิ่ม
 - [How to segment Objects with YOLOv8](https://medium.com/@Mert.A/how-to-segment-with-yolov8-f33b1c63b6c6)
