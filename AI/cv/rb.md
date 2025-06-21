@@ -15,7 +15,7 @@ ultralytics.checks()
 
 ```python
 from roboflow import Roboflow
-rf = Roboflow(api_key="lSo7IewhW1q6S8BxXfOK")
+rf = Roboflow(api_key="ROBOFLOW_API_KEY")
 project = rf.workspace("workenv-dayet").project("facial-emotion-dataset-7g1jd-hipbk")
 version = project.version(3)
 dataset = version.download("yolov11")
@@ -117,4 +117,10 @@ for image_path in random_images:
     results = model(image_path, imgsz=640)
     results[0].show()
 ```
+
+
+## Home Work
+ให้เขียนโค้ดเปิด webcam แล้วทำการตรวจจับอารมณ์ โดยใช้โมเดลที่เทรนในข้้นตอนก่อนหน้า
+
+
 

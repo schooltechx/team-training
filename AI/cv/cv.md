@@ -103,17 +103,17 @@ import numpy as np
 conf = 0.9 # Confidence threshold  
 model = YOLO("yolo11m-seg.pt")
 cap = cv2.VideoCapture('./temp_video.mp4') # 0 for default webcam or video path
+yolo_classes = list(model.names.values())
+classes_ids = [yolo_classes.index(clas) for clas in yolo_classes]      
+colors = [random.choices(range(256), k=3) for _ in classes_ids]
 while True:
     # time.sleep(0.05)
     ret, frame = cap.read() # Capture frame-by-frame
     if not ret:
         print("End of video or failed to grab frame.")
         break
-    yolo_classes = list(model.names.values())
-    classes_ids = [yolo_classes.index(clas) for clas in yolo_classes]
-      
     results = model(frame,conf=conf,verbose=False)[0]
-    colors = [random.choices(range(256), k=3) for _ in classes_ids]
+
     # print(results)
     for result in results:
         for mask, box in zip(result.masks.xy, result.boxes):
