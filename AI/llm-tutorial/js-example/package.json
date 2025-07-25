@@ -1,0 +1,22 @@
+{
+  "name": "ts-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "vercel1": "node --env-file .env vercel1.js",
+    "vercel2": "node --env-file .env vercel2.js",
+    "gemini1": "node --env-file .env gemini1.js",
+    "gemini2": "node --env-file .env gemini2.js",
+    "gemini3": "node --env-file .env gemini3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@ai-sdk/google": "^1.2.22",
+    "@google/genai": "^1.11.0",
+    "ai": "^4.3.19"
+  }
+}
