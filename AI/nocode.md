@@ -53,3 +53,11 @@ docker compose up -d
 - [Build ANY AI Agent with Flowise and n8n, Here's How](https://www.youtube.com/watch?v=-zlbm58WRAA)
 - [Flowise + n8n - The BEST No Code + Local AI Agent Combo](https://www.youtube.com/watch?v=23s2N3ug8B8)
 
+
+## N8N Template
+
+- [WhatsApp chabot เป็นเซลล์ มีข้อมูลสินค้าจาก vector store](https://n8n.io/workflows/2465-building-your-first-whatsapp-chatbot/?_gl=1*1tvgonz*_gcl_au*NzE1MTM2NTYwLjE3NDk5MDk3NjQ.*_ga*NTEwMTQ2NTY1LjE3NTA3MzUyNTE.*_ga_0SC4FF2FH9*czE3NTA4NjEwNzYkbzQkZzEkdDE3NTA4NjEyNTkkajM1JGwwJGgw)
+- [AI agent that can scrape webpages](https://n8n.io/workflows/2006-ai-agent-that-can-scrape-webpages/?_gl=1*qbdsyr*_gcl_au*NzE1MTM2NTYwLjE3NDk5MDk3NjQ.*_ga*NTEwMTQ2NTY1LjE3NTA3MzUyNTE.*_ga_0SC4FF2FH9*czE3NTA4NjEwNzYkbzQkZzEkdDE3NTA4NjEyMzQkajYwJGwwJGgw)
+- [N8N Agent Connector, Open WebUI](https://www.youtube.com/watch?app=desktop&v=6zn8vVTeFE0)
+- [Build Your OWN AI Agent That Can SEE And SPEAK With Ease](https://www.youtube.com/watch?v=cTvaMD4Tt9Y)
+
