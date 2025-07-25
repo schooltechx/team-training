@@ -1,6 +1,6 @@
 import { google } from "@ai-sdk/google"
-import { generateText } from "ai"
-import fs from "fs"
+import { generateText,CoreMessage } from "ai"
+import {readFileSync} from "fs"
 const model = google("gemini-2.5-flash")
 const providerOptions = {
   google: {
@@ -9,7 +9,7 @@ const providerOptions = {
     },
   },
 }
-const messages= [
+const messages:CoreMessage[] = [
   {
     role: 'user',
     content: [
@@ -19,7 +19,7 @@ const messages= [
       },
       {
         type: 'file',
-        data: fs.readFileSync('../img/dog.jpeg'),
+        data: readFileSync('../img/dog.jpeg'),
         mimeType: 'image/jpeg',
       },
     ],

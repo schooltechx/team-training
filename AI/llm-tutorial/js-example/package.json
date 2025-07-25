@@ -4,11 +4,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "vercel1": "node --env-file .env vercel1.js",
-    "vercel2": "node --env-file .env vercel2.js",
-    "gemini1": "node --env-file .env gemini1.js",
-    "gemini2": "node --env-file .env gemini2.js",
-    "gemini3": "node --env-file .env gemini3.js"
+    "vercel1": "bun --env-file .env vercel1.ts",
+    "vercel2": "bun --env-file .env vercel2.ts",
+    "vercel3": "bun --env-file .env vercel3.ts",
+    "vercel4": "bun --env-file .env vercel4.ts",
+    "gemini1": "bun --env-file .env gemini1.ts",
+    "gemini2": "bun --env-file .env gemini2.ts",
+    "gemini3": "bun --env-file .env gemini3.ts",
+    "gemini4": "bun --env-file .env gemini4.ts",
+    "gemini5": "bun --env-file .env gemini5.ts",
+    "gemini6": "bun --env-file .env gemini6.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +22,11 @@
   "dependencies": {
     "@ai-sdk/google": "^1.2.22",
     "@google/genai": "^1.11.0",
-    "ai": "^4.3.19"
+    "ai": "^4.3.19",
+    "ts-node": "^10.9.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0"
   }
 }

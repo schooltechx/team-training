@@ -13,7 +13,7 @@ const image = await ai.files.upload({
 const contents = [
   createUserContent([
     "ภาพนี้คือตัวอะไร",
-    createPartFromUri(image.uri, image.mimeType),
+    createPartFromUri(image.uri||'', image.mimeType|| 'image/jpeg'),
   ]),
 ]
 const config = {
