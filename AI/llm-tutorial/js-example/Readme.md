@@ -23,11 +23,11 @@ npm install @google/genai
 
 สคริปต์เรียกใช้ตัวอย่างดูใน [package.json](./package.json) เช่น npm run vercel1
 
-- ตัวอย่างอย่างง่าย ([vercel1.ts](./vercel1.ts),[gemini1.js](./gemini1.js)) ตอบเป็นครั้งๆไป
-- คอนฟิกและอธิบายภาพ ([vercel2.ts](./vercel2.ts),[gemini2.js](./gemini2.js))
+- ตัวอย่างอย่างง่าย ([vercel1.ts](./vercel1.ts),[gemini1.ts](./gemini1.ts)) ตอบเป็นครั้งๆไป
+- คอนฟิกและอธิบายภาพ ([vercel2.ts](./vercel2.ts),[gemini2.ts](./gemini2.ts))
 - Chat ([vercel3.ts](./vercel3.ts),[gemini3.ts](./gemini3.ts)) จะมี history ทำให้คุยต่อเนื่องได้(จำข้อความก่อนหน้าได้)
-- Structured output ([vercel4.ts](./vercel4.js),[gemini4.ts](./gemini4.ts)) ได้คำตอบเป็น JSON เหมาะกับนำไปใช้กับโปรแกรมต่อ
-- Web Search Agent ([vercel5.ts](./vercel5.js), [gemini5.ts](./gemini5.ts)) ค้นหาข้อมูลในเวปมาใช้เป็นคำตอบจะได้ข้อมูลล่าสุด
+- Structured output ([vercel4.ts](./vercel4.ts),[gemini4.ts](./gemini4.ts)) ได้คำตอบเป็น JSON เหมาะกับนำไปใช้กับโปรแกรมต่อ
+- Web Search Agent ([vercel5.ts](./vercel5.ts), [gemini5.ts](./gemini5.ts)) ค้นหาข้อมูลในเวปมาใช้เป็นคำตอบจะได้ข้อมูลล่าสุด
 - External tools ([vercel6.ts](./vercel6.ts),[gemini5.ts](./gemini6.ts)) เพื่อที่จะได้นำข้อมูลจากภายนอกมาใช้ร่วมกับ LLM ได้ เช่นถามว่าตอนนี้ที่กรุงเทพมีอุณหภูมิเท่าไหร่ เราต้องสร้าง tools(function) ที่มีคำอธิบายว่าใช้ทำอะไรมีพารามิเตอร์อะไร ในเบื้องหลังจะเรียก LLM และ tools หลายรอบ
   - ใช้ LLM วิเคราะห์ prompt นี้ควรเรียกใช้ tools ตัวไหนและมีพารามิเตอร์อะไร
   - เรียกใช้ tools ด้วย พารามิเตอร์ จะได้ผลลัพท์กลับมา
