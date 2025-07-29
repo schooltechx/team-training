@@ -8,6 +8,9 @@
     "vercel2": "bun --env-file .env vercel2.ts",
     "vercel3": "bun --env-file .env vercel3.ts",
     "vercel4": "bun --env-file .env vercel4.ts",
+    "vercel5": "bun --env-file .env vercel5.ts",
+    "vercel6": "bun --env-file .env vercel6.ts",
+
     "gemini1": "bun --env-file .env gemini1.ts",
     "gemini2": "bun --env-file .env gemini2.ts",
     "gemini3": "bun --env-file .env gemini3.ts",
