@@ -1,6 +1,10 @@
 //external tools
-import { GoogleGenAI, Type } from '@google/genai';
-
+import { GoogleGenAI, Type,ContentListUnion } from '@google/genai';
+const model = "gemini-2.5-flash"
+let contents:ContentListUnion =[{
+  role: 'user',
+  parts:[{text:"อุณหภูมิที่กรุงเทพตอนนี้เท่าไหร่?" }]
+}]
 // Define the function declaration for the model
 const weatherFunctionDeclaration = {
   name: 'get_current_temperature',
@@ -16,26 +20,30 @@ const weatherFunctionDeclaration = {
     required: ['location'],
   },
 };
+const config = {
+  tools: [{functionDeclarations: [weatherFunctionDeclaration]}],
+}
+const getCurrentTemperature = (location:string)=>28
 const ai = new GoogleGenAI({});
 // Send request with function declarations
-const response = await ai.models.generateContent({
-  model: 'gemini-2.5-flash',
-  contents: "อุณหภูมิที่กรุงเทพตอนนี้เท่าไหร่?",
-  config: {
-    tools: [{
-      functionDeclarations: [weatherFunctionDeclaration]
-    }],
-  },
-});
+const response = await ai.models.generateContent({model,contents,config });
 
 // Check for function calls in the response
-if (response.functionCalls && response.functionCalls.length > 0) {
+if (response.functionCalls && response.candidates && 
+  response.candidates.length > 0 &&
+  response.candidates[0].content &&
+  response.functionCalls.length > 0) {
+
   const functionCall = response.functionCalls[0]; // Assuming one function call
-  console.log(`Function to call: ${functionCall.name}`);
-  console.log(`Arguments: ${JSON.stringify(functionCall.args)}`);
-  // In a real app, you would call your actual function here:
-  // const result = await getCurrentTemperature(functionCall.args);
+  const t =  getCurrentTemperature(functionCall.args?.location as string);
+  const function_response_part = {
+    name: functionCall.name,
+    response: {t}
+  }
+  contents.push(response.candidates[0].content);
+  contents.push({ role: 'user', parts: [{ functionResponse: function_response_part }] });  
+  const final_response = await ai.models.generateContent({model,contents,config })
+  console.log("Final Response",final_response.text);
 } else {
-  console.log("No function call found in the response.");
-  console.log(response.text);
+  console.log("Response:",response.text) //without function call
 }

@@ -6,3 +6,4 @@ const response = await ai.models.generateContent({
   contents: "AI ทำงานอย่างไรตอบอย่างสั้นหนึ่งบรรทัด",
 })
 console.log(response.text)
+// console.log(JSON.stringify(response,null,2))

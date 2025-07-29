@@ -3,8 +3,12 @@
 มีตัวอย่างใช้ [Vercel AI SDK](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) และ
 [Gemini API](https://ai.google.dev/gemini-api/docs/text-generation#javascript)
 
-- ใช้ bun เพื่อรองรับ typescript และ top level await ได้
-- API key ใส่ใน param ตอนเรียกใช้งาน หรือตัวแปรแวดล้อม Vercel ใช้ GOOGLE_GENERATIVE_AI_API_KEY, ใช้ GEMINI_API_KEY
+- ใช้ bun เพื่อรองรับ typescript, top level await และ .env 
+- API key ใส่ใน param ตอนเรียกใช้งาน หรือตัวแปรแวดล้อม(หรือ .env) Vercel ใช้ GOOGLE_GENERATIVE_AI_API_KEY, ใช้ GEMINI_API_KEY
+```js
+// สามารถใส่ในโค้ดตรงๆแบบนี้ก็ได้
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+```
 
 ## install
 
@@ -31,7 +35,7 @@ bun add @google/genai
   - ใช้ LLM วิเคราะห์ prompt นี้ควรเรียกใช้ tools ตัวไหนและมีพารามิเตอร์อะไร
   - เรียกใช้ tools ด้วย พารามิเตอร์ จะได้ผลลัพท์กลับมา
   - เอาผลลัพท์ที่ได้จาก tools ไป รวมกับ prompt เดิมเพื่อเรียกใช้ LLM ก็จะได้ผลลัพท์ที่ต้องการ
-  - Gemini API(JavaScript) ต้องเรียกแต่ละขั้นตอนเอง แต่ Gemini API(Python) และ Vercel เรียกใช้ tools โดยอัตโนมัติ
+  - Gemini API(Python) และ Vercel เรียกใช้ tools โดยอัตโนมัติ Gemini API(JavaScript) ต้องเรียกแต่ละขั้นตอนเอง คิดว่าเพื่อ handle กรณีเรียก tool แล้วมีปัญหาได้
 
 ## อ่านต่อ
 
