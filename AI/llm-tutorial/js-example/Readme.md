@@ -3,20 +3,19 @@
 มีตัวอย่างใช้ [Vercel AI SDK](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) และ
 [Gemini API](https://ai.google.dev/gemini-api/docs/text-generation#javascript)
 
-- ใช้ node 22.x เพื่อที่ใช้ top level await ได้
-- API key ใส่ใน param ตอนเรียกใช้งานหรือตัวแปรแวดล้อม Vercel ใช้ GOOGLE_GENERATIVE_AI_API_KEY, ใช้ GEMINI_API_KEY
+- ใช้ bun เพื่อรองรับ typescript และ top level await ได้
+- API key ใส่ใน param ตอนเรียกใช้งาน หรือตัวแปรแวดล้อม Vercel ใช้ GOOGLE_GENERATIVE_AI_API_KEY, ใช้ GEMINI_API_KEY
 
 ## install
 
 ```sh
 mkdir project_folder
 cd project_folder
-npm init -y
-npm install ts-node
+bun init
 # versel
-npm install ai @ai-sdk/google
+bun add ai @ai-sdk/google
 # gemini
-npm install @google/genai
+bun add @google/genai
 ```
 
 ## Text Generation
