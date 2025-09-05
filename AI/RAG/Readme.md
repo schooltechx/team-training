@@ -2,14 +2,17 @@
 เป็นเทคนิคใน AI ที่ช่วยเพิ่มความแม่นยำและน่าเชื่อถือของโมเดลภาษาขนาดใหญ่ (LLM) โดยการดึงข้อมูลที่เกี่ยวข้องจากฐานความรู้ภายนอกมาเป็นบริบทเพิ่มเติม ก่อนที่โมเดลจะสร้างคำตอบ ทำให้ AI สามารถให้คำตอบที่อิงจากข้อมูลจริง ล่าสุด และเฉพาะเจาะจงได้ดีขึ้น แทนที่จะต้องพึ่งพาข้อมูลที่ถูกฝึกไว้ในโมเดลเพียงอย่างเดียว. 
 ข้อมูลจะเก็บในฐานข้อมูลประเถท Vector หรือ Graph ที่จะใช้การค้นหาโดยดูจากความคล้ายของข้อมูล ข้อมูลจะต้องไปทำ Embedding ก่อนเก็บ
 
+## Sample Code
+- [simple_rag.ipynb](./simple_rag.ipynb) แบบง่ายด้วย Gemini
+- [simple_rag_hybrid.ipynb](./simple_rag_hybrid.ipynb) ทำแบบ Hybrid Search ตัดคำ normalize Chunk(ให้ผลยังไม่ดีเท่าไหร่น่าจะทำยังไม่ถูก)
 
 ## Vectorization / Embeddings
 เป็นขั้นตอนแปลงข้อมูลเป็นเวกเตอร์ตัวเลขที่มีมิติสูง เพื่อให้สามารถนำไปใช้ในงานต่างๆ เช่น การค้นหาความคล้ายคลึงกัน (similarity search) หรือการจัดกลุ่มข้อมูล (clustering) ได้ง่ายขึ้น 
 การเลือกโมเดล ต้องขึ้นกับงานและต้องรองรับภาษาไทย ดูได้ที [Thai-Sentence-Vector-Benchmark](https://github.com/mrpeerat/Thai-Sentence-Vector-Benchmark) ที่นิยมใช้เช่น
 - [BGE-M3](https://huggingface.co/BAAI/bge-m3) รองรับ 8192 โทเคน
-- [intfloat/multilingual-e5]
-- [sentence-transformers/LaBSE]
-- [wangchanberta]
+- [intfloat/multilingual-e5](https://huggingface.co/intfloat/multilingual-e5-large)
+- [sentence-transformers/LaBSE](https://huggingface.co/sentence-transformers/LaBSE)
+- wangchanberta ?
 
 ## การตัดข้อความ (Chunking)
 ภาษาไทยเป็นภาษาที่ ไม่มีเครื่องหมายวรรคตอนชัดเจน วิธีที่แนะนำ:
