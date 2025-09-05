@@ -19,17 +19,24 @@
 ## Retrieval
 ถ้าเลือกใช้ PostgreSQL หรือ Elasticsearch น่าจะปรับใช้กับงานได้ง่ายเพราะมีอยู่แล้วไม่ต้องติดตั้งตัวใหม่
 - Vector Search: มีให้เลือกใช้หลายตัวเช่น 
-[FAISS](https://github.com/facebookresearch/faiss), 
 [Weaviate](https://weaviate.io/), 
 [Qdrant](https://qdrant.tech/), 
 [PostgreSQL + pgvector](https://github.com/pgvector/pgvector)
 - GraphRAG : ให้ผลที่ดีกว่า Vector แต่มีความซับซ้อนสูงกว่า เช่น [neo4j](https://neo4j.com/blog/developer/rag-tutorial/)
-- Hybrid Search: ผสม BM25 (lexical) กับ embedding search → ภาษาไทย benefit มาก เพราะบางคำ embedding ไม่ชัด แต่ keyword ยังช่วยได้ เช่น [Elasticsearch hybrid search](https://www.elastic.co/what-is/hybrid-search)
+- Hybrid Search: ผสม BM25 (lexical) กับ embedding search → ภาษาไทย benefit มาก เพราะบางคำ embedding ไม่ชัด แต่ keyword ยังช่วยได้ เช่น 
+[FAISS](https://github.com/facebookresearch/faiss), 
+[Elasticsearch hybrid search](https://www.elastic.co/what-is/hybrid-search)
 
 ## Generation
-ในเบื้องต้น Gemini ในการทดสอบ ส่วนนี้ถ้าปรับไปใช้ Node.js แทน Python ได้น่าจะง่ายในการ integrate กับระบบเดิม
+ในเบื้องต้น Gemini ในการทดสอบรองรับภาษาไทยได้ดี ส่วนนี้ถ้าปรับไปใช้ Node.js แทน Python ได้น่าจะง่ายในการ integrate กับระบบเดิม
 
 ## ปัญหากับภาษาไทย
-- การสะกดหลายแบบ (เช่น “กรุงเทพฯ” vs “กรุงเทพ”) → อาจพลาด retrieval
-- ภาษาพูด vs ภาษาเขียน → เช่น “ครับ/ค่ะ” อาจไม่จำเป็นต่อความหมาย แต่มีผลกับ similarity
-- การใช้ emoji หรือภาษาปนอังกฤษ → ต้อง normalize เพิ่ม
+- Word Segmentation: ภาษาไทยไม่มี space คั่นคำ ต้องใช้ตัวตัดคำ เช่น PyThaiNLP, Deepcut, หรือ HuggingFace tokenizer ที่รองรับไทย
+- Normalization: ลดความหลากหลาย เช่น แปลงสระ/วรรณยุกต์ซ้ำ ("เก่งงงง" → "เก่ง"), การสะกดหลายแบบ (เช่น “กรุงเทพฯ” vs “กรุงเทพ”) → อาจพลาด retrieval, ภาษาพูด vs ภาษาเขียน → เช่น “ครับ/ค่ะ” อาจไม่จำเป็นต่อความหมาย แต่มีผลกับ similarity, การใช้ emoji หรือภาษาปนอังกฤษ → ต้อง normalize เพิ่ม
+- Stopwords: ภาษาไทยมีคำฟุ่มเฟือย (เช่น "แล้ว", "และ", "คือ") ซึ่งอาจต้องกำจัดก่อน indexing
+
+
+
+## อ่านเพิ่ม
+- [Embedding Projector](http://projector.tensorflow.org/)
+- [breadchris/hybrid.py](https://gist.github.com/breadchris/b73aae81953eb8f865ebb4842a1c15b5)
