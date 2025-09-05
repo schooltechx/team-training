@@ -3,24 +3,27 @@
 ข้อมูลจะเก็บในฐานข้อมูลประเถท Vector หรือ Graph ที่จะใช้การค้นหาโดยดูจากความคล้ายของข้อมูล ข้อมูลจะต้องไปทำ Embedding ก่อนเก็บ
 
 ## Sample Code
+สองตัวอย่างแรกยังไม่เห็นความแตกต่างที่ชัดเจนนัก
 - [simple_rag.ipynb](./simple_rag.ipynb) แบบง่ายด้วย Gemini
-- [simple_rag_hybrid.ipynb](./simple_rag_hybrid.ipynb) ทำแบบ Hybrid Search ตัดคำ normalize Chunk(ให้ผลยังไม่ดีเท่าไหร่น่าจะทำยังไม่ถูก)
+- [simple_rag_hybrid.ipynb](./simple_rag_hybrid.ipynb) ทำแบบ Hybrid Search ตัดคำ normalize Chunk
 
 ## Vectorization / Embeddings
 เป็นขั้นตอนแปลงข้อมูลเป็นเวกเตอร์ตัวเลขที่มีมิติสูง เพื่อให้สามารถนำไปใช้ในงานต่างๆ เช่น การค้นหาความคล้ายคลึงกัน (similarity search) หรือการจัดกลุ่มข้อมูล (clustering) ได้ง่ายขึ้น 
 การเลือกโมเดล ต้องขึ้นกับงานและต้องรองรับภาษาไทย ดูได้ที [Thai-Sentence-Vector-Benchmark](https://github.com/mrpeerat/Thai-Sentence-Vector-Benchmark) ที่นิยมใช้เช่น
-- [BGE-M3](https://huggingface.co/BAAI/bge-m3) รองรับ 8192 โทเคน
+- [BGE-M3](https://huggingface.co/BAAI/bge-m3) รองรับได้ถึง 8192 โทเคน
 - [intfloat/multilingual-e5](https://huggingface.co/intfloat/multilingual-e5-large)
 - [sentence-transformers/LaBSE](https://huggingface.co/sentence-transformers/LaBSE)
 - wangchanberta ?
 
 ## การตัดข้อความ (Chunking)
-ภาษาไทยเป็นภาษาที่ ไม่มีเครื่องหมายวรรคตอนชัดเจน วิธีที่แนะนำ:
+เอกสารยิ่งใหญ่ยิ่งต้องใช้มิติขนาดใหญ่สำหรับเก็บ Vector แต่ก็จะกระทบกับประสิทธิ์ภาพของฐานข้อมูล ดังนั้นจำเป็นต้องตัดเป็นส่วนเล็กๆ ถ้าไปตัดกึ่งกลางของบริบทก็จะเกิดปัญหาได้ ก็ต้องมีการทำ overlapping จุดที่ตัดสำหรับภาษาไทยจะยุ่งยากกว่าภาษาอังกฤษเนื่องจากเป็นภาษาที่ ไม่มีเครื่องหมายวรรคตอนชัดเจน วิธีที่แนะนำ:
 - ตัดตาม จำนวนตัวอักษร/โทเคน (เช่น 300–500 tokens)
 - หรือใช้การตัดตาม ประโยค/ย่อหน้า (sentence splitter ภาษาไทย)
 
-## Retrieval
-ถ้าเลือกใช้ PostgreSQL หรือ Elasticsearch น่าจะปรับใช้กับงานได้ง่ายเพราะมีอยู่แล้วไม่ต้องติดตั้งตัวใหม่
+น่าจะต้องศึกษาหัวข้อนี้ให้เข้าใจ อาจจะต้องศึกษาลักษณะของเอกสาร เพื่อกำหนดขนาดมิติ Chunking และ overlapping ที่เหมาะสม
+
+## Database
+ถ้าเลือกใช้ PostgreSQL หรือ Elasticsearch น่าจะปรับใช้กับงานได้ง่ายเพราะใช้กับระบบอื่นร่วมกันไม่ต้องติดตั้งตัวใหม่
 - Vector Search: มีให้เลือกใช้หลายตัวเช่น 
 [Weaviate](https://weaviate.io/), 
 [Qdrant](https://qdrant.tech/), 
@@ -37,8 +40,6 @@
 - Word Segmentation: ภาษาไทยไม่มี space คั่นคำ ต้องใช้ตัวตัดคำ เช่น PyThaiNLP, Deepcut, หรือ HuggingFace tokenizer ที่รองรับไทย
 - Normalization: ลดความหลากหลาย เช่น แปลงสระ/วรรณยุกต์ซ้ำ ("เก่งงงง" → "เก่ง"), การสะกดหลายแบบ (เช่น “กรุงเทพฯ” vs “กรุงเทพ”) → อาจพลาด retrieval, ภาษาพูด vs ภาษาเขียน → เช่น “ครับ/ค่ะ” อาจไม่จำเป็นต่อความหมาย แต่มีผลกับ similarity, การใช้ emoji หรือภาษาปนอังกฤษ → ต้อง normalize เพิ่ม
 - Stopwords: ภาษาไทยมีคำฟุ่มเฟือย (เช่น "แล้ว", "และ", "คือ") ซึ่งอาจต้องกำจัดก่อน indexing
-
-
 
 ## อ่านเพิ่ม
 - [Embedding Projector](http://projector.tensorflow.org/)
