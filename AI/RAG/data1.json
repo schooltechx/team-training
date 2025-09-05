@@ -1,0 +1,122 @@
+[
+    {
+        "name": "La Dotta",
+        "description": "Authentic Italian restaurant specializing in handmade pasta dishes using imported ingredients from Italy. Located in Thonglor district of Bangkok.",
+        "price_range": "$$",
+        "address": "161/6 Thonglor Soi 9, Bangkok 10110",
+        "cuisine": "Italian",
+        "popular_dishes": [
+            "Truffle Tagliatelle",
+            "Cacio e Pepe",
+            "Seafood Linguine"
+        ]
+    },
+    {
+        "name": "Peppina",
+        "description": "Neapolitan pizza restaurant with wood-fired ovens imported from Italy. Features traditional Italian dishes and a wide selection of Italian wines.",
+        "price_range": "$$",
+        "address": "27/1 Sukhumvit Soi 33, Bangkok 10110",
+        "cuisine": "Italian, Pizza",
+        "popular_dishes": [
+            "Margherita Pizza",
+            "Burrata",
+            "Tiramisu"
+        ]
+    },
+    {
+        "name": "L'Oliva",
+        "description": "High-end Italian dining with focus on Northern Italian cuisine. Offers homemade pasta, risotto, and seafood specialties in the heart of Sukhumvit.",
+        "price_range": "$$$",
+        "address": "4 Sukhumvit Soi 36, Bangkok 10110",
+        "cuisine": "Italian, Fine Dining",
+        "popular_dishes": [
+            "Risotto ai Funghi",
+            "Osso Buco",
+            "Branzino"
+        ]
+    },
+    {
+        "name": "Appia",
+        "description": "Roman-inspired trattoria serving hearty Italian comfort food including porchetta and homemade pasta in a rustic setting in Sukhumvit Soi 31.",
+        "price_range": "$$$",
+        "address": "20/4 Sukhumvit Soi 31, Bangkok 10110",
+        "cuisine": "Italian, Roman",
+        "popular_dishes": [
+            "Porchetta",
+            "Carbonara",
+            "Saltimbocca"
+        ]
+    },
+    {
+        "name": "Pizza Massilia",
+        "description": "Upscale Italian restaurant specializing in gourmet pizzas with premium imported ingredients and authentic Italian recipes with a modern twist.",
+        "price_range": "$$$",
+        "address": "Sukhumvit Soi 49, Bangkok 10110",
+        "cuisine": "Italian, Pizza",
+        "popular_dishes": [
+            "Truffle Pizza",
+            "Parma Pizza",
+            "Seafood Pizza"
+        ]
+    },
+    {
+        "name": "Gianni's",
+        "description": "Classic Italian restaurant in Sukhumvit offering traditional dishes from various regions of Italy, with an extensive wine collection.",
+        "price_range": "$$$",
+        "address": "34/1 Sukhumvit Soi 23, Bangkok 10110",
+        "cuisine": "Italian",
+        "popular_dishes": [
+            "Lasagna",
+            "Veal Milanese",
+            "Panna Cotta"
+        ]
+    },
+    {
+        "name": "Som Tam Nua",
+        "description": "Popular Thai restaurant specializing in Northeastern Thai cuisine, especially spicy papaya salad and grilled chicken. Located in Siam Square.",
+        "price_range": "$",
+        "address": "392/14 Siam Square Soi 5, Bangkok 10330",
+        "cuisine": "Thai, Isaan",
+        "popular_dishes": [
+            "Som Tam",
+            "Gai Yang",
+            "Larb Moo"
+        ]
+    },
+    {
+        "name": "Pad Thai Ekkamai",
+        "description": "Local favorite serving authentic pad thai and other traditional Thai noodle dishes in the trendy Ekkamai neighborhood.",
+        "price_range": "$",
+        "address": "337/5 Ekkamai Soi 2, Bangkok 10110",
+        "cuisine": "Thai",
+        "popular_dishes": [
+            "Pad Thai",
+            "Pad See Ew",
+            "Guay Teow"
+        ]
+    },
+    {
+        "name": "Isaan Der",
+        "description": "Northeastern Thai cuisine featuring grilled meats, sticky rice, and spicy salads served in a casual atmosphere near Asok.",
+        "price_range": "$",
+        "address": "5/8 Sukhumvit Soi 20, Bangkok 10110",
+        "cuisine": "Thai, Isaan",
+        "popular_dishes": [
+            "Nam Tok Moo",
+            "Som Tam",
+            "Moo Ping"
+        ]
+    },
+    {
+        "name": "Gaggan",
+        "description": "Progressive Indian restaurant offering innovative tasting menus with modern techniques while maintaining authentic flavors. Located in Lumpini.",
+        "price_range": "$$$$",
+        "address": "68/1 Soi Langsuan, Ploenchit Road, Bangkok 10330",
+        "cuisine": "Indian, Molecular Gastronomy",
+        "popular_dishes": [
+            "Yogurt Explosion",
+            "Charcoal",
+            "Pork Vindaloo"
+        ]
+    }
+]
