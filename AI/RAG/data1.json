@@ -1,5 +1,6 @@
 [
     {
+        "id": "001",
         "name": "La Dotta",
         "description": "Authentic Italian restaurant specializing in handmade pasta dishes using imported ingredients from Italy. Located in Thonglor district of Bangkok.",
         "price_range": "$$",
@@ -12,6 +13,7 @@
         ]
     },
     {
+        "id": "002",
         "name": "Peppina",
         "description": "Neapolitan pizza restaurant with wood-fired ovens imported from Italy. Features traditional Italian dishes and a wide selection of Italian wines.",
         "price_range": "$$",
@@ -24,6 +26,7 @@
         ]
     },
     {
+        "id": "003",
         "name": "L'Oliva",
         "description": "High-end Italian dining with focus on Northern Italian cuisine. Offers homemade pasta, risotto, and seafood specialties in the heart of Sukhumvit.",
         "price_range": "$$$",
@@ -36,6 +39,7 @@
         ]
     },
     {
+        "id": "004",
         "name": "Appia",
         "description": "Roman-inspired trattoria serving hearty Italian comfort food including porchetta and homemade pasta in a rustic setting in Sukhumvit Soi 31.",
         "price_range": "$$$",
@@ -48,6 +52,7 @@
         ]
     },
     {
+        "id": "005",
         "name": "Pizza Massilia",
         "description": "Upscale Italian restaurant specializing in gourmet pizzas with premium imported ingredients and authentic Italian recipes with a modern twist.",
         "price_range": "$$$",
@@ -60,6 +65,7 @@
         ]
     },
     {
+        "id": "006",
         "name": "Gianni's",
         "description": "Classic Italian restaurant in Sukhumvit offering traditional dishes from various regions of Italy, with an extensive wine collection.",
         "price_range": "$$$",
@@ -72,6 +78,7 @@
         ]
     },
     {
+        "id": "007",
         "name": "Som Tam Nua",
         "description": "Popular Thai restaurant specializing in Northeastern Thai cuisine, especially spicy papaya salad and grilled chicken. Located in Siam Square.",
         "price_range": "$",
@@ -84,6 +91,7 @@
         ]
     },
     {
+        "id": "008",
         "name": "Pad Thai Ekkamai",
         "description": "Local favorite serving authentic pad thai and other traditional Thai noodle dishes in the trendy Ekkamai neighborhood.",
         "price_range": "$",
@@ -96,6 +104,7 @@
         ]
     },
     {
+        "id": "009",
         "name": "Isaan Der",
         "description": "Northeastern Thai cuisine featuring grilled meats, sticky rice, and spicy salads served in a casual atmosphere near Asok.",
         "price_range": "$",
@@ -108,6 +117,7 @@
         ]
     },
     {
+        "id": "010",
         "name": "Gaggan",
         "description": "Progressive Indian restaurant offering innovative tasting menus with modern techniques while maintaining authentic flavors. Located in Lumpini.",
         "price_range": "$$$$",
