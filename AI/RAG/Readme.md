@@ -24,13 +24,12 @@
 
 ## Database
 ถ้าเลือกใช้ PostgreSQL หรือ Elasticsearch น่าจะปรับใช้กับงานได้ง่ายเพราะใช้กับระบบอื่นร่วมกันไม่ต้องติดตั้งตัวใหม่
-- Vector Search: มีให้เลือกใช้หลายตัวเช่น 
+- Vector Search: มีให้เลือกใช้หลายตัวเช่น [FAISS](https://github.com/facebookresearch/faiss),
 [Weaviate](https://weaviate.io/), 
 [Qdrant](https://qdrant.tech/), 
 [PostgreSQL + pgvector](https://github.com/pgvector/pgvector)
 - GraphRAG : ให้ผลที่ดีกว่า Vector แต่มีความซับซ้อนสูงกว่า เช่น [neo4j](https://neo4j.com/blog/developer/rag-tutorial/)
-- Hybrid Search: ผสม BM25 (lexical) กับ embedding search → ภาษาไทย benefit มาก เพราะบางคำ embedding ไม่ชัด แต่ keyword ยังช่วยได้ เช่น 
-[FAISS](https://github.com/facebookresearch/faiss), 
+- Hybrid Search: ผสม BM25 (lexical) กับ embedding search → ภาษาไทย benefit มาก เพราะบางคำ embedding ไม่ชัด แต่ keyword ยังช่วยได้ เช่น  
 [Elasticsearch hybrid search](https://www.elastic.co/what-is/hybrid-search)
 
 ## Generation
