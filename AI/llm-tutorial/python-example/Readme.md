@@ -2,6 +2,9 @@
 ตัวอย่างใช้ [Gemini API](https://ai.google.dev/gemini-api/docs/text-generation#python) 
 ในภาษา Python 
 - .env ให้ใส่ตัวแปรแวดล้อม [GEMINI_API_KEY](https://aistudio.google.com/app/apikey)
+```
+GEMINI_API_KEY=XXXXX
+```
 - โค้ดตัวอย่างใช้ Jupyter Notebook ให้ตั้งค่าให้เรียบร้อย
 
 ## Install
