@@ -15,6 +15,7 @@ const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 ```sh
 mkdir project_folder
 cd project_folder
+# copy *.ts to this folder
 bun init
 # versel
 bun add ai @ai-sdk/google
@@ -22,13 +23,12 @@ bun add ai @ai-sdk/google
 bun add @google/genai
 # MCP
 npm install @modelcontextprotocol/sdk
+##
+npm install mammoth
+
 ```
-
-
 ## การเรียกใช้งานแบบง่าย (Simple Call)
 การเรียกใช้งาน Gemini API ที่ง่ายที่สุดคือการส่งข้อความไปยังโมเดลและรับการตอบกลับทันที โดยไม่จำเป็นต้องมีการตั้งค่าพิเศษใด ๆ 
-
-
 
 - ตัวอย่าง: [vercel1.ts](./vercel1.ts)
 - ตัวอย่าง: [gemini1.ts](./gemini1.ts)

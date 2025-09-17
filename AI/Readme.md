@@ -37,3 +37,9 @@ Data Science = Computer science + Math & Static + Business / Domain Exertise
 
 ![alt text](img/ml-algorithms.png)
 ![alt text](img/scikit-learn-algorithm-cheet-sheet.png)
+
+## Development
+- สำหรับการพัฒนาโปรแกรมบน node.js จะมี library สำหรับเรียกใช้ LLM เช่น Vercel AI SDK, Gemini SDK
+- Transformer.js ทำให้ใช้ Transformer บน node.js หรือ Browser ก็ได้แต่โมเดลต้องรองรับ ONNX
+- [ตัวอย่างโค้ดในการใช้ LLM](./llm-tutorial/Readme.md) 
+- [ตัวอย่างการใช้ RAG](./RAG/Readme.md)

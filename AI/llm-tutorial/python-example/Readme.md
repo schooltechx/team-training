@@ -1,9 +1,13 @@
 ## LLM (Python)
-ตัวอย่างใช้ [Gemini API](https://ai.google.dev/gemini-api/docs/text-generation#python) 
+ตัวอย่างใช้ [Gemini API](https://ai.google.dev/gemini-api/docs/text-generation#python_1) 
 ในภาษา Python 
-- .env ให้ใส่ตัวแปรแวดล้อม [GEMINI_API_KEY](https://aistudio.google.com/app/apikey)
+- [.env](./env.example) ให้ใส่ตัวแปรแวดล้อม [GEMINI_API_KEY](https://aistudio.google.com/app/apikey)
 ```
 GEMINI_API_KEY=XXXXX
+```
+- ถ้าใช้ colab อาจจะตั้งค่าใน secret แล้วดึงมาใช้หรือเรียกแบบนี้
+```sh
+%env GEMINI_API_KEY=xxxxxx
 ```
 - โค้ดตัวอย่างใช้ Jupyter Notebook ให้ตั้งค่าให้เรียบร้อย
 
