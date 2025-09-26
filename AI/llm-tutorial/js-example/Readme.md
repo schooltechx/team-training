@@ -22,9 +22,7 @@ bun add ai @ai-sdk/google
 # gemini
 bun add @google/genai
 # MCP
-npm install @modelcontextprotocol/sdk
-##
-npm install mammoth
+bun add @modelcontextprotocol/sdk
 
 ```
 ## การเรียกใช้งานแบบง่าย (Simple Call)
