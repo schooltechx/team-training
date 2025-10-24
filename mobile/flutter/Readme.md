@@ -1,65 +1,18 @@
-# ใช้งาน Flutter บน DevContainer
-การติดตั้งและอัปเกรด Flutter ค่อนข้างซับซ้อนและกินเวลานาน มักจะเจอปัญหา เวอร์ชั่นของคอมโปเน้นไม่ตรงและขัดแย้งกัน เราสามารถใช้ 
-[DevContainer](https://code.visualstudio.com/docs/devcontainers/containers) เพื่อแก้ปัญหานี้ได้
+# การพัฒนาโปรแกรมด้วย Flutter 
+สำหรับการพัฒนาจะประกอบไปด้วยสามส่วนหลัก
+- Flutter SDK เป็นเครื่องมือต่างๆเช่น คอมไพล์โค้ด, build apk ฯลฯ
+- อุปกรณ์สำหรับทดสองหรือใช้ Emulator 
+- Editor สำหรับแก้ไขโค้ดใช้ VS Code หรือ Android Studio ก็ได้
 
-สร้างโฟลเดอร์เช่น my_flutter ที่มีโฟลเดอร์และไฟล์นี้ 
+## การติดตั้ง
+สำหรับ windows และ Linux แนะนำให้ลองติดตั้งผ่าน DevContainer ทำได้รวดเร็ว และไม่ต้องติดตั้งโปรแกรมบนเครื่องเพิ่มเติม
+- [ติดตั้งผ่าน VS Code](https://docs.flutter.dev/install/with-vs-code#install-flutter) รุ่นใหม่ทำได้ง่ายและรวดเร็ว
+- [ติดตั้งด้วยตัวเอง](https://docs.flutter.dev/install/manual) ทำได้ยากแต่เลือกเวอร์ชั่นหรือติดตั้งบางส่วนได้
+- [ติดตั้งผ่าน DevContainer](./devcontainer.md) ง่ายและรวดเร็วที่สุด ตัว SDK รับอยู่บน Container แล้วใช้ VS Code เข้าไปแก้โค้ดในคอนเทนเนอร์ เหมาะกับสภาพแวดล้อมที่มีการควบคุม เวอร์ชั่นของเครื่องมือให้ตรงกัน อัปเกรดง่าย เหมาะกับทีมขนาดใหญ่ ทำ CI/CD ได้ง่าย สภาพแวดล้อมในการพัฒนาจะเป็น Linux บนคอนเทนเนอร์จะมีข้อจำกัดในการแสดงผลกราฟฟิก และเชื่อมต่อจากภายนอก จำเป็นต้อง mount USB ,debug ผ่าน Wifi, รัน Emulator นอกคอนเทนเนอร์ หรือ Forward XWindows ออกมานอกคอนเทนเนอร์ แต่ยังไม่เคยลองบน macOS ว่ามีปัญหาอะไรหรือไม่ 
+- [ติดตั้ง Android Emulator อย่างเดียว](./install-android-emulator-only.md) สำหรับการรัน SDK แยกจาก Emulator เช่นใช้กับ DevContainer หรือทีม Test เพื่อการทดสอบ mulator หลายๆตัว
 
-.devcontainer/devcontainer.json 
-
-แล้วใช้ VSCode เปิดโฟลเดอร์ my_flutter แล้ว กด CTL+Shift+p เลือก 
-"Remote-Container: Open Folder in Container..." ไฟล์และโฟเดอร์ที่อยู่ในโฟลเดอร์ my_flutter จะแก้ไขได้ในคอนเทนเนอร์
-
-## ตัวอย่างการใช้งาน
-เราสามารถสร้างอิมเมจด้วยตัวเอง หรือใช้ที่มีคนให้แล้ว
-- แบบง่าย ใช้อิมเมจที่มีทำไว้อยู่แล้ว 
-[cirruslabs/flutter](https://github.com/cirruslabs/docker-images-flutter/pkgs/container/flutter) 
-
-```json
-{
-    "name": "Flutter",
-    "image": "ghcr.io/cirruslabs/flutter:stable",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "dart-code.dart-code",
-                "dart-code.flutter"
-            ]
-        }
-    }
-}
-```
-- สร้างอิมเมจเองจาก Dockerfile จะใช้อิมเมจก่อนหน้าเป็นพื้นฐาน สามารถแก้ไขไฟล์นี้เพิ่มได้
-```
-FROM ghcr.io/cirruslabs/flutter:3.35.6
-```
-devcontainer.json จะเซ็ตให้ใช้ build image และรันคำสั่ง Docker และมีการ mount USB (ยังไม่ได้ทดสอบ)
-```json
-{
-    "name": "Flutter Development Container",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "runArgs": [
-        "--privileged",
-        "-v",
-        "/dev/bus/usb:/dev/bus/usb"
-    ],
-    "forwardPorts": [8081, 5037],
-    "remoteUser": "root"
-}
-```
-- สร้างอิมเมจเองและติดตั้งโปรแกรมใหม่หมด เรียกใช้ผ่าน compose.yaml
-ตัวอย่างนี้ไม่ได้ mount usb ต้องรันผ่าน Wifi
-  - [./devcontainer/devcontainer.json](./.devcontainer/devcontainer.json)
-  - [./devcontainer/compose.yaml](./devcontainer/compose.yaml)
-  - [./devcontainer/Dockerfile](./devcontainer/Dockerfile)
-  - [./devcontainer/.env](././devcontainer/.env.example)
-
-
-
-
-## การตั้งค่าสำหรับ Android
-การตั้งโหมดนักพัฒนาภาพตัวอย่างเป็นของ Xiaomi ภาพจะเป็น Interface ไทยแต่คำอธิบายจะเป็นภาษาอังกฤษเพื่อให้เข้าใจวิธีการทั้งสองภาษา
+## การตั้งค่าสำหรับมือถือ Android ให้อยู่โหมด Debug
+การตั้งโหมดนักพัฒนาภาพตัวอย่างเป็น Interface ไทยของ Xiaomi แต่คำอธิบายจะเป็นภาษาอังกฤษเพื่อให้เข้าใจวิธีการทั้งสองภาษา
 -  Settings > About phone (หรือ About device) หาเลข Build กด 7 ก็จะเข้าสู่โหมดนักพัฒนา
 
 ![About](img/android_about_dev.jpeg)
@@ -94,6 +47,8 @@ flutter pub upgrade --major-versions
 flutter run
 flutter clean
 flutter build apk
+# mirror screen
+scrcpy -m 1024
 
 ```
 
