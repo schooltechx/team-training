@@ -1,5 +1,9 @@
 # Keycloak Vue Express
-ตัวอย่างการใช้ Keycloak(26.0.6) ร่วมกับ Vue และ Express การตั้งค่าและใช้งาน Keycloak ดูที่ [Keyloak.md](./keycloak/Keycloak.md)
+ตัวอย่างการใช้ Keycloak(26.4.6) ร่วมกับ Vue และ Express การตั้งค่าและใช้งาน Keycloak ดูที่ [Keyloak.md](./keycloak/Keycloak.md)
+
+์Note: 
+- สำหรับรุ่น 26.0.0 จะแยกการพัฒนาเวอร์ชั่นของ Library จะไม่ตรงกับ Keycloak 
+- [26.2.0](https://cdn.jsdelivr.net/npm/keycloak-js@26.2.1/+esm) จะเป็นรุ่นสุดท้ายที่ใช้แบบฟังก์ชั่น รุ่น [26.2.1](https://cdn.jsdelivr.net/npm/keycloak-js@26.2.1/lib/keycloak.js) จะเป็นแบบ class ต้องเขียนโค้ดวิธีใหม่
 
 ## Backend
 Node.js + Express จะตรวจสอบ token ทำ Authorization ใช้ jsonwebtoken ในการตรวจสอบ
@@ -20,7 +24,7 @@ Note: ใช้ [node-fetch-commonjs](https://www.npmjs.com/package/node-fetch-c
 มีสองตัวเลือกในการทดสอบ
 - [api.http](./keycloak/api.http) ให้เรียก API "Login for realms user" เพื่อให้ได้ access token แล้วค่อยนำไปทดสอบต่อ
 
-- Client อย่างง่าย: [be/static/demo.html](be/static/demo.html) จะเรียกใช้ be/static/keycloak.json ให้แก้ให้เหมาะสม โค้ดตัวอย่างนี้ปรับปรุงแล้วสำหรับ 26.x.x ยังไม่ได้ทดสอบมากนัก
+- Client อย่างง่าย: [be/static/keycloak.html](be/static/demo.html) จะเรียกใช้ be/static/keycloak.json ให้แก้ให้เหมาะสม โค้ดตัวอย่างนี้ปรับปรุงแล้วสำหรับ Library รุ่น 26.2.0 ยังไม่ได้ทดสอบมากนัก
 
 
 ## Frontend 

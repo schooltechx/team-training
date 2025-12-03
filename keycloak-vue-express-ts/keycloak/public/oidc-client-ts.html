@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OIDC Single Page App Client (ES Module Style)</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Removed the global script loading, now using ES Module import -->
+    <script>
+        // Set the Noto Sans font for modern aesthetic
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for clean UI */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex items-center justify-center min-h-screen">
+
+    <div id="app-container" class="w-full max-w-lg bg-white p-6 sm:p-8 rounded-xl shadow-2xl border border-gray-100">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">OIDC Login Demo</h1>
+        
+        <!-- Status Display -->
+        <div id="status-card" class="mb-6 p-4 rounded-lg">
+            <p id="auth-status" class="font-semibold text-center">Initializing...</p>
+        </div>
+
+        <!-- Buttons and User Info -->
+        <div id="auth-controls" class="space-y-4">
+            <!-- Removed inline onclick handlers -->
+            <button id="login-button" 
+                    class="w-full px-4 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition duration-150 shadow-md hidden">
+                Log In
+            </button>
+            <button id="logout-button" 
+                    class="w-full px-4 py-3 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-150 shadow-md hidden">
+                Log Out
+            </button>
+
+            <div id="user-info-display" class="mt-8 p-5 bg-gray-50 border border-gray-200 rounded-lg hidden" >
+                <h2 class="text-xl font-semibold mb-3 text-gray-700">Information</h2>
+                <button id="id-token-button" class="px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-150 shadow-md">
+                    ID Token</button>
+                <button id="access-token-button" class="px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-150 shadow-md">
+                    Access Token</button>
+                <button id="refresh-token-button" class="px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-150 shadow-md">
+                    refresh Token</button>
+                <button id="user-token-button" class="px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-150 shadow-md">
+                    user Object</button>
+                <button id="setting-button" class="px-4 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-150 shadow-md">
+                    Setting</button>
+
+                    
+
+                <pre id="user-info-pre" class="whitespace-pre-wrap text-sm text-gray-800 bg-white p-3 rounded border border-gray-300 overflow-auto"></pre>
+            </div>
+        </div>
+
+        <p class="mt-8 text-xs text-gray-500 text-center">
+            demo by SchooltechX
+        </p>
+
+    </div>
+
+    <!-- The script is now of type="module" -->
+    <script type="module">
+        // --- 0. ES Module Import of oidc-client-ts ---
+        import { UserManager, WebStorageStateStore } from 'https://esm.sh/oidc-client-ts@3.4.1';
+        
+        // --- Shared Module Constants ---
+        const currentUrl = window.location.href.split('?')[0].split('#')[0];
+        let userManager = null; // Defined in the module scope
+
+        // --- UI Element References ---
+        const loginButton = document.getElementById('login-button');
+        const logoutButton = document.getElementById('logout-button');
+        const authStatus = document.getElementById('auth-status');
+        const userInfoDisplay = document.getElementById('user-info-display');
+
+        const accessTokenButton = document.getElementById('access-token-button');
+        const idTokenButton = document.getElementById('id-token-button');
+        const refreshTokenButton = document.getElementById('refresh-token-button');
+        const userTokenButton = document.getElementById('user-token-button');
+        const settingButton  = document.getElementById('setting-button');
+        const userInfoPre = document.getElementById('user-info-pre');
+        const statusCard = document.getElementById('status-card');
+
+        // --- 1. OIDC Configuration ---
+        const config = {
+            // !!! IMPORTANT: REPLACE THESE WITH YOUR ACTUAL OIDC PROVIDER DETAILS !!!
+            authority: 'http://localhost:3022/realms/sso', // Example Authority URL
+            client_id: 'express-client', // Example Public Client ID
+            redirect_uri: currentUrl, // The current file path must be registered as the Redirect URI
+            response_type: 'code', // Authorization Code Flow with PKCE (Recommended for SPAs)
+            scope: 'openid profile email', // Scopes to request
+            post_logout_redirect_uri: currentUrl,
+            silent_redirect_uri: currentUrl, // Required for token renewal in the background
+            automaticSilentRenew: true,
+            monitorSession: true,
+            loadUserInfo: true,
+            // Use WebStorageStateStore imported directly
+            userStore: new WebStorageStateStore({ store: window.localStorage }), 
+        };
+
+        // --- 3. Core Functions (Private to the module) ---
+
+        function updateUI(user) {
+            if (user && !user.expired) {
+                // User is logged in
+                loginButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+                userInfoDisplay.classList.remove('hidden');
+
+                authStatus.textContent = `Logged in as: ${user.profile.name || user.profile.email || user.profile.sub}`;
+                statusCard.className = 'mb-6 p-4 rounded-lg bg-green-100 border border-green-300';
+                
+                // Displaying tokens/claims
+                userInfoPre.textContent = JSON.stringify(user, null, 2);
+
+            } else {
+                // User is logged out or session expired
+                loginButton.classList.remove('hidden');
+                logoutButton.classList.add('hidden');
+                userInfoDisplay.classList.add('hidden');
+                
+                authStatus.textContent = 'You are logged out.';
+                statusCard.className = 'mb-6 p-4 rounded-lg bg-yellow-100 border border-yellow-300';
+                userInfoPre.textContent = '';
+                // idTokenPre.textContent = '';
+            }
+        }
+
+        // Initiate the OIDC login flow
+        async function login() {
+            if (!userManager) return;
+            try {
+                // signinRedirect automatically handles PKCE and state/nonce management
+                await userManager.signinRedirect();
+            } catch (error) {
+                console.error("Login initiation failed:", error);
+                authStatus.textContent = `Login initiation failed. Check console.`;
+            }
+        }
+
+        // Initiate the OIDC logout flow
+        async function logout() {
+            if (!userManager) return;
+            try {
+                // 1. Get the current user object
+                const user = await userManager.getUser();
+                
+                // 2. Prepare the parameters, including the ID token hint if available
+                const signoutArgs = user && user.id_token
+                    ? { id_token_hint: user.id_token }
+                    : {};
+                
+                // 3. Perform the redirect with the ID token hint
+                await userManager.signoutRedirect(signoutArgs);
+
+            } catch (error) {
+                console.error("Logout failed:", error);
+                authStatus.textContent = `Logout failed. Check console.`;
+            }
+        }
+        
+        // --- 4. Initialization Logic (Main entry point) ---
+
+        async function initApp() {
+            // Check if this is a redirect from the OIDC Provider
+            if (window.location.search.includes('code=')) {
+                try {
+                    // This handles the callback and exchanges the code for tokens
+                    const user = await userManager.signinRedirectCallback(window.location.href);
+                    // Clear the URL parameters after processing the callback for a cleaner URL bar
+                    history.replaceState(null, '', currentUrl);
+                    updateUI(user);
+                } catch (error) {
+                    console.error("OIDC Callback Error:", error);
+                    authStatus.textContent = `Login failed during callback. Error: ${error.error || error.message}`;
+                    statusCard.className = 'mb-6 p-4 rounded-lg bg-red-100 border border-red-300';
+                }
+            } else {
+                // Not a callback, try to load any existing user session
+                try {
+                    const user = await userManager.getUser();
+                    updateUI(user);
+                } catch (error) {
+                    console.error("Error loading user:", error);
+                    updateUI(null);
+                }
+            }
+        }
+
+        // --- 5. Event Listeners and Setup ---
+        
+        // Initialize UserManager using the imported class
+        userManager = new UserManager(config); 
+            
+        // Attach event listeners to buttons
+        loginButton.addEventListener('click', login);
+        logoutButton.addEventListener('click', logout);
+        idTokenButton.addEventListener('click', async ()=>{
+            try{
+                const user = await userManager.getUser();
+                const base64Url = user.id_token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                userInfoPre.textContent = JSON.stringify(JSON.parse(jsonPayload), null, 2);
+            }catch{
+                userInfoPre.textContent = "Fail to decode ID token"
+            }
+        });
+        accessTokenButton.addEventListener('click',async()=>{
+            try{
+                const user = await userManager.getUser();
+                const base64Url = user.access_token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                userInfoPre.textContent = JSON.stringify(JSON.parse(jsonPayload), null, 2);
+            }catch{
+                userInfoPre.textContent = "Fail to decode ID token"
+            }
+
+        });
+        refreshTokenButton.addEventListener('click',async()=>{
+            try{
+                const user = await userManager.getUser();
+                const base64Url = user.refresh_token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                userInfoPre.textContent = JSON.stringify(JSON.parse(jsonPayload), null, 2);
+            }catch{
+                userInfoPre.textContent = "Fail to decode ID token"
+            }
+        });
+        userTokenButton.addEventListener('click', async ()=>{
+            const user = await userManager.getUser();
+            userInfoPre.textContent = JSON.stringify(user, null, 2);            
+        });
+        settingButton.addEventListener('click', async ()=>{
+            const settings = await userManager.settings;
+            userInfoPre.textContent = JSON.stringify(settings, null, 2);            
+        });
+
+
+        // Listen for user loaded/expired events (e.g., after silent renew)
+        userManager.events.addUserLoaded(user => {
+            console.log("User loaded event triggered.");
+            updateUI(user);
+        });
+
+        userManager.events.addUserSignedOut(() => {
+            console.log("User signed out event triggered.");
+            updateUI(null);
+        });
+        
+        // Start the application logic
+        initApp();
+        
+    </script>
+</body>
+</html>
