@@ -133,5 +133,19 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 ```
+## Note
+- ultralytics มี 
+[streamlit](https://docs.ultralytics.com/guides/streamlit-live-inference/)
+เป็น UI ไว้ทดสอบโมเดล สามารถใช้กับ Webcam หรือไฟล์วีดีโอได้
+```
+yolo solutions inference
+```
+- ข้อควรระวังการ์ดจอ Pascal Maxwell สำหรับ pytorch 2.8 ขึ้นไป จะใช้ได้แค่cuda 12.6 ถ้ามากกว่านั้นจะ[ไม่รองรับแล้ว](https://dev-discuss.pytorch.org/t/cuda-toolkit-version-and-architecture-support-update-maxwell-and-pascal-architecture-support-removed-in-cuda-12-8-and-12-9-builds/3128)
+```
+uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+```
+
+
+
 ## อ่านเพิ่ม
 - [How to segment Objects with YOLOv8](https://medium.com/@Mert.A/how-to-segment-with-yolov8-f33b1c63b6c6)
