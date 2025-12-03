@@ -1,27 +1,25 @@
 //ตัวอย่างคอนฟิกและอธิบายภาพ
-import {
-  GoogleGenAI,
-  createUserContent,
-  createPartFromUri,
-} from "@google/genai"
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
 const ai = new GoogleGenAI({})
-const model = "gemini-2.5-flash"
-const image = await ai.files.upload({
-  file: "../img/dog.jpeg",
-})
-
+const model = "gemini-flash-latest"
+const base64ImageFile = fs.readFileSync("../img/dog.jpeg", {
+  encoding: "base64",
+});
 const contents = [
-  createUserContent([
-    "ภาพนี้คือตัวอะไร",
-    createPartFromUri(image.uri||'', image.mimeType|| 'image/jpeg'),
-  ]),
-]
-const config = {
-  systemInstruction: "You are teacher who explain things in simple way",
-  thinkingConfig: {
-    thinkingBudget: 0, // Disables thinking
-    temperature: 0.8,
+  {
+    inlineData: {
+      mimeType: "image/jpeg",
+      data: base64ImageFile,
+    },
   },
-}
+  { text: "ภาพนี้คือตัวอะไร" },
+];
+//https://googleapis.github.io/js-genai/release_docs/interfaces/types.GenerateContentConfig.html
+  const config = {
+    temperature: 0.8,
+    systemInstruction:"คุณคือครูที่คอยอธิบายสิ่งต่าง ๆ ให้เด็กเข้าใจง่าย ๆ",
+  };
+
 const res = await ai.models.generateContent({ model, contents, config })
 console.log(res.text)

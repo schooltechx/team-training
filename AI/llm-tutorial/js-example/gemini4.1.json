@@ -1,0 +1,153 @@
+{
+  "type": "object",
+  "properties": {
+    "card_type": {
+      "type": "string",
+      "description": "The type of identification card identified."
+    },
+    "personal_details": {
+      "type": "object",
+      "properties": {
+        "name_thai": {
+          "type": "string",
+          "description": "First and last name in Thai."
+        },
+        "name_english": {
+          "type": "string",
+          "description": "First name in English."
+        },
+        "last_name_english": {
+          "type": "string",
+          "description": "Last name (surname) in English."
+        },
+        "date_of_birth_thai": {
+          "type": "string",
+          "description": "Date of birth in Thai format (YYYY-MM-DD)."
+        },
+        "date_of_birth_english": {
+          "type": "string",
+          "description": "Date of birth in English format (YYYY-MM-DD)."
+        },
+        "religion": {
+          "type": "object",
+          "properties": {
+            "thai": {
+              "type": "string",
+              "description": "Religion in Thai script."
+            }
+          },
+          "required": ["thai"]
+        }
+      },
+      "required": [
+        "name_thai",
+        "name_english",
+        "last_name_english",
+        "date_of_birth_thai",
+        "date_of_birth_english",
+        "religion"
+      ]
+    },
+    "identification_info": {
+      "type": "object",
+      "properties": {
+        "identification_number": {
+          "type": "string",
+          "description": "The 13-digit Identification Number (usually partially obscured/redacted on the image)."
+        },
+        "card_number_bottom": {
+          "type": "string",
+          "description": "The number printed at the bottom right of the card, often used as a card control number."
+        }
+      },
+      "required": [
+        "identification_number",
+        "card_number_bottom"
+      ]
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "province_thai": {
+          "type": "string",
+          "description": "Province name in Thai."
+        },
+        "district_thai": {
+          "type": "string",
+          "description": "District (Amphoe) name in Thai."
+        },
+        "sub_district_thai": {
+          "type": "string",
+          "description": "Sub-district (Tambon) name in Thai."
+        },
+        "village_no_thai": {
+          "type": "string",
+          "description": "Village number (Moo) or general location marker."
+        }
+      },
+      "required": [
+        "province_thai",
+        "district_thai",
+        "sub_district_thai",
+        "village_no_thai"
+      ]
+    },
+    "issue_and_expiry": {
+      "type": "object",
+      "properties": {
+        "date_of_issue_thai": {
+          "type": "string",
+          "description": "Date of issue in Thai B.E. format (Day Month Year)."
+        },
+        "date_of_issue_english": {
+          "type": "string",
+          "description": "Date of issue in Gregorian format (YYYY-MM-DD)."
+        },
+        "date_of_expiry_thai": {
+          "type": "string",
+          "description": "Date of expiry in Thai B.E. format (Day Month Year)."
+        },
+        "date_of_expiry_english": {
+          "type": "string",
+          "description": "Date of expiry in Gregorian format (YYYY-MM-DD)."
+        }
+      },
+      "required": [
+        "date_of_issue_thai",
+        "date_of_issue_english",
+        "date_of_expiry_thai",
+        "date_of_expiry_english"
+      ]
+    },
+    "issuer_details": {
+      "type": "object",
+      "properties": {
+        "issuer_title": {
+          "type": "string",
+          "description": "Title/Rank of the official who issued the card (e.g., Police Lieutenant)."
+        },
+        "issuer_name_thai": {
+          "type": "string",
+          "description": "Name of the official who issued the card (in parentheses)."
+        },
+        "issuer_position": {
+          "type": "string",
+          "description": "The role of the signatory (e.g., Issuing Officer)."
+        }
+      },
+      "required": [
+        "issuer_title",
+        "issuer_name_thai",
+        "issuer_position"
+      ]
+    }
+  },
+  "required": [
+    "card_type",
+    "personal_details",
+    "identification_info",
+    "address",
+    "issue_and_expiry",
+    "issuer_details"
+  ]
+}

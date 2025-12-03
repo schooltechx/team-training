@@ -1,9 +1,17 @@
 // https://ai-sdk.dev/cookbook/node/web-search-agent
 import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
-const model = google('gemini-2.5-flash', {useSearchGrounding: true})
-const prompt = 'ใครคือนายกรัฐมนตรีของไทยในปัจจุบัน'
-const res = await generateText({model,prompt});
-console.log('text:',res.text);
-//console.log('response:',res); // check res.providerMetadata?.google
 
+const { text, sources, providerMetadata } = await generateText({
+  model: google('gemini-flash-latest'),
+  tools: {
+    google_search: google.tools.googleSearch({}),
+  },
+  prompt:
+    'ใครคือนายกรัฐมนตรีของไทยในปัจจุบัน.' +
+    'แสดงเเฉพาะชื่อนามสกุลและวันรับตำแหน่ง',
+});
+
+console.log(text);
+// console.log(sources);
+// console.log(providerMetadata);

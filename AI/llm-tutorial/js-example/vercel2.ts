@@ -1,7 +1,7 @@
 import { google } from "@ai-sdk/google"
-import { generateText,CoreMessage } from "ai"
+import { generateText,type ModelMessage } from "ai"
 import {readFileSync} from "fs"
-const model = google("gemini-2.5-flash")
+const model = google("gemini-flash-latest")
 const providerOptions = {
   google: {
     thinkingConfig: {
@@ -9,19 +9,16 @@ const providerOptions = {
     },
   },
 }
-const messages:CoreMessage[] = [
+const base64ImageFile = readFileSync("../img/dog.jpeg", {
+  encoding: "base64",
+});
+
+const messages:ModelMessage[] = [
   {
     role: 'user',
     content: [
-      {
-        type: 'text',
-        text: 'ภาพนี้คืออะไรตอบสั้นๆไม่เกิน 10 คำ',
-      },
-      {
-        type: 'file',
-        data: readFileSync('../img/dog.jpeg'),
-        mimeType: 'image/jpeg',
-      },
+      {type: 'text',text: 'ภาพนี้คืออะไรตอบสั้นๆไม่เกิน 10 คำ'},
+      {type: 'image',image: `data:image/jpeg;base64,${base64ImageFile}`},
     ],
   },
 ]

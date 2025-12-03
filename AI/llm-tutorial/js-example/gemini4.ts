@@ -1,6 +1,6 @@
 //Structured output
 import { GoogleGenAI, Type } from "@google/genai"
-const model = "gemini-2.5-flash"
+const model = "gemini-flash-latest"
 const contents ="ระบุสูตรขนมยอดนิยม 3 สูตร พร้อมกับส่วนผสมและปริมาณ"
 const config ={
       responseMimeType: "application/json",

@@ -2,7 +2,7 @@
 import { google } from '@ai-sdk/google';
 import { generateObject } from 'ai';
 import { z } from 'zod';
-const model = google('gemini-2.5-flash');
+const model = google('gemini-flash-latest');
 const prompt = 'ส่วนผสมและวิธีทำขนมบัวลอย'
 const schema=z.object({
     recipe: z.object({

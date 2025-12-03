@@ -1,6 +1,6 @@
 // ตัวอย่างการ Chat แบบมีประวัติการสนทนา
 import { GoogleGenAI } from "@google/genai"
-const model = "gemini-2.5-flash"
+const model = "gemini-flash-latest"
 const ai = new GoogleGenAI({})
 let history= [ //บังคับใส่ประวัติการสนทนาเริ่มต้น
     {

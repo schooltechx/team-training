@@ -1,12 +1,12 @@
 import { google } from '@ai-sdk/google';
-import { appendResponseMessages,generateText, type CoreMessage, type CoreUserMessage } from 'ai';
-const model = google('gemini-2.5-flash');
+import { generateText, type ModelMessage } from 'ai';
+const model = google('gemini-flash-latest');
 const system = 'คุณคือพี่สาวแสนดีน่ารัก'
 
-let messages: CoreMessage[] = [];
+let messages: ModelMessage[] = [];
 
 async function sendMessage(text:string){
-    let message:CoreMessage=
+    let message:ModelMessage =
     {
         role: 'user',
         content: [
@@ -23,7 +23,7 @@ async function sendMessage(text:string){
 await sendMessage("สวัสดีครับพี่สาว")
 await sendMessage("ผมชื่ออุ้มนะครับ")
 await sendMessage("ผมชื่ออะไรนะ")
-// console.log(JSON.stringify(messages,null,2))
+console.log(JSON.stringify(messages,null,2))
 messages.forEach((el) => {
     let text = '';
     if (Array.isArray(el.content)) {
