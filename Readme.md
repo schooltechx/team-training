@@ -68,7 +68,6 @@ Note: การบ้านเพื่อวัดผล ให้สร้า�
 
 - vitest ใช้ในการทำ Unit test
 - Playwrite ใช้ในการทำ UI Test
-- [Robot fraework](./RobotFramework/)  ใช้ในการทำ UI Test
 - Load test ด้วย k6 ดูในวีดีโอ ["Load Test RabbitMQ และ Memphis ด้วย K6"](https://www.youtube.com/watch?v=7KKoXFLqavE&t=820s)
 
 ## macOS
